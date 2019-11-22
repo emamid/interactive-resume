@@ -8,10 +8,25 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+
+import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
+import TagIcon from '@material-ui/icons/Category';
+
+import { Switch, Route, Redirect } from 'react-router-dom';
+
+import RoutableListItem from './components/RoutableListItem';
+
+import Home from './views/Home';
+import Employer from './views/Employer';
+import Project from './views/Project';
+import Tag from './views/Tag';
+import Tags from './views/Tags';
 
 const styles = theme => ({
 	appFrame: {
@@ -35,8 +50,41 @@ const styles = theme => ({
 
 class App extends Component {
 
+	state = {
+		menuDrawerOpen: false		
+	};
+
+	openMenuDrawer = () => {
+		this.setState({
+			menuDrawerOpen: true
+		});
+	};
+
+	closeMenuDrawer = () => {
+		this.setState({
+			menuDrawerOpen: false
+		});
+	};
+
 	render() {
 		const { classes } = this.props;
+
+		const { menuDrawerOpen } = this.state;
+
+		const menuDrawer = (
+			<Drawer
+				variant='temporary'
+				anchor='left'
+				open={menuDrawerOpen}
+				onClose={this.closeMenuDrawer}
+			>
+				<List>
+					<RoutableListItem to='/' icon={<HomeIcon />} text={'Home'} onNavigated={this.closeMenuDrawer}></RoutableListItem>
+					<RoutableListItem to='/Tags' icon={<TagIcon />} text={'Tags'} onNavigated={this.closeMenuDrawer}></RoutableListItem>
+				</List>
+			</Drawer>
+		);    
+
 		return (
 			<div className='App'>
 				<div className={classes.appFrame}>
@@ -44,16 +92,23 @@ class App extends Component {
 						<Toolbar disableGutters={true}>
 							<IconButton
 								color='inherit'
-								// onClick={this.openMenuDrawer}
+								onClick={this.openMenuDrawer}
 							>
 								<MenuIcon />
 							</IconButton>
 							<Typography variant='h6' color='inherit' noWrap>Interactive Resume</Typography>
 						</Toolbar>
 					</AppBar>
-					{/* {menuDrawer} */}
+					{menuDrawer}
 					<main className={classNames(classes.content)}>
-						{/* {body} */}
+						<Switch>
+							<Route exact path='/' component={Home}/>
+							<Route path='/project/:projectID' component={Project}/>
+							<Route path='/employer/:employerID' component={Employer}/>
+							<Route path='/tag/:tagID' component={Tag}/>
+							<Route path='/tags' component={Tags}/>
+							<Redirect to="/"/>
+						</Switch>
 					</main>        
 				</div>
 			</div>
