@@ -1,0 +1,25 @@
+{
+  "name": "interactive-resume",
+  "version": "1.0.0",
+  "description": "Interactive resume client/server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Emami",
+  "license": "ISC",
+  "dependencies": {
+    "@feathersjs/errors": "^4.3.11",
+    "@feathersjs/express": "^4.3.11",
+    "@feathersjs/feathers": "^4.3.11",
+    "assert": "^2.0.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "feathers-sequelize": "^6.1.0",
+    "sequelize": "^5.21.2",
+    "sqlite3": "^4.1.0",
+    "uuid": "^3.3.3"
+  }
+}
