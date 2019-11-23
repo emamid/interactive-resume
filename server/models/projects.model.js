@@ -65,35 +65,3 @@ module.exports = {
 	associateModel,
 	getModel
 }
-
-// module.exports = function(app) {
-
-// 	const sequelize = require('./sequelize')();
-
-// 	const Project = sequelize.define('project', {
-// 		id: {
-// 			type: Sequelize.UUIDV4,
-// 			defaultValue: Sequelize.UUIDV4,
-// 			primaryKey: true
-// 		},
-// 		name: {
-// 			type: Sequelize.TEXT
-// 		},
-// 		notes: {
-// 			type: Sequelize.TEXT
-// 		},
-//         startDate: {
-//             type: Sequelize.DATE
-//         },
-//         endDate: {
-//             type: Sequelize.DATE
-// 		},
-// 		employerID: {
-// 			type: Sequelize.UUIDV4			
-// 		}
-// 	}, {
-//         tableName: 'projects'
-// 	});
-
-// 	return Project;
-// };

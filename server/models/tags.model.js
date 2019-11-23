@@ -27,28 +27,24 @@ function getModel(app) {
 
 function associateModel(app) {
 
+	const sequelize = require('./sequelize')();
+
+	const { Project, ProjectTag } = sequelize.models;
+
+	Tag.belongsToMany(Project, {
+		as: 'Projects',
+		constraints: false,
+		foreignKey: 'tagID',
+		otherKey: 'projectID',
+		through: {
+			model: ProjectTag,
+			unique: false
+		}
+	})
+
 }
 
 module.exports = {
 	associateModel,
 	getModel
 }
-
-// module.exports = function(app) {
-
-// 	const sequelize = require('./sequelize')();
-
-// 	const Tag = sequelize.define('tag', {
-// 		id: {
-// 			type: Sequelize.UUIDV4,
-// 			defaultValue: Sequelize.UUIDV4,
-// 			primaryKey: true
-// 		},
-// 		name: {
-// 			type: Sequelize.TEXT
-// 		}
-// 	}, {
-//         tableName: 'tags'
-//     });
-// 	return Tag;
-// };

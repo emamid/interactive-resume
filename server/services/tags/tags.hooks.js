@@ -1,10 +1,12 @@
 'use strict';
 
+const populateAssociations = require('../../hooks/tag-populate-associations');
+
 module.exports = {
 	before: {
 		all: [],
 		find: [],
-		get: [],
+		get: [populateAssociations],
 		create: [],
 		update: [],
 		patch: [],
