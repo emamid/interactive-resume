@@ -28,6 +28,9 @@ import Project from './views/Project';
 import Tag from './views/Tag';
 import Tags from './views/Tags';
 
+import { Provider } from 'react-redux';
+import { store } from './redux/Store';
+
 const styles = theme => ({
 	appFrame: {
 		height: 800,
@@ -86,32 +89,34 @@ class App extends Component {
 		);    
 
 		return (
-			<div className='App'>
-				<div className={classes.appFrame}>
-					<AppBar className={classNames(classes.appBar)}>
-						<Toolbar disableGutters={true}>
-							<IconButton
-								color='inherit'
-								onClick={this.openMenuDrawer}
-							>
-								<MenuIcon />
-							</IconButton>
-							<Typography variant='h6' color='inherit' noWrap>Interactive Resume</Typography>
-						</Toolbar>
-					</AppBar>
-					{menuDrawer}
-					<main className={classNames(classes.content)}>
-						<Switch>
-							<Route exact path='/' component={Home}/>
-							<Route path='/project/:projectID' component={Project}/>
-							<Route path='/employer/:employerID' component={Employer}/>
-							<Route path='/tag/:tagID' component={Tag}/>
-							<Route path='/tags' component={Tags}/>
-							<Redirect to="/"/>
-						</Switch>
-					</main>        
+			<Provider store={store}>
+				<div className='App'>
+					<div className={classes.appFrame}>
+						<AppBar className={classNames(classes.appBar)}>
+							<Toolbar disableGutters={true}>
+								<IconButton
+									color='inherit'
+									onClick={this.openMenuDrawer}
+								>
+									<MenuIcon />
+								</IconButton>
+								<Typography variant='h6' color='inherit' noWrap>Interactive Resume</Typography>
+							</Toolbar>
+						</AppBar>
+						{menuDrawer}
+						<main className={classNames(classes.content)}>
+							<Switch>
+								<Route exact path='/' component={Home}/>
+								<Route path='/project/:projectID' component={Project}/>
+								<Route path='/employer/:employerID' component={Employer}/>
+								<Route path='/tag/:tagID' component={Tag}/>
+								<Route path='/tags' component={Tags}/>
+								<Redirect to="/"/>
+							</Switch>
+						</main>        
+					</div>
 				</div>
-			</div>
+			</Provider>
 		)
 	}
 }
