@@ -111,10 +111,10 @@ class App extends Component {
 						<main className={classNames(classes.content)}>
 							<Switch>
 								<Route exact path='/' component={Home}/>
-								<Route path='/project/:projectID' component={Project}/>
-								<Route path='/employer/:employerID' component={Employer}/>
-								<Route path='/tag/:tagID' component={Tag}/>
-								<Route path='/tags' component={Tags}/>
+								<Route path='/projects/:projectID' component={Project}/>
+								<Route path='/employers/:employerID' component={Employer}/>
+								<Route exact path='/tags' component={Tags}/>
+								<Route path='/tags/:tagID' component={Tag}/>
 								<Redirect to="/"/>
 							</Switch>
 						</main>        

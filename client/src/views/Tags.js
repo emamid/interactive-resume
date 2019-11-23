@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 import { connect } from 'react-redux';
 
@@ -31,7 +31,7 @@ class Tags extends Component {
 			<Grid container spacing={3}>
 				{this.props.tags.map(tag => (
 					<Grid item xs={2} key={tag.id}>
-						<Paper>{tag.name}</Paper>
+						<Button variant="outlined" color="primary" href={`/tags/${tag.id}`}>{tag.name}</Button>
 					</Grid>
 				))}
 			</Grid>
