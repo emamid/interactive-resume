@@ -43,13 +43,37 @@ export function loadMyself() {
 	}
 }
 
-export function loadEmployers() {
-	return {
-        type: 'LOAD_EMPLOYERS',
-        payload: {
-            request: {
-                url: '/employers'
+function loadObjectFactory(actionName, servicePath) {
+    return function(id) {
+        return {
+            type: `LOAD_${actionName}`,
+            payload: {
+                request: {
+                    url: `/${servicePath}/${id}`
+                }
             }
-        }	
-	}
+        }
+    }
 }
+
+function loadListFactory(actionName, servicePath) {
+    return function() {
+        return {
+            type: `LOAD_${actionName}`,
+            payload: {
+                request: {
+                    url: `/${servicePath}`
+                }
+            }	
+        }    
+    }
+}
+
+export const loadEmployer = loadObjectFactory('EMPLOYER', 'employers');
+export const loadEmployers = loadListFactory('EMPLOYERS', 'employers');
+
+export const loadProject = loadObjectFactory('PROJECT', 'projects');
+export const loadProjects = loadListFactory('PROJECTS', 'projects');
+
+export const loadTag = loadObjectFactory('TAG', 'tags');
+export const loadTags = loadListFactory('TAGS', 'tags');
