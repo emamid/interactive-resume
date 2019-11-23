@@ -55,7 +55,7 @@ class Home extends Component {
 		);
 		return (
 			<Paper>
-				<div className="MuiTypography-root MuiTypography-body1" dangerouslySetInnerHTML={{__html: this.props.myself.homeHTML}}/>
+				<div className="MuiTypography-root MuiTypography-body1" dangerouslySetInnerHTML={{__html: this.props.myself.pageContent}}/>
 				{employerTable}
 			</Paper>
 		)

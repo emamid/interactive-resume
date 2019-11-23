@@ -18,7 +18,7 @@ function getModel(app) {
 			name: {
 				type: Sequelize.TEXT
 			},
-			homeHTML: {
+			pageContent: {
 				type: Sequelize.TEXT
 			}
 		}, {

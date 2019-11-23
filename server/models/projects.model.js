@@ -17,7 +17,7 @@ function getModel(app) {
 			name: {
 				type: Sequelize.TEXT
 			},
-			notes: {
+			pageContent: {
 				type: Sequelize.TEXT
 			},
 			startDate: {

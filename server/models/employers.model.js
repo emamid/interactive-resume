@@ -21,7 +21,7 @@ function getModel(app) {
 			position: {
 				type: Sequelize.TEXT
 			},
-			notes: {
+			pageContent: {
 				type: Sequelize.TEXT
 			},
 			url: {
