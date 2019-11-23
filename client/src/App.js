@@ -16,7 +16,7 @@ import Typography from '@material-ui/core/Typography';
 
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
-import TagIcon from '@material-ui/icons/Category';
+import TagIcon from '@material-ui/icons/LocalOffer';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 
