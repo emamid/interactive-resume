@@ -46,8 +46,8 @@ class Home extends Component {
 					{this.props.employers.map(employer => (
 						<TableRow key={employer.id}>
 							<TableCell>{new Date(employer.startDate).getFullYear()} - {new Date(employer.endDate).getFullYear()}</TableCell>
-							<TableCell>{employer.name}</TableCell>
-							<TableCell>{employer.position}</TableCell>
+							<TableCell><a href={`/employers/${employer.id}`}>{employer.name}</a></TableCell>
+							<TableCell><a href={`/employers/${employer.id}`}>{employer.position}</a></TableCell>
 						</TableRow>
 					))}
 				</TableBody>
