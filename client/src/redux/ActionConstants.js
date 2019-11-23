@@ -1,7 +1,7 @@
 function getLoadConstants(name) {
     return {
-        [`LOAD_${name}_REQUEST`]: `LOAD_${name}_REQUEST`,
-        [`LOAD_${name}_ERROR`]: `LOAD_${name}_ERROR`,
+        [`LOAD_${name}`]: `LOAD_${name}`,
+        [`LOAD_${name}_FAILURE`]: `LOAD_${name}_FAILURE`,
         [`LOAD_${name}_SUCCESS`]: `LOAD_${name}_SUCCESS`
     }
 }

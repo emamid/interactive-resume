@@ -20,7 +20,7 @@ const errors = (state = {}, action) => {
 
 const loading = (state = {}, action) => {
     switch (action.type) {
-        case actionConstants.LOAD_MYSELF_ERROR:
+        case actionConstants.LOAD_MYSELF_FAILURE:
             return {
                 ...state,
                 myself: false
@@ -41,26 +41,30 @@ const loading = (state = {}, action) => {
     }
 };
 
-const reducerFactory = (name, defaultValue) => {
-    
-    return (state = [], action) => {
+const objectReducerFactory = (name) => {
+    return (state = {}, action) => {
         switch (action.type) {
-            case actionConstants[`LOAD_${name}_REQUEST`]:
-                return defaultValue;
-            case actionConstants[`LOAD_${name}_SUCCESS`]:
-                return action[name];
+            case actionConstants[`LOAD_${name.toUpperCase()}`]:
+                return {};
+            case actionConstants[`LOAD_${name.toUpperCase()}_SUCCESS`]:
+                return {...action.payload.data};
             default:
                 return state;
         }
     }
 }
 
-const objectReducerFactory = (name) => {
-    return reducerFactory(name, {});
-}
-
 const arrayReducerFactory = (name) => {
-    return reducerFactory(name, []);
+    return (state = {}, action) => {
+        switch (action.type) {
+            case actionConstants[`LOAD_${name.toUpperCase()}`]:
+                return [];
+            case actionConstants[`LOAD_${name.toUpperCase()}_SUCCESS`]:
+                return [...action.payload.data];
+            default:
+                return state;
+        }
+    }
 }
 
 export default {

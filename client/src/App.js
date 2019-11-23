@@ -29,7 +29,7 @@ import Tag from './views/Tag';
 import Tags from './views/Tags';
 
 import { Provider } from 'react-redux';
-import { store } from './redux/Store';
+import { store, loadMyself } from './redux/Store';
 
 const styles = theme => ({
 	appFrame: {
@@ -46,7 +46,7 @@ const styles = theme => ({
 	content: {
 		flexGrow: 1,
 		backgroundColor: theme.palette.background.default,
-		padding: theme.spacing.unit * 3,
+		padding: theme.spacing(3),
 		marginTop: 64
 	},
 });
@@ -56,6 +56,10 @@ class App extends Component {
 	state = {
 		menuDrawerOpen: false		
 	};
+
+	componentDidMount() {
+		store.dispatch(loadMyself());
+	}
 
 	openMenuDrawer = () => {
 		this.setState({
