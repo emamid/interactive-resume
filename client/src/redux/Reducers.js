@@ -41,11 +41,11 @@ const loading = (state = {}, action) => {
     }
 };
 
-const objectReducerFactory = (name) => {
+const objectReducerFactory = (name, defaultValue = {}) => {
     return (state = {}, action) => {
         switch (action.type) {
             case actionConstants[`LOAD_${name.toUpperCase()}`]:
-                return {};
+                return {...defaultValue};
             case actionConstants[`LOAD_${name.toUpperCase()}_SUCCESS`]:
                 return {...action.payload.data};
             default:
@@ -54,11 +54,11 @@ const objectReducerFactory = (name) => {
     }
 }
 
-const arrayReducerFactory = (name) => {
+const arrayReducerFactory = (name, defaultValue = []) => {
     return (state = {}, action) => {
         switch (action.type) {
             case actionConstants[`LOAD_${name.toUpperCase()}`]:
-                return [];
+                return [...defaultValue];
             case actionConstants[`LOAD_${name.toUpperCase()}_SUCCESS`]:
                 return [...action.payload.data];
             default:
@@ -71,10 +71,10 @@ export default {
     errors,
     loading,
     myself: objectReducerFactory('myself'),
-    employer: objectReducerFactory('employer'),
+    employer: objectReducerFactory('employer', {Projects:[]}),
     employers: arrayReducerFactory('employers'),
-    project: objectReducerFactory('project'),
+    project: objectReducerFactory('project', {Employer:{}, Tags:[]}),
     projects: arrayReducerFactory('projects'),
-    tag: objectReducerFactory('tag'),
+    tag: objectReducerFactory('tag', {Projects:[]}),
     tags: arrayReducerFactory('tags')
 };

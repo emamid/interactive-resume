@@ -10,11 +10,18 @@ const initialState = {
     myself: {
         homeHTML: 'homeHTML goes here'
     },
-    project: {},
+    project: {
+        Employer: {},
+        Tags: []
+    },
     projects: [],
-    employer: {},
+    employer: {
+        Projects: []
+    },
     employers: [],
-    tag: {},
+    tag: {
+        Projects: []
+    },
     tags: []
 };
 
