@@ -12,6 +12,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+import HTMLContent from '../components/HTMLContent';
+
 const mapStateToProps = state => ({
     myself: state.myself,
     employers: state.employers
@@ -54,10 +56,10 @@ class Home extends Component {
 			</Table>
 		);
 		return (
-			<Paper>
-				<div className="MuiTypography-root MuiTypography-body1" dangerouslySetInnerHTML={{__html: this.props.myself.pageContent}}/>
+			<div>
+				<HTMLContent html={this.props.myself.pageContent}/>
 				{employerTable}
-			</Paper>
+			</div>
 		)
 	}
 

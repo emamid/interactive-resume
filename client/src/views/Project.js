@@ -29,10 +29,10 @@ class Project extends Component {
 
 	render() {
 		return <div>
-			<Typography>{this.props.project.name} at {this.props.project.Employer.name}</Typography>
+			<Typography align="left">{this.props.project.name} at {this.props.project.Employer.name}</Typography>
 			<HTMLContent html={this.props.project.pageContent}/>
 			<hr/>
-			<Typography>{JSON.stringify(this.props.project)}</Typography>
+			<Typography align="left">{JSON.stringify(this.props.project)}</Typography>
 		</div>
 	}
 
