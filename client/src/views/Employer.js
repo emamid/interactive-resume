@@ -31,7 +31,6 @@ class Employer extends Component {
 		return <div>
 			<Typography>{this.props.employer.position} at {this.props.employer.name} ({this.props.employer.startDate} to {this.props.employer.endDate})</Typography>
 			<HTMLContent html={this.props.employer.pageContent}/>
-			<Typography>{JSON.stringify(this.props.employer)}</Typography>
 		</div>
 	}
 
