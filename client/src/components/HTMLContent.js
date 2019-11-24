@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 const HTMLContent = (props) => {
 	const { html } = props;
 	return (
-		<Typography align="left"><span dangerouslySetInnerHTML={{__html: html}}/></Typography>		
+		<Typography><span dangerouslySetInnerHTML={{__html: html}}/></Typography>		
 	)
 }
 
