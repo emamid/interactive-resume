@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Typography from '@material-ui/core/Typography';
+import Chip from '@material-ui/core/Chip';
 
 import { connect } from 'react-redux';
 
@@ -30,6 +31,11 @@ class Project extends Component {
 	render() {
 		return <div>
 			<Typography align="left">{this.props.project.name} at {this.props.project.Employer.name}</Typography>
+			<div style={{textAlign:'left'}}>
+				{this.props.project.Tags.map(tag => (
+					<Chip label={tag.name} component="a" href={`/tags/${tag.id}`} clickable variant="outlined" key={tag.id}/>
+				))}
+			</div>
 			<HTMLContent html={this.props.project.pageContent}/>
 			<hr/>
 			<Typography align="left">{JSON.stringify(this.props.project)}</Typography>
