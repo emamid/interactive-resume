@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import Typography from '@material-ui/core/Typography';
 
 import { connect } from 'react-redux';
 
 import { loadEmployer } from '../redux/Store';
+
+import HTMLContent from '../components/HTMLContent';
 
 const mapStateToProps = state => ({
     employer: state.employer
@@ -24,9 +27,12 @@ class Employer extends Component {
 		this.props.loadEmployer(this.props.match.params.employerID);
 	}
 
-
 	render() {
-		return <Typography>{'Employer placeholder'} {this.props.match.params.employerID} {JSON.stringify(this.props.employer)}</Typography>
+		return <div>
+			<Typography>{this.props.employer.position} at {this.props.employer.name} ({this.props.employer.startDate} to {this.props.employer.endDate})</Typography>
+			<HTMLContent html={this.props.employer.pageContent}/>
+			<Typography>{JSON.stringify(this.props.employer)}</Typography>
+		</div>
 	}
 
 }
