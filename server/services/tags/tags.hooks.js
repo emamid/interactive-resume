@@ -1,13 +1,14 @@
 'use strict';
 
-const prepareQuery = require('../../hooks/tag-prepare-query');
+const prepareQueryGet = require('../../hooks/tag-prepare-query');
 const adjustStructure = require('../../hooks/tag-adjust-structure');
+const prepareQueryAll = require('../../hooks/tags-prepare-query');
 
 module.exports = {
 	before: {
 		all: [],
-		find: [],
-		get: [prepareQuery],
+		find: [prepareQueryAll],
+		get: [prepareQueryGet],
 		create: [],
 		update: [],
 		patch: [],
