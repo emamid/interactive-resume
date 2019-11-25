@@ -30,15 +30,13 @@ class Project extends Component {
 
 	render() {
 		return <div>
-			<Typography>{this.props.project.name} at {this.props.project.Employer.name}</Typography>
+			<Typography component="h5" variant="h5">{this.props.project.name} at {this.props.project.Employer.name}</Typography>
 			<div style={{textAlign:'left'}}>
 				{this.props.project.Tags.map(tag => (
 					<Chip label={tag.name} component="a" href={`/tags/${tag.id}`} clickable variant="outlined" key={tag.id}/>
 				))}
 			</div>
 			<HTMLContent html={this.props.project.pageContent}/>
-			<hr/>
-			<Typography>{JSON.stringify(this.props.project)}</Typography>
 		</div>
 	}
 

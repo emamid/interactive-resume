@@ -29,7 +29,7 @@ class Employer extends Component {
 
 	render() {
 		return <div>
-			<Typography>{this.props.employer.position} at {this.props.employer.name} ({this.props.employer.startDate} to {this.props.employer.endDate})</Typography>
+			<Typography component="h5" variant="h5">{this.props.employer.position} at {this.props.employer.name} ({this.props.employer.startDate} to {this.props.employer.endDate})</Typography>
 			<HTMLContent html={this.props.employer.pageContent}/>
 		</div>
 	}
