@@ -1,13 +1,13 @@
 'use strict';
 
-const populateAssociations = require('../../hooks/project-populate-associations');
+const prepareQuery = require('../../hooks/project-prepare-query');
 const adjustStructure = require('../../hooks/project-adjust-structure');
 
 module.exports = {
 	before: {
 		all: [],
 		find: [],
-		get: [populateAssociations],
+		get: [prepareQuery],
 		create: [],
 		update: [],
 		patch: [],

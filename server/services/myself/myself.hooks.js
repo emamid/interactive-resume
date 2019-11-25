@@ -1,6 +1,6 @@
 'use strict';
 
-const squash = require('../../hooks/myself-squash');
+const adjustStructure = require('../../hooks/myself-adjust-structure');
 
 module.exports = {
 	before: {
@@ -13,7 +13,7 @@ module.exports = {
 		remove: []
 	},
 	after: {
-		all: [squash],
+		all: [adjustStructure],
 		find: [],
 		get: [],
 		create: [],

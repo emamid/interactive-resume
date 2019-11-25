@@ -1,12 +1,12 @@
 'use strict';
 
-const populateAssociations = require('../../hooks/employer-populate-associations');
+const preparQuery = require('../../hooks/employer-prepare-query');
 
 module.exports = {
 	before: {
 		all: [],
 		find: [],
-		get: [populateAssociations],
+		get: [preparQuery],
 		create: [],
 		update: [],
 		patch: [],
