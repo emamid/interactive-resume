@@ -1,6 +1,7 @@
 'use strict';
 
 const populateAssociations = require('../../hooks/tag-populate-associations');
+const adjustStructure = require('../../hooks/tag-adjust-structure');
 
 module.exports = {
 	before: {
@@ -15,7 +16,7 @@ module.exports = {
 	after: {
 		all: [],
 		find: [],
-		get: [],
+		get: [adjustStructure],
 		create: [],
 		update: [],
 		patch: [],

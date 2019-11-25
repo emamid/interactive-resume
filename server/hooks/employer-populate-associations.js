@@ -3,7 +3,8 @@
 module.exports = function(context) {
     context.params.sequelize = {
         include: [{
-            association: 'Projects'
+            association: 'Projects',
+            attributes: ['id', 'name', 'employerID']
         }],
         raw: false
     };
