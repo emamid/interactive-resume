@@ -8,7 +8,8 @@ const initialState = {
     errors: {},
     loading: {},
     myself: {
-        homeHTML: 'homeHTML goes here'
+        homeHTML: 'homeHTML goes here',
+        Projects: []
     },
     project: {
         Employer: {},

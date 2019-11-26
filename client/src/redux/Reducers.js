@@ -70,7 +70,7 @@ const arrayReducerFactory = (name, defaultValue = []) => {
 export default {
     errors,
     loading,
-    myself: objectReducerFactory('myself'),
+    myself: objectReducerFactory('myself', {Projects:[]}),
     employer: objectReducerFactory('employer', {Projects:[]}),
     employers: arrayReducerFactory('employers'),
     project: objectReducerFactory('project', {Employer:{}, Tags:[], Images:[]}),
