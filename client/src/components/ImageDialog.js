@@ -9,9 +9,9 @@ const ImageDialog = (props) => {
 	const { image, onClose } = props;
 	if (image) {
 		return (		
-			<Dialog open={Boolean(image.filename)} onClose={onClose}>
+			<Dialog open={Boolean(image.filename)} onClose={onClose} fullWidth={true} maxWidth="xl">
 				<DialogContent>
-					<img src={`http://localhost:3000/thumbnails/${image.filename}`}/>
+					<img src={`http://localhost:3000/images/${image.filename}`}/>
 					<DialogContentText>{image.caption}</DialogContentText>
 				</DialogContent>
 			</Dialog>
