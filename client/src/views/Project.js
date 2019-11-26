@@ -12,6 +12,7 @@ import { loadProject } from '../redux/Store';
 import HTMLContent from '../components/HTMLContent';
 import YearRange from '../components/YearRange';
 import ImageCard from '../components/ImageCard';
+import ImageDialog from '../components/ImageDialog';
 
 const mapStateToProps = state => ({
     project: state.project
@@ -27,6 +28,10 @@ class Project extends Component {
 		project: PropTypes.object
 	};
 
+	state = {
+		dialogImage: null
+	};
+
 	componentDidMount() {
 		this.props.loadProject(this.props.match.params.projectID);
 	}
@@ -40,9 +45,10 @@ class Project extends Component {
 				))}
 			</div>
 			<HTMLContent html={this.props.project.pageContent}/>
+			<ImageDialog image={this.state.dialogImage} onClose={()=>{this.setState({dialogImage:null})}}/>
 			<Grid container spacing={3}>
 				{this.props.project.Images.map(image => (
-					<ImageCard image={image}  key={image.id}/>
+					<ImageCard image={image} key={image.filename} onClick={()=>{this.setState({dialogImage: {...image}})}}/>
 				))}			
 			</Grid>
 		</div>

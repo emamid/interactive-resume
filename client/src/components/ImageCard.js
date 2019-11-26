@@ -9,11 +9,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
 const ImageCard = (props) => {
-	const { image } = props;
+	const { image, onClick } = props;
 	return (
         <Grid item xs={2} key={image.id}>
             <Card>
-                <CardActionArea>								
+                <CardActionArea onClick={onClick}>
                     <CardMedia image={`http://localhost:3000/thumbnails/${image.filename}`} title={image.caption} style={{height:108}}/>
                     <CardContent>									
                         <Typography variant="body2" color="textSecondary" component="p">{image.caption}</Typography>
@@ -25,7 +25,8 @@ const ImageCard = (props) => {
 }
 
 ImageCard.propTypes = {
-	onClicked: PropTypes.func
+	image: PropTypes.object,
+	onClick: PropTypes.func
 }
 
 export default ImageCard;

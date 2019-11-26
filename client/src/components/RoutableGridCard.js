@@ -30,7 +30,7 @@ const RoutableGridCard = (props) => {
 }
 
 RoutableGridCard.propTypes = {
-	onClicked: PropTypes.func,
+	onClick: PropTypes.func,
 	onNavigated: PropTypes.func,
     title: PropTypes.string,
     subtitle: PropTypes.string,
