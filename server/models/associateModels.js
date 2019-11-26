@@ -2,7 +2,7 @@
 
 module.exports = function(app) {
 
-    const modelNames = ['employers', 'projects', 'tags', 'projectTag', 'myself'];
+    const modelNames = ['employers', 'projects', 'tags', 'projectTag', 'myself', 'images'];
 
     const modelDefs = modelNames.map(name => require(`./${name}.model.js`));
   

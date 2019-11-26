@@ -41,7 +41,7 @@ function associateModel(app) {
 
 	const sequelize = require('./sequelize')();
 
-	const { Employer, ProjectTag, Tag } = sequelize.models;
+	const { Employer, Image, ProjectTag, Tag } = sequelize.models;
 
 	Project.belongsTo(Employer, {
 		foreignKey: 'employerID',
@@ -58,6 +58,12 @@ function associateModel(app) {
 			unique: false
 		}
 	})
+
+	Project.hasMany(Image, {
+		foreignKey: 'projectID',
+		as: 'Images'
+	});
+
 
 }
 
