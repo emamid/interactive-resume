@@ -37,17 +37,20 @@ class Project extends Component {
 	}
 
 	render() {
+		const { project } = this.props;
 		return <div>
-			<Typography component="h5" variant="h5">{this.props.project.name} at <a href={`/employers/${this.props.project.employerID}`}>{this.props.project.Employer.name}</a> <YearRange startDate={this.props.project.startDate} endDate={this.props.project.endDate}/></Typography>
+			<Typography component="h5" variant="h5" gutterBottom={true}>
+				{project.name} at <a href={`/employers/${project.employerID}`}>{project.Employer.name}</a> <YearRange startDate={project.startDate} endDate={project.endDate}/>
+			</Typography>
 			<div>
-				{this.props.project.Tags.map(tag => (
+				{project.Tags.map(tag => (
 					<Chip label={tag.name} component="a" href={`/tags/${tag.id}`} clickable variant="outlined" key={tag.id}/>
 				))}
 			</div>
-			<HTMLContent html={this.props.project.pageContent}/>
+			<HTMLContent html={project.pageContent}/>
 			<ImageDialog image={this.state.dialogImage} onClose={()=>{this.setState({dialogImage:null})}}/>
 			<Grid container spacing={3}>
-				{this.props.project.Images.map(image => (
+				{project.Images.map(image => (
 					<ImageCard image={image} key={image.filename} onClick={()=>{this.setState({dialogImage: {...image}})}}/>
 				))}			
 			</Grid>
