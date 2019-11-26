@@ -20,7 +20,12 @@ function getModel(app) {
 			},
 			pageContent: {
 				type: Sequelize.TEXT
-			}
+			},
+			personalEmployerID: {
+				type: Sequelize.UUIDV4,
+				defaultValue: Sequelize.UUIDV4
+			},
+
 		}, {
 			tableName: 'myself'
 		});	
@@ -28,7 +33,20 @@ function getModel(app) {
 	return Myself;
 }
 
+function associateModel(app) {
+
+	const sequelize = require('./sequelize')();
+
+	const Project = sequelize.models.Project;
+
+	Myself.hasMany(Project, {
+		foreignKey: 'employerID',
+		sourceKey: 'personalEmployerID',
+		as: 'Projects'
+	});
+}
 
 module.exports = {
+	associateModel,
 	getModel
 }

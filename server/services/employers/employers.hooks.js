@@ -1,12 +1,13 @@
 'use strict';
 
-const preparQuery = require('../../hooks/employer-prepare-query');
+const preparQueryGet = require('../../hooks/employer-prepare-query');
+const preparQueryAll = require('../../hooks/employers-prepare-query');
 
 module.exports = {
 	before: {
-		all: [],
+		all: [preparQueryAll],
 		find: [],
-		get: [preparQuery],
+		get: [preparQueryGet],
 		create: [],
 		update: [],
 		patch: [],
