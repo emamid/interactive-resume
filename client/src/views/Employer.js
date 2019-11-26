@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { loadEmployer } from '../redux/Store';
 
 import HTMLContent from '../components/HTMLContent';
+import YearRange from '../components/YearRange';
 
 const mapStateToProps = state => ({
     employer: state.employer
@@ -29,7 +30,7 @@ class Employer extends Component {
 
 	render() {
 		return <div>
-			<Typography component="h5" variant="h5">{this.props.employer.position} at {this.props.employer.name} ({this.props.employer.startDate} to {this.props.employer.endDate})</Typography>
+			<Typography component="h5" variant="h5">{this.props.employer.position} at {this.props.employer.name} <YearRange startDate={this.props.employer.startDate} endDate={this.props.employer.endDate}/></Typography>
 			<HTMLContent html={this.props.employer.pageContent}/>
 		</div>
 	}

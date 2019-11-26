@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { loadProject } from '../redux/Store';
 
 import HTMLContent from '../components/HTMLContent';
+import YearRange from '../components/YearRange';
 
 const mapStateToProps = state => ({
     project: state.project
@@ -30,7 +31,7 @@ class Project extends Component {
 
 	render() {
 		return <div>
-			<Typography component="h5" variant="h5">{this.props.project.name} at <a href={`/employers/${this.props.project.employerID}`}>{this.props.project.Employer.name}</a></Typography>
+			<Typography component="h5" variant="h5">{this.props.project.name} at <a href={`/employers/${this.props.project.employerID}`}>{this.props.project.Employer.name}</a> <YearRange startDate={this.props.project.startDate} endDate={this.props.project.endDate}/></Typography>
 			<div style={{textAlign:'left'}}>
 				{this.props.project.Tags.map(tag => (
 					<Chip label={tag.name} component="a" href={`/tags/${tag.id}`} clickable variant="outlined" key={tag.id}/>
