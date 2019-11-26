@@ -7,7 +7,7 @@ module.exports = function(context) {
             attributes: ['name']
         }, {
             association: 'Tags',
-            attributes: ['name']
+            attributes: ['id', 'name']
         }, {
             association: 'Images',
             attributes: ['filename', 'caption', 'description', 'sortOrder']

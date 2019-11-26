@@ -73,7 +73,7 @@ export default {
     myself: objectReducerFactory('myself'),
     employer: objectReducerFactory('employer', {Projects:[]}),
     employers: arrayReducerFactory('employers'),
-    project: objectReducerFactory('project', {Employer:{}, Tags:[]}),
+    project: objectReducerFactory('project', {Employer:{}, Tags:[], Images:[]}),
     projects: arrayReducerFactory('projects'),
     tag: objectReducerFactory('tag', {Projects:[]}),
     tags: arrayReducerFactory('tags')

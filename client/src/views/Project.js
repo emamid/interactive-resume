@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
 
 import { connect } from 'react-redux';
 
@@ -39,9 +44,18 @@ class Project extends Component {
 			</div>
 			<HTMLContent html={this.props.project.pageContent}/>
 			<Grid container spacing={3}>
-				{/* {this.props.tag.Images.map(Image => (
-					<RoutableGridCard key={project.id} to={`/projects/${project.id}`} title={project.name} subtitle={project.Employer.name}/>
-				))}			 */}
+				{this.props.project.Images.map(image => (
+					<Grid item xs={2} key={image.id}>
+						<Card>
+							<CardActionArea>								
+								<CardMedia image={`http://localhost:3000/thumbnails/${image.filename}`} title={image.caption} style={{height:108}}/>
+								<CardContent>									
+									<Typography variant="body2" color="textSecondary" component="p">{image.caption}</Typography>
+								</CardContent>
+							</CardActionArea>
+						</Card>
+					</Grid>
+				))}			
 			</Grid>
 		</div>
 	}
