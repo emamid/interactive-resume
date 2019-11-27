@@ -2,6 +2,7 @@
 
 const preparQueryGet = require('../../hooks/employer-prepare-query');
 const preparQueryAll = require('../../hooks/employers-prepare-query');
+const adjustStructureGet = require('../../hooks/employer-adjust-structure');
 
 module.exports = {
 	before: {
@@ -16,7 +17,7 @@ module.exports = {
 	after: {
 		all: [],
 		find: [],
-		get: [],
+		get: [adjustStructureGet],
 		create: [],
 		update: [],
 		patch: [],
