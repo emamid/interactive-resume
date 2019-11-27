@@ -28,6 +28,9 @@ function getModel(app) {
 			},
 			employerID: {
 				type: Sequelize.UUIDV4			
+			},
+			isPersonal: {
+				type: Sequelize.BOOLEAN
 			}
 		}, {
 			tableName: 'projects'
