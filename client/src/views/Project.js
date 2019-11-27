@@ -37,7 +37,7 @@ class Project extends Component {
 
 	render() {
 		const { project } = this.props;
-		const employerText = project.isPersonal ? '' : <span>at <a href={`/#/employers/${project.employerID}`}>{project.Employer.name}</a> <YearRange startDate={project.startDate} endDate={project.endDate} withParens={true}/></span>;
+		const employerText = project.isPersonal ? '' : <span> at <a href={`/#/employers/${project.employerID}`}>{project.Employer.name}</a> <YearRange startDate={project.startDate} endDate={project.endDate} withParens={true}/></span>;
 		return <div>
 			<Typography component="h5" variant="h5" gutterBottom={true}>
 				{project.name}{employerText}
