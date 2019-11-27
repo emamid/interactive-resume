@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Chip from '@material-ui/core/Chip';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 import { connect } from 'react-redux';
@@ -40,7 +39,7 @@ class Project extends Component {
 		const { project } = this.props;
 		return <div>
 			<Typography component="h5" variant="h5" gutterBottom={true}>
-				{project.name} at <a href={`/employers/${project.employerID}`}>{project.Employer.name}</a> <YearRange startDate={project.startDate} endDate={project.endDate}/>
+				{project.name} at <a href={`/employers/${project.employerID}`}>{project.Employer.name}</a> <YearRange startDate={project.startDate} endDate={project.endDate} withParens={true}/>
 			</Typography>
 			<div>
 				{project.Tags.map(tag => (

@@ -13,6 +13,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 
 import HTMLContent from '../components/HTMLContent';
+import YearRange from '../components/YearRange';
 
 const mapStateToProps = state => ({
     myself: state.myself,
@@ -47,7 +48,7 @@ class Home extends Component {
 				<TableBody>
 					{this.props.employers.map(employer => (
 						<TableRow key={employer.id}>
-							<TableCell>{new Date(employer.startDate).getFullYear()} - {new Date(employer.endDate).getFullYear()}</TableCell>
+							<TableCell><YearRange startDate={employer.startDate} endDate={employer.endDate}/></TableCell>
 							<TableCell><a href={`/employers/${employer.id}`}>{employer.name}</a></TableCell>
 							<TableCell><a href={`/employers/${employer.id}`}>{employer.position}</a></TableCell>
 						</TableRow>
@@ -66,7 +67,7 @@ class Home extends Component {
 				<TableBody>
 					{this.props.myself.Projects.map(project => (
 						<TableRow key={project.id}>
-							<TableCell>{new Date(project.startDate).getFullYear()} - {new Date(project.endDate).getFullYear()}</TableCell>
+							<TableCell><YearRange startDate={project.startDate} endDate={project.endDate}/></TableCell>
 							<TableCell><a href={`/projects/${project.id}`}>{project.name}</a></TableCell>
 						</TableRow>
 					))}
