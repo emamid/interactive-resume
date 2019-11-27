@@ -1,5 +1,0 @@
-Request GET /api/rest/employers
-Request GET /favicon.ico
-Request GET /api/rest/employers
-Request GET /api/rest/employers
-Request GET /favicon.ico
