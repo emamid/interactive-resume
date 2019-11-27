@@ -44,12 +44,24 @@ function associateModel(app) {
 
 	const sequelize = require('./sequelize')();
 
-	const Project = sequelize.models.Project;
+	const { EmployerReference, Project, Reference } = sequelize.models;
 
 	Employer.hasMany(Project, {
 		foreignKey: 'employerID',
 		as: 'Projects'
 	});
+
+	Employer.belongsToMany(Reference, {
+		as: 'References',
+		constraints: false,
+		foreignKey: 'employerID',
+		otherKey: 'referenceID',
+		through: {
+			model: EmployerReference,
+			unique: false
+		}
+	})
+
 }
 
 module.exports = {

@@ -5,6 +5,9 @@ module.exports = function(context) {
         include: [{
             association: 'Projects',
             attributes: ['id', 'name', 'employerID']
+        }, {
+            association: 'References',
+            attributes: ['id', 'name', 'url']
         }],
         raw: false
     };

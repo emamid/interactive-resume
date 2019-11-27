@@ -18,7 +18,8 @@ const initialState = {
     },
     projects: [],
     employer: {
-        Projects: []
+        Projects: [],
+        References: []
     },
     employers: [],
     tag: {

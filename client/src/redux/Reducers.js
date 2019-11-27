@@ -71,7 +71,7 @@ export default {
     errors,
     loading,
     myself: objectReducerFactory('myself', {Projects:[]}),
-    employer: objectReducerFactory('employer', {Projects:[]}),
+    employer: objectReducerFactory('employer', {Projects:[], References:[]}),
     employers: arrayReducerFactory('employers'),
     project: objectReducerFactory('project', {Employer:{}, Tags:[], Images:[]}),
     projects: arrayReducerFactory('projects'),
