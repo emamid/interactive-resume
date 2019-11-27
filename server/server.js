@@ -16,8 +16,19 @@ const nodePort = 3000;
 
 let app = null;
 
+const fs = require('fs');
+
 function initApp() {
     app = express(feathers());
+	app.all('*', (request, response, next) => {
+		console.log(`Request ${request.method} ${request.path}\n`);
+        fs.appendFile('log.txt', `Request ${request.method} ${request.path}\n`, function (err) {
+			if (err) throw err;
+        });
+		if (next) {
+			next();
+		}
+	});
     app.use(cors({
         origin: true,
         credentials: true
