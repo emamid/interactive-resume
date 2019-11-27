@@ -29,7 +29,7 @@ const initialState = {
 };
 
 const client = axios.create({ //all axios can be used, shown in axios documentation
-    baseURL:'http://localhost:3000/api/rest',
+    baseURL: '/api/rest',
     responseType: 'json'
 });
 
