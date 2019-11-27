@@ -28,9 +28,9 @@ class Tags extends Component {
 
 	render() {
 		return (
-			<Grid container spacing={3}>
+			<Grid container spacing={4}>
 				{this.props.tags.map(tag => (
-					<Grid item xs={2} key={tag.id}>
+					<Grid item xs={6} m={4} xl={2} key={tag.id}>
 						<Button variant="outlined" color="primary" href={`/#/tags/${tag.id}`}>{tag.name}</Button>
 					</Grid>
 				))}

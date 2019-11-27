@@ -12,7 +12,7 @@ import { withRouter } from 'react-router'
 const RoutableGridCard = (props) => {
 	const { title, subtitle, history, to, onClick, onNavigated } = props;
 	return (
-        <Grid item xs={3}>
+        <Grid item xs={12} md={4} xl={3}>
             <Card>
                 <CardActionArea>
                     <CardContent onClick={(event) => {
