@@ -31,7 +31,7 @@ class Tags extends Component {
 			<Grid container spacing={3}>
 				{this.props.tags.map(tag => (
 					<Grid item xs={2} key={tag.id}>
-						<Button variant="outlined" color="primary" href={`/tags/${tag.id}`}>{tag.name}</Button>
+						<Button variant="outlined" color="primary" href={`/#/tags/${tag.id}`}>{tag.name}</Button>
 					</Grid>
 				))}
 			</Grid>

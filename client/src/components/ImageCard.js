@@ -14,7 +14,8 @@ const ImageCard = (props) => {
         <Grid item xs={2} key={image.id}>
             <Card>
                 <CardActionArea onClick={onClick}>
-                    <CardMedia image={`http://localhost:3000/thumbnails/${image.filename}`} title={image.caption} style={{height:108}}/>
+                    {/* <CardMedia image={`http://localhost:3000/thumbnails/${image.filename}`} title={image.caption} style={{height:108}}/> */}
+                    <CardMedia image={`/thumbnails/${image.filename}`} title={image.caption} style={{height:108}}/>
                     <CardContent>									
                         <Typography variant="body2" color="textSecondary" component="p">{image.caption}</Typography>
                     </CardContent>

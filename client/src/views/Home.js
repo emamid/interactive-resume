@@ -49,8 +49,8 @@ class Home extends Component {
 					{this.props.employers.map(employer => (
 						<TableRow key={employer.id}>
 							<TableCell><YearRange startDate={employer.startDate} endDate={employer.endDate}/></TableCell>
-							<TableCell><a href={`/employers/${employer.id}`}>{employer.name}</a></TableCell>
-							<TableCell><a href={`/employers/${employer.id}`}>{employer.position}</a></TableCell>
+							<TableCell><a href={`/#/employers/${employer.id}`}>{employer.name}</a></TableCell>
+							<TableCell><a href={`/#/employers/${employer.id}`}>{employer.position}</a></TableCell>
 						</TableRow>
 					))}
 				</TableBody>
@@ -68,7 +68,7 @@ class Home extends Component {
 					{this.props.myself.Projects.map(project => (
 						<TableRow key={project.id}>
 							<TableCell><YearRange startDate={project.startDate} endDate={project.endDate}/></TableCell>
-							<TableCell><a href={`/projects/${project.id}`}>{project.name}</a></TableCell>
+							<TableCell><a href={`/#/projects/${project.id}`}>{project.name}</a></TableCell>
 						</TableRow>
 					))}
 				</TableBody>

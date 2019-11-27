@@ -26,7 +26,7 @@ function initApp() {
     // Path to client (production build)
     app.use('/images', express.static(`${process.env.RESUME_DATA_DIR}/images`));
     app.use('/thumbnails', express.static(`${process.env.RESUME_DATA_DIR}/thumbnails`));    
-    app.use('/', express.static('../client/dist'));
+    app.use('/', express.static('../client/build'));
 
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));

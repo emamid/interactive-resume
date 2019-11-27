@@ -39,11 +39,11 @@ class Project extends Component {
 		const { project } = this.props;
 		return <div>
 			<Typography component="h5" variant="h5" gutterBottom={true}>
-				{project.name} at <a href={`/employers/${project.employerID}`}>{project.Employer.name}</a> <YearRange startDate={project.startDate} endDate={project.endDate} withParens={true}/>
+				{project.name} at <a href={`/#/employers/${project.employerID}`}>{project.Employer.name}</a> <YearRange startDate={project.startDate} endDate={project.endDate} withParens={true}/>
 			</Typography>
 			<div>
 				{project.Tags.map(tag => (
-					<Chip label={tag.name} component="a" href={`/tags/${tag.id}`} clickable variant="outlined" key={tag.id}/>
+					<Chip label={tag.name} component="a" href={`/#/tags/${tag.id}`} clickable variant="outlined" key={tag.id}/>
 				))}
 			</div>
 			<HTMLContent html={project.pageContent}/>
