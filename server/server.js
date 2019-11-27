@@ -23,11 +23,6 @@ function initApp() {
         credentials: true
     }));
 
-    // Path to client (production build)
-    app.use('/images', express.static(`${process.env.RESUME_DATA_DIR}/images`));
-    app.use('/thumbnails', express.static(`${process.env.RESUME_DATA_DIR}/thumbnails`));    
-    app.use('/', express.static('../client/build'));
-
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
     app.use(bodyParser.json());
@@ -38,6 +33,11 @@ function initApp() {
 
     servicesInit(app);
     associateModels(app);
+
+    // Path to client (production build)
+    app.use('/images', express.static(`${process.env.RESUME_DATA_DIR}/images`));
+    app.use('/thumbnails', express.static(`${process.env.RESUME_DATA_DIR}/thumbnails`));    
+    app.use('/', express.static('../client/build'));
 };
 
 initApp();

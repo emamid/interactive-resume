@@ -28,7 +28,7 @@ const initialState = {
     tags: []
 };
 
-const client = axios.create({ //all axios can be used, shown in axios documentation
+const client = axios.create({
     baseURL: '/api/rest',
     responseType: 'json'
 });
