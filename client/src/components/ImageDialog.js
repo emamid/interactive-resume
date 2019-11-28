@@ -9,7 +9,7 @@ const ImageDialog = (props) => {
 	const { image, onClose } = props;
 	if (image) {
 		return (		
-			<Dialog open={Boolean(image.filename)} onClose={onClose} fullWidth={true} maxWidth="xl">
+			<Dialog open={Boolean(image.filename)} onClose={onClose} fullWidth={true} maxWidth="xl" onClick={onClose}>
 				<DialogTitle id="confirmation-dialog-title" style={{textAlign:'center'}}>{image.caption}</DialogTitle>
 				<DialogContent dividers>
 					<img src={`/images/${image.filename}`} alt={image.caption} style={{maxHeight:'90%', maxWidth:'90%', display:'block', marginLeft:'auto', marginRight:'auto'}}/>
