@@ -1,13 +1,14 @@
 'use strict';
 
-const prepareQuery = require('../../hooks/project-prepare-query');
+const prepareQueryAll = require('../../hooks/projects-prepare-query');
+const prepareQueryGet = require('../../hooks/project-prepare-query');
 const adjustStructure = require('../../hooks/project-adjust-structure');
 
 module.exports = {
 	before: {
-		all: [],
+		all: [prepareQueryAll],
 		find: [],
-		get: [prepareQuery],
+		get: [prepareQueryGet],
 		create: [],
 		update: [],
 		patch: [],

@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
+import ProjectIcon from '@material-ui/icons/Build';
 import TagIcon from '@material-ui/icons/LocalOffer';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -25,6 +26,7 @@ import RoutableListItem from './components/RoutableListItem';
 import Home from './views/Home';
 import Employer from './views/Employer';
 import Project from './views/Project';
+import Projects from './views/Projects';
 import Tag from './views/Tag';
 import Tags from './views/Tags';
 
@@ -87,7 +89,8 @@ class App extends Component {
 			>
 				<List>
 					<RoutableListItem to='/' icon={<HomeIcon />} text={'Home'} onNavigated={this.closeMenuDrawer}></RoutableListItem>
-					<RoutableListItem to='/Tags' icon={<TagIcon />} text={'Tags'} onNavigated={this.closeMenuDrawer}></RoutableListItem>
+					<RoutableListItem to='/projects' icon={<ProjectIcon />} text={'Projects'} onNavigated={this.closeMenuDrawer}></RoutableListItem>
+					<RoutableListItem to='/tags' icon={<TagIcon />} text={'Tags'} onNavigated={this.closeMenuDrawer}></RoutableListItem>
 				</List>
 			</Drawer>
 		);    
@@ -111,6 +114,7 @@ class App extends Component {
 						<main className={classNames(classes.content)}>
 							<Switch>
 								<Route exact path='/' component={Home}/>
+								<Route exact path='/projects' component={Projects}/>
 								<Route path='/projects/:projectID' component={Project}/>
 								<Route path='/employers/:employerID' component={Employer}/>
 								<Route exact path='/tags' component={Tags}/>
