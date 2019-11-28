@@ -4,15 +4,17 @@ import PropTypes from 'prop-types'
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const ImageDialog = (props) => {
 	const { image, onClose } = props;
 	if (image) {
 		return (		
 			<Dialog open={Boolean(image.filename)} onClose={onClose} fullWidth={true} maxWidth="xl">
-				<DialogContent>
-					<img src={`/images/${image.filename}`} alt={image.caption}/>
-					<DialogContentText>{image.caption}</DialogContentText>
+				<DialogTitle id="confirmation-dialog-title" style={{textAlign:'center'}}>{image.caption}</DialogTitle>
+				<DialogContent dividers>
+					<img src={`/images/${image.filename}`} alt={image.caption} style={{maxHeight:'90%', maxWidth:'90%', display:'block', marginLeft:'auto', marginRight:'auto'}}/>
+					{/* <DialogContentText>{image.caption}</DialogContentText> */}
 				</DialogContent>
 			</Dialog>
 		)	
