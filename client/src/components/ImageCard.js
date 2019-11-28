@@ -11,10 +11,10 @@ import Typography from '@material-ui/core/Typography';
 const ImageCard = (props) => {
 	const { image, onClick } = props;
 	return (
-        <Grid item xs={2} key={image.id}>
-            <Card>
+        <Grid item  xs={12} md={4} xl={3} key={image.id}>
+            <Card style={{textAlign:'center'}}>
                 <CardActionArea onClick={onClick}>
-                    <CardMedia image={`/thumbnails/${image.filename}`} title={image.caption} style={{height:108}}/>
+                    <CardMedia src={`/thumbnails/${image.filename}`} title={image.caption} style={{maxHeight:108, maxWidth:192, display:'block', marginLeft:'auto', marginRight:'auto'}} component="img"/>
                     <CardContent>									
                         <Typography variant="body2" color="textSecondary" component="p">{image.caption}</Typography>
                     </CardContent>

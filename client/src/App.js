@@ -33,7 +33,7 @@ import { store, loadMyself } from './redux/Store';
 
 const styles = theme => ({
 	appFrame: {
-		height: 800,
+		height: '100%',
 		zIndex: 1,
 		overflow: 'hidden',
 		position: 'relative',
@@ -96,7 +96,7 @@ class App extends Component {
 			<Provider store={store}>
 				<div className='App'>
 					<div className={classes.appFrame}>
-						<AppBar className={classNames(classes.appBar)}>
+						<AppBar className={classNames(classes.appBar)} position="static">
 							<Toolbar disableGutters={true}>
 								<IconButton
 									color='inherit'
