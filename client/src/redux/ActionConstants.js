@@ -10,7 +10,7 @@ const actionConstants = {
     ...getLoadConstants('EMPLOYER'),
     ...getLoadConstants('EMPLOYERS'),
     ...getLoadConstants('PROJECT'),
-    ...getLoadConstants('PROJECT'),
+    ...getLoadConstants('PROJECTS'),
     ...getLoadConstants('TAG'),
     ...getLoadConstants('TAGS'),
     ...getLoadConstants('MYSELF')
