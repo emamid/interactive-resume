@@ -16,7 +16,7 @@ const express = require('@feathersjs/express');
 const servicesInit = require('./services');
 const associateModels = require('./models/associateModels');
 
-const nodePort = 3000;
+const nodePort = process.env.API_PORT || 3000;
 
 let app = null;
 
