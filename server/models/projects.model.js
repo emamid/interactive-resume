@@ -27,17 +27,17 @@ function getModel(app) {
 				type: Sequelize.DATE
 			},
 			employerID: {
-				type: Sequelize.UUIDV4			
+				type: Sequelize.UUIDV4
 			},
 			isPersonal: {
 				type: Sequelize.BOOLEAN
 			}
 		}, {
 			tableName: 'projects'
-		});	
+		});
 	}
 
-	return Project;	
+	return Project;
 }
 
 function associateModel(app) {

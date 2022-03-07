@@ -16,8 +16,8 @@ import HTMLContent from '../components/HTMLContent';
 import YearRange from '../components/YearRange';
 
 const mapStateToProps = state => ({
-    myself: state.myself,
-    employers: state.employers
+	myself: state.myself,
+	employers: state.employers
 });
 
 const mapDispatchToProps = {
@@ -30,7 +30,7 @@ class Home extends Component {
 		myself: PropTypes.object.isRequired,
 		employers: PropTypes.array.isRequired
 	};
-	
+
 	componentDidMount() {
 		this.props.loadEmployers();
 	}
@@ -48,7 +48,7 @@ class Home extends Component {
 				<TableBody>
 					{this.props.employers.map(employer => (
 						<TableRow key={employer.id}>
-							<TableCell><YearRange startDate={employer.startDate} endDate={employer.endDate}/></TableCell>
+							<TableCell><YearRange startDate={employer.startDate} endDate={employer.endDate} /></TableCell>
 							<TableCell><a href={`/#/employers/${employer.id}`}>{employer.name}</a></TableCell>
 							<TableCell><a href={`/#/employers/${employer.id}`}>{employer.position}</a></TableCell>
 						</TableRow>
@@ -67,7 +67,7 @@ class Home extends Component {
 				<TableBody>
 					{this.props.myself.Projects.map(project => (
 						<TableRow key={project.id}>
-							<TableCell><YearRange startDate={project.startDate} endDate={project.endDate}/></TableCell>
+							<TableCell><YearRange startDate={project.startDate} endDate={project.endDate} /></TableCell>
 							<TableCell><a href={`/#/projects/${project.id}`}>{project.name}</a></TableCell>
 						</TableRow>
 					))}
@@ -76,10 +76,10 @@ class Home extends Component {
 		);
 		return (
 			<div>
-				<HTMLContent html={this.props.myself.pageContent}/>
+				<HTMLContent html={this.props.myself.pageContent} />
 				<Typography>Employment History</Typography>
 				{employerTable}
-				<br/>
+				<br />
 				<Typography>Personal Projects</Typography>
 				{personalProjectTable}
 			</div>

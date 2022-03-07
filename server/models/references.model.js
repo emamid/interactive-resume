@@ -17,13 +17,13 @@ function getModel(app) {
 			},
 			name: {
 				type: Sequelize.TEXT
-            },
-            url: {
+			},
+			url: {
 				type: Sequelize.TEXT
-            }
+			}
 		}, {
 			tableName: 'references'
-		});	
+		});
 	}
 	return Reference;
 }

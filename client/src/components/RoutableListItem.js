@@ -8,7 +8,7 @@ import { withRouter } from 'react-router'
 const RoutableListItem = (props) => {
 	const { icon, text, history, to, onClick, onNavigated } = props;
 	return (
-		<ListItem button 
+		<ListItem button
 			onClick={(event) => {
 				onClick && onClick(event);
 				history.push(to);
@@ -16,10 +16,10 @@ const RoutableListItem = (props) => {
 			}}
 		>
 			<ListItemIcon>
-			{icon}
+				{icon}
 			</ListItemIcon>
 			<ListItemText primary={text} />
-		</ListItem>          
+		</ListItem>
 	)
 }
 

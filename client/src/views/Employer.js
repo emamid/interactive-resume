@@ -12,7 +12,7 @@ import ReferenceList from '../components/ReferenceList';
 import YearRange from '../components/YearRange';
 
 const mapStateToProps = state => ({
-    employer: state.employer
+	employer: state.employer
 });
 
 const mapDispatchToProps = {
@@ -32,10 +32,10 @@ class Employer extends Component {
 	render() {
 		const { employer } = this.props;
 		return <div>
-			<Typography component="h5" variant="h5">{employer.position} at {employer.name} <YearRange startDate={employer.startDate} endDate={employer.endDate} withParens={true}/></Typography>
-			<HTMLContent html={this.props.employer.pageContent}/>
-			<br/>
-			<ReferenceList references={employer.References}/>
+			<Typography component="h5" variant="h5">{employer.position} at {employer.name} <YearRange startDate={employer.startDate} endDate={employer.endDate} withParens={true} /></Typography>
+			<HTMLContent html={this.props.employer.pageContent} />
+			<br />
+			<ReferenceList references={employer.References} />
 		</div>
 	}
 

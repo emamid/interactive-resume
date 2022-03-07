@@ -28,7 +28,7 @@ function getModel(app) {
 
 		}, {
 			tableName: 'myself'
-		});	
+		});
 	}
 	return Myself;
 }

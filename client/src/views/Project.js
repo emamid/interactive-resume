@@ -14,7 +14,7 @@ import ImageGallery from '../components/ImageGallery';
 import ImageDialog from '../components/ImageDialog';
 
 const mapStateToProps = state => ({
-    project: state.project
+	project: state.project
 });
 
 const mapDispatchToProps = {
@@ -37,19 +37,19 @@ class Project extends Component {
 
 	render() {
 		const { project } = this.props;
-		const employerText = project.isPersonal ? '' : <span> at <a href={`/#/employers/${project.employerID}`}>{project.Employer.name}</a> <YearRange startDate={project.startDate} endDate={project.endDate} withParens={true}/></span>;
+		const employerText = project.isPersonal ? '' : <span> at <a href={`/#/employers/${project.employerID}`}>{project.Employer.name}</a> <YearRange startDate={project.startDate} endDate={project.endDate} withParens={true} /></span>;
 		return <div>
 			<Typography component="h5" variant="h5" gutterBottom={true}>
 				{project.name}{employerText}
 			</Typography>
 			<div>
 				{project.Tags.map(tag => (
-					<Chip label={tag.name} component="a" href={`/#/tags/${tag.id}`} clickable variant="outlined" key={tag.id}/>
+					<Chip label={tag.name} component="a" href={`/#/tags/${tag.id}`} clickable variant="outlined" key={tag.id} />
 				))}
 			</div>
-			<HTMLContent html={project.pageContent}/>
-			<ImageDialog image={this.state.dialogImage} onClose={()=>{this.setState({dialogImage:null})}}/>
-			<ImageGallery images={project.Images} onClick={(image)=>{this.setState({dialogImage: {...image}})}} />
+			<HTMLContent html={project.pageContent} />
+			<ImageDialog image={this.state.dialogImage} onClose={() => { this.setState({ dialogImage: null }) }} />
+			<ImageGallery images={project.Images} onClick={(image) => { this.setState({ dialogImage: { ...image } }) }} />
 		</div>
 	}
 

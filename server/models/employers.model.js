@@ -35,7 +35,7 @@ function getModel(app) {
 			}
 		}, {
 			tableName: 'employers'
-		});	
+		});
 	}
 	return Employer;
 }

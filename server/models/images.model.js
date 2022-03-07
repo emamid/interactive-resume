@@ -20,17 +20,17 @@ function getModel(app) {
 				type: Sequelize.TEXT
 			},
 			projectID: {
-				type: Sequelize.UUIDV4			
+				type: Sequelize.UUIDV4
 			},
 			sortOrder: {
 				type: Sequelize.INTEGER
 			}
 		}, {
 			tableName: 'images'
-		});	
+		});
 	}
 
-	return Image;	
+	return Image;
 }
 
 module.exports = {

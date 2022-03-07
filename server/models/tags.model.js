@@ -20,7 +20,7 @@ function getModel(app) {
 			}
 		}, {
 			tableName: 'tags'
-		});	
+		});
 	}
 	return Tag;
 }

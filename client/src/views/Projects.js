@@ -13,8 +13,8 @@ import { connect } from 'react-redux';
 
 import { loadProjects } from '../redux/Store';
 
-const mapStateToProps = state => ({	
-    projects: state.projects
+const mapStateToProps = state => ({
+	projects: state.projects
 });
 
 const mapDispatchToProps = {
@@ -26,7 +26,7 @@ class Projects extends Component {
 	static propTypes = {
 		projects: PropTypes.array.isRequired
 	};
-	
+
 	componentDidMount() {
 		this.props.loadProjects();
 	}
@@ -45,7 +45,7 @@ class Projects extends Component {
 				<TableBody>
 					{projects.map(project => (
 						<TableRow key={project.id}>
-							<TableCell><YearRange startDate={project.startDate} endDate={project.endDate}/></TableCell>
+							<TableCell><YearRange startDate={project.startDate} endDate={project.endDate} /></TableCell>
 							<TableCell><a href={`/#/projects/${project.id}`}>{project.name}</a></TableCell>
 							<TableCell>{project.isPersonal ? '' : <a href={`/#/employers/${project.employerID}`}>{project.Employer.name}</a>}</TableCell>
 						</TableRow>

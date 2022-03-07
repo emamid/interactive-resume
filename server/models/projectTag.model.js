@@ -23,7 +23,7 @@ function getModel(app) {
 			}
 		}, {
 			tableName: 'project_tags'
-		});	
+		});
 	}
 	return ProjectTag;
 }

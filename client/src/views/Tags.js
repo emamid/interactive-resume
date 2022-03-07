@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { loadTags } from '../redux/Store';
 
 const mapStateToProps = state => ({
-    tags: state.tags
+	tags: state.tags
 });
 
 const mapDispatchToProps = {
@@ -21,7 +21,7 @@ class Tags extends Component {
 	static propTypes = {
 		tags: PropTypes.array.isRequired
 	};
-	
+
 	componentDidMount() {
 		this.props.loadTags();
 	}

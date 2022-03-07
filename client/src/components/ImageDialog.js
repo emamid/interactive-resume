@@ -8,14 +8,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 const ImageDialog = (props) => {
 	const { image, onClose } = props;
 	if (image) {
-		return (		
+		return (
 			<Dialog open={Boolean(image.filename)} onClose={onClose} fullWidth={true} maxWidth="xl" onClick={onClose}>
-				<DialogTitle id="confirmation-dialog-title" style={{textAlign:'center'}}>{image.caption}</DialogTitle>
+				<DialogTitle id="confirmation-dialog-title" style={{ textAlign: 'center' }}>{image.caption}</DialogTitle>
 				<DialogContent dividers>
-					<img src={`/images/${image.filename}`} alt={image.caption} style={{maxHeight:'90%', maxWidth:'90%', display:'block', marginLeft:'auto', marginRight:'auto'}}/>
+					<img src={`/images/${image.filename}`} alt={image.caption} style={{ maxHeight: '90%', maxWidth: '90%', display: 'block', marginLeft: 'auto', marginRight: 'auto' }} />
 				</DialogContent>
 			</Dialog>
-		)	
+		)
 	} else {
 		return '';
 	}
@@ -23,7 +23,7 @@ const ImageDialog = (props) => {
 
 ImageDialog.propTypes = {
 	image: PropTypes.object,
-	onClose: PropTypes.func	
+	onClose: PropTypes.func
 }
 
 export default ImageDialog;

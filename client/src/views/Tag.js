@@ -10,7 +10,7 @@ import RoutableGridCard from '../components/RoutableGridCard';
 import { loadTag } from '../redux/Store';
 
 const mapStateToProps = state => ({
-    tag: state.tag
+	tag: state.tag
 });
 
 const mapDispatchToProps = {
@@ -31,8 +31,8 @@ class Tag extends Component {
 
 		return <Grid container spacing={3}>
 			{this.props.tag.Projects.map(project => (
-				<RoutableGridCard key={project.id} to={`/projects/${project.id}`} title={project.name} subtitle={project.Employer.name}/>
-			))}			
+				<RoutableGridCard key={project.id} to={`/projects/${project.id}`} title={project.name} subtitle={project.Employer.name} />
+			))}
 		</Grid>
 	}
 

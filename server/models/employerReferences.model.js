@@ -23,7 +23,7 @@ function getModel(app) {
 			}
 		}, {
 			tableName: 'employer_references'
-		});	
+		});
 	}
 	return EmployerReference;
 }

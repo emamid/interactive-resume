@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 
 let sequelize = null;
 
-module.exports = function() {
+module.exports = function () {
 	if (!sequelize) {
 		console.log('Database file: ', `${process.env.RESUME_DATA_DIR}/resume.sqlite`);
 		sequelize = new Sequelize('sequelize', '', '', {
