@@ -1,5 +1,9 @@
 'use strict';
 
+// Environment vars
+const dotenv = require('dotenv');
+dotenv.config({ path: '../.env' });
+
 // Express/Node
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -35,6 +39,7 @@ function initApp() {
     associateModels(app);
 
     // Path to client (production build)
+	console.log(process.env.RESUME_DATA_DIR);
     app.use('/images', express.static(`${process.env.RESUME_DATA_DIR}/images`));
     app.use('/thumbnails', express.static(`${process.env.RESUME_DATA_DIR}/thumbnails`));    
     app.use('/', express.static('../client/build'));
