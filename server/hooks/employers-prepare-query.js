@@ -14,8 +14,10 @@ module.exports = async function(context) {
             id: {
                 [Sequelize.Op.ne]: myself.personalEmployerID
             }
-
-        }
+        },
+		order: [
+			['startDate', 'DESC']
+		]
     };
     return context;
 };
