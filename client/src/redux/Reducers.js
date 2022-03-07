@@ -75,6 +75,7 @@ export default {
 	employers: arrayReducerFactory('employers'),
 	project: objectReducerFactory('project', { Employer: {}, Tags: [], Images: [] }),
 	projects: arrayReducerFactory('projects'),
+	projectTags: arrayReducerFactory('projectTags'),
 	tag: objectReducerFactory('tag', { Projects: [] }),
 	tags: arrayReducerFactory('tags')
 };

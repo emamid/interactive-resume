@@ -22,6 +22,7 @@ const initialState = {
 		References: []
 	},
 	employers: [],
+	projectTags: [],
 	tag: {
 		Projects: []
 	},
@@ -84,6 +85,8 @@ export const loadEmployers = loadListFactory('EMPLOYERS', 'employers');
 
 export const loadProject = loadObjectFactory('PROJECT', 'projects');
 export const loadProjects = loadListFactory('PROJECTS', 'projects');
+
+export const loadProjectTags = loadListFactory('PROJECTTAGS', 'project-tags');
 
 export const loadTag = loadObjectFactory('TAG', 'tags');
 export const loadTags = loadListFactory('TAGS', 'tags');

@@ -13,6 +13,7 @@ const actionConstants = {
 	...getLoadConstants('PROJECTS'),
 	...getLoadConstants('TAG'),
 	...getLoadConstants('TAGS'),
+	...getLoadConstants('PROJECTTAGS'),
 	...getLoadConstants('MYSELF')
 };
 
