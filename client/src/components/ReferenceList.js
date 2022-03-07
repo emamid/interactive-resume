@@ -13,7 +13,7 @@ const ReferenceList = (props) => {
 				<Typography component="h6" variant="h6">References</Typography>
 				<ul>
 					{references.map(reference => (
-						<li key={reference.id}><a href={reference.url} target="_blank">{reference.name}</a></li>
+						<li key={reference.id}><a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.name}</a></li>
 					))}
 				</ul>
 			</div>
