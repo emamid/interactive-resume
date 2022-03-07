@@ -17,6 +17,12 @@ function getModel(app) {
 			},
 			name: {
 				type: Sequelize.TEXT
+			},
+			category: {
+				type: Sequelize.TEXT
+			},
+			layer: {
+				type: Sequelize.TEXT
 			}
 		}, {
 			tableName: 'tags'

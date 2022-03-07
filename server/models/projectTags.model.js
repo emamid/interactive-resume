@@ -28,6 +28,25 @@ function getModel(app) {
 	return ProjectTag;
 }
 
+function associateModel(app) {
+
+	const sequelize = require('./sequelize')();
+
+	const { Project, ProjectTag, Tag } = sequelize.models;
+
+	ProjectTag.belongsTo(Tag, {
+		foreignKey: 'tagID',
+		as: 'Tag'
+	});
+
+	ProjectTag.belongsTo(Project, {
+		foreignKey: 'projectID',
+		as: 'Project'
+	});
+
+}
+
 module.exports = {
+	associateModel,
 	getModel
 }
