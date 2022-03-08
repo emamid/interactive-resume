@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import { useD3 } from '../hooks/useD3';
 import { max, uniq } from 'lodash';
 
-const BubbleChart = ({ colorBy, data, groupBy, onclick }) => {
+const BubbleChart = ({ colorBy, data, groupBy, onclick, colorMapChanged }) => {
 	const ref = useD3(
 		(svg) => {
 			const mappedTags = data.map(tag => ({
@@ -26,7 +26,9 @@ const BubbleChart = ({ colorBy, data, groupBy, onclick }) => {
 				[value]: colors(index)
 			}), {});
 
-			console.log('colorMap = ', colorMap);
+			if (colorMapChanged) {
+				colorMapChanged(colorMap);
+			}
 			
 			const packed = d3.packSiblings(mappedTags);
 
