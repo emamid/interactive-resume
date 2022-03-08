@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Table from '@material-ui/core/Table';
@@ -21,40 +21,37 @@ const mapDispatchToProps = {
 	loadProjects
 };
 
-class Projects extends Component {
+const Projects = (props) => {
 
-	static propTypes = {
-		projects: PropTypes.array.isRequired
-	};
+	const { projects, loadProjects } = props;
 
-	componentDidMount() {
-		this.props.loadProjects();
-	}
+	useEffect(()=> {loadProjects()}, [loadProjects])
 
-	render() {
-		const { projects } = this.props;
-		return (
-			<Table size="small">
-				<TableHead>
-					<TableRow>
-						<TableCell>Dates</TableCell>
-						<TableCell>Project</TableCell>
-						<TableCell>Company</TableCell>
+	return (
+		<Table size="small">
+			<TableHead>
+				<TableRow>
+					<TableCell>Dates</TableCell>
+					<TableCell>Project</TableCell>
+					<TableCell>Company</TableCell>
+				</TableRow>
+			</TableHead>
+			<TableBody>
+				{projects.map(project => (
+					<TableRow key={project.id}>
+						<TableCell><YearRange startDate={project.startDate} endDate={project.endDate} /></TableCell>
+						<TableCell><a href={`/#/projects/${project.id}`}>{project.name}</a></TableCell>
+						<TableCell>{project.isPersonal ? '' : <a href={`/#/employers/${project.employerID}`}>{project.Employer.name}</a>}</TableCell>
 					</TableRow>
-				</TableHead>
-				<TableBody>
-					{projects.map(project => (
-						<TableRow key={project.id}>
-							<TableCell><YearRange startDate={project.startDate} endDate={project.endDate} /></TableCell>
-							<TableCell><a href={`/#/projects/${project.id}`}>{project.name}</a></TableCell>
-							<TableCell>{project.isPersonal ? '' : <a href={`/#/employers/${project.employerID}`}>{project.Employer.name}</a>}</TableCell>
-						</TableRow>
-					))}
-				</TableBody>
-			</Table>
-		)
-	}
+				))}
+			</TableBody>
+		</Table>
+	)
 
 }
+
+Projects.propTypes = {
+	projects: PropTypes.array.isRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Projects);

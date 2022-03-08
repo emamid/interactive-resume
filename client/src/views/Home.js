@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
@@ -24,68 +24,66 @@ const mapDispatchToProps = {
 	loadEmployers
 };
 
-class Home extends Component {
+const Home = (props) => {
 
-	static propTypes = {
-		myself: PropTypes.object.isRequired,
-		employers: PropTypes.array.isRequired
-	};
+	const { myself, employers, loadEmployers } = props;
 
-	componentDidMount() {
-		this.props.loadEmployers();
-	}
+	useEffect(() => { loadEmployers() }, [loadEmployers]);
 
-	render() {
-		const employerTable = (
-			<Table size="small">
-				<TableHead>
-					<TableRow>
-						<TableCell>Dates</TableCell>
-						<TableCell>Company</TableCell>
-						<TableCell>Position</TableCell>
+	const employerTable = (
+		<Table size="small">
+			<TableHead>
+				<TableRow>
+					<TableCell>Dates</TableCell>
+					<TableCell>Company</TableCell>
+					<TableCell>Position</TableCell>
+				</TableRow>
+			</TableHead>
+			<TableBody>
+				{employers.map(employer => (
+					<TableRow key={employer.id}>
+						<TableCell><YearRange startDate={employer.startDate} endDate={employer.endDate} /></TableCell>
+						<TableCell><a href={`/#/employers/${employer.id}`}>{employer.name}</a></TableCell>
+						<TableCell><a href={`/#/employers/${employer.id}`}>{employer.position}</a></TableCell>
 					</TableRow>
-				</TableHead>
-				<TableBody>
-					{this.props.employers.map(employer => (
-						<TableRow key={employer.id}>
-							<TableCell><YearRange startDate={employer.startDate} endDate={employer.endDate} /></TableCell>
-							<TableCell><a href={`/#/employers/${employer.id}`}>{employer.name}</a></TableCell>
-							<TableCell><a href={`/#/employers/${employer.id}`}>{employer.position}</a></TableCell>
-						</TableRow>
-					))}
-				</TableBody>
-			</Table>
-		);
-		const personalProjectTable = (
-			<Table size="small">
-				<TableHead>
-					<TableRow>
-						<TableCell>Dates</TableCell>
-						<TableCell>Project</TableCell>
+				))}
+			</TableBody>
+		</Table>
+	);
+	const personalProjectTable = (
+		<Table size="small">
+			<TableHead>
+				<TableRow>
+					<TableCell>Dates</TableCell>
+					<TableCell>Project</TableCell>
+				</TableRow>
+			</TableHead>
+			<TableBody>
+				{myself.Projects.map(project => (
+					<TableRow key={project.id}>
+						<TableCell><YearRange startDate={project.startDate} endDate={project.endDate} /></TableCell>
+						<TableCell><a href={`/#/projects/${project.id}`}>{project.name}</a></TableCell>
 					</TableRow>
-				</TableHead>
-				<TableBody>
-					{this.props.myself.Projects.map(project => (
-						<TableRow key={project.id}>
-							<TableCell><YearRange startDate={project.startDate} endDate={project.endDate} /></TableCell>
-							<TableCell><a href={`/#/projects/${project.id}`}>{project.name}</a></TableCell>
-						</TableRow>
-					))}
-				</TableBody>
-			</Table>
-		);
-		return (
-			<div>
-				<HTMLContent html={this.props.myself.pageContent} />
-				<Typography>Employment History</Typography>
-				{employerTable}
-				<br />
-				<Typography>Personal Projects</Typography>
-				{personalProjectTable}
-			</div>
-		)
-	}
+				))}
+			</TableBody>
+		</Table>
+	);
+	return (
+		<div>
+			<HTMLContent html={myself.pageContent} />
+			<Typography>Employment History</Typography>
+			{employerTable}
+			<br />
+			<Typography>Personal Projects</Typography>
+			{personalProjectTable}
+		</div>
+	)
 
 }
+
+Home.propTypes = {
+	myself: PropTypes.object.isRequired,
+	employers: PropTypes.array.isRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Chip from '@material-ui/core/Chip';
@@ -21,38 +21,34 @@ const mapDispatchToProps = {
 	loadProject
 };
 
-class Project extends Component {
+const Project = (props) => {
 
-	static propTypes = {
-		project: PropTypes.object
-	};
+	const { project, loadProject, match } = props;
 
-	state = {
-		dialogImage: null
-	};
+	useEffect(() => { loadProject(match.params.projectID) }, [loadProject]);
 
-	componentDidMount() {
-		this.props.loadProject(this.props.match.params.projectID);
-	}
+	const [dialogImage, setDialogImage] = useState(null);
 
-	render() {
-		const { project } = this.props;
-		const employerText = project.isPersonal ? '' : <span> at <a href={`/#/employers/${project.employerID}`}>{project.Employer.name}</a> <YearRange startDate={project.startDate} endDate={project.endDate} withParens={true} /></span>;
-		return <div>
-			<Typography component="h5" variant="h5" gutterBottom={true}>
-				{project.name}{employerText}
-			</Typography>
-			<div>
-				{project.Tags.map(tag => (
-					<Chip label={tag.name} component="a" href={`/#/tags/${tag.id}`} clickable variant="outlined" key={tag.id} />
-				))}
-			</div>
-			<HTMLContent html={project.pageContent} />
-			<ImageDialog image={this.state.dialogImage} onClose={() => { this.setState({ dialogImage: null }) }} />
-			<ImageGallery images={project.Images} onClick={(image) => { this.setState({ dialogImage: { ...image } }) }} />
+	const employerText = project.isPersonal ? '' : <span> at <a href={`/#/employers/${project.employerID}`}>{project.Employer.name}</a> <YearRange startDate={project.startDate} endDate={project.endDate} withParens={true} /></span>;
+	return <div>
+		<Typography component="h5" variant="h5" gutterBottom={true}>
+			{project.name}{employerText}
+		</Typography>
+		<div>
+			{project.Tags.map(tag => (
+				<Chip label={tag.name} component="a" href={`/#/tags/${tag.id}`} clickable variant="outlined" key={tag.id} />
+			))}
 		</div>
-	}
+		<HTMLContent html={project.pageContent} />
+		<ImageDialog image={dialogImage} onClose={() => { setDialogImage(null) }} />
+		{/* <ImageGallery images={project.Images} onClick={(image) => { this.setState({ dialogImage: { ...image } }) }} /> */}
+		<ImageGallery images={project.Images} onClick={(image) => { setDialogImage({ ...image }) }} />
+	</div>
 
 }
+
+Project.propTypes = {
+	project: PropTypes.object
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Project);

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
@@ -16,28 +16,27 @@ const mapDispatchToProps = {
 	loadTags
 };
 
-class Tags extends Component {
+const Tags = (props) => {
 
-	static propTypes = {
-		tags: PropTypes.array.isRequired
-	};
+	const { tags, loadTags } = props;
 
-	componentDidMount() {
-		this.props.loadTags();
-	}
+	useEffect(() => { loadTags() }, [loadTags]);
 
-	render() {
-		return (
-			<Grid container spacing={4}>
-				{this.props.tags.map(tag => (
-					<Grid item xs={6} m={4} xl={2} key={tag.id}>
-						<Button variant="outlined" color="primary" href={`/#/tags/${tag.id}`}>{tag.name}</Button>
-					</Grid>
-				))}
-			</Grid>
-		)
-	}
+
+	return (
+		<Grid container spacing={4}>
+			{tags.map(tag => (
+				<Grid item xs={6} m={4} xl={2} key={tag.id}>
+					<Button variant="outlined" color="primary" href={`/#/tags/${tag.id}`}>{tag.name}</Button>
+				</Grid>
+			))}
+		</Grid>
+	)
 
 }
+
+Tags.propTypes = {
+	tags: PropTypes.array.isRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tags);

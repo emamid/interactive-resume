@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 
@@ -16,27 +16,24 @@ const mapDispatchToProps = {
 	loadProjectTags
 };
 
-class Visualize extends Component {
+const Visualize = (props) => {
 
-	static propTypes = {
-		projectTags: PropTypes.array.isRequired
-	};
+	useEffect(() => {
+		props.loadProjectTags();
+	}, [props.loadProjectTags]);
 
-	componentDidMount() {
-		this.props.loadProjectTags();
-	}
-
-	render() {
-		return (<div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
-			<div>Top bar</div>
-			<div style={{ flexGrow: 1 }}>
-				<BubbleChart data={this.props.projectTags} colorBy="category" groupBy="layer" onclick={tagID => this.props.history.push('/tags/' + tagID)} />
-			</div>
-			<div>Bottom bar</div>
+	return (<div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
+		<div>Top bar</div>
+		<div style={{ flexGrow: 1 }}>
+			<BubbleChart data={props.projectTags} colorBy="category" groupBy="layer" onclick={tagID => props.history.push('/tags/' + tagID)} />
 		</div>
-		)
-	}
+		<div>Bottom bar</div>
+	</div>
+	)
+}
 
+Visualize.propTypes = {
+	projectTags: PropTypes.array.isRequired
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Visualize));

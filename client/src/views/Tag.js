@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
@@ -17,25 +17,22 @@ const mapDispatchToProps = {
 	loadTag
 };
 
-class Tag extends Component {
+const Tag = (props) => {
 
-	static propTypes = {
-		tag: PropTypes.object
-	};
+	const { tag, loadTag, match } = props;
 
-	componentDidMount() {
-		this.props.loadTag(this.props.match.params.tagID);
-	}
+	useEffect(() => { loadTag(match.params.tagID) }, [loadTag])
 
-	render() {
-
-		return <Grid container spacing={3}>
-			{this.props.tag.Projects.map(project => (
-				<RoutableGridCard key={project.id} to={`/projects/${project.id}`} title={project.name} subtitle={project.Employer.name} />
-			))}
-		</Grid>
-	}
+	return <Grid container spacing={3}>
+		{tag.Projects.map(project => (
+			<RoutableGridCard key={project.id} to={`/projects/${project.id}`} title={project.name} subtitle={project.Employer.name} />
+		))}
+	</Grid>
 
 }
+
+Tag.propTypes = {
+	tag: PropTypes.object
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Tag));

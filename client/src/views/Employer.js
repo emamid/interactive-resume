@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Typography from '@material-ui/core/Typography';
@@ -19,26 +19,23 @@ const mapDispatchToProps = {
 	loadEmployer
 };
 
-class Employer extends Component {
+const Employer = (props) => {
 
-	static propTypes = {
-		employer: PropTypes.object
-	};
+	const { employer, loadEmployer, match } = props;
 
-	componentDidMount() {
-		this.props.loadEmployer(this.props.match.params.employerID);
-	}
+	useEffect(() => { loadEmployer(match.params.employerID) }, [loadEmployer, match])
 
-	render() {
-		const { employer } = this.props;
-		return <div>
-			<Typography component="h5" variant="h5">{employer.position} at {employer.name} <YearRange startDate={employer.startDate} endDate={employer.endDate} withParens={true} /></Typography>
-			<HTMLContent html={this.props.employer.pageContent} />
-			<br />
-			<ReferenceList references={employer.References} />
-		</div>
-	}
+	return <div>
+		<Typography component="h5" variant="h5">{employer.position} at {employer.name} <YearRange startDate={employer.startDate} endDate={employer.endDate} withParens={true} /></Typography>
+		<HTMLContent html={employer.pageContent} />
+		<br />
+		<ReferenceList references={employer.References} />
+	</div>
 
 }
+
+Employer.propTypes = {
+	employer: PropTypes.object
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Employer);
