@@ -26,9 +26,14 @@ class Visualize extends Component {
 		this.props.loadProjectTags();
 	}
 
-	render() {	
-		return (
-			<BubbleChart data={this.props.projectTags} colorBy="category" groupBy="layer" onclick={tagID => this.props.history.push('/tags/'+tagID)}/>
+	render() {
+		return (<div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
+			<div>Top bar</div>
+			<div style={{ flexGrow: 1 }}>
+				<BubbleChart data={this.props.projectTags} colorBy="category" groupBy="layer" onclick={tagID => this.props.history.push('/tags/' + tagID)} />
+			</div>
+			<div>Bottom bar</div>
+		</div>
 		)
 	}
 
