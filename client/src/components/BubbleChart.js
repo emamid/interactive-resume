@@ -26,6 +26,8 @@ const BubbleChart = ({ colorBy, data, groupBy, onclick }) => {
 				[value]: colors(index)
 			}), {});
 
+			console.log('colorMap = ', colorMap);
+			
 			const packed = d3.packSiblings(mappedTags);
 
 			const bubblesArea = svg.select('.bubbles-area');

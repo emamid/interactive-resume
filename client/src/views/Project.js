@@ -25,7 +25,7 @@ const Project = (props) => {
 
 	const { project, loadProject, match } = props;
 
-	useEffect(() => { loadProject(match.params.projectID) }, [loadProject]);
+	useEffect(() => { loadProject(match.params.projectID) }, [loadProject, match.params.projectID]);
 
 	const [dialogImage, setDialogImage] = useState(null);
 

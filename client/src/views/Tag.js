@@ -21,7 +21,7 @@ const Tag = (props) => {
 
 	const { tag, loadTag, match } = props;
 
-	useEffect(() => { loadTag(match.params.tagID) }, [loadTag])
+	useEffect(() => { loadTag(match.params.tagID) }, [loadTag, match.params.tagID])
 
 	return <Grid container spacing={3}>
 		{tag.Projects.map(project => (

@@ -18,14 +18,16 @@ const mapDispatchToProps = {
 
 const Visualize = (props) => {
 
+	const { projectTags, loadProjectTags, history } = props;
+
 	useEffect(() => {
-		props.loadProjectTags();
-	}, [props.loadProjectTags]);
+		loadProjectTags();
+	}, [loadProjectTags]);
 
 	return (<div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
 		<div>Top bar</div>
 		<div style={{ flexGrow: 1 }}>
-			<BubbleChart data={props.projectTags} colorBy="category" groupBy="layer" onclick={tagID => props.history.push('/tags/' + tagID)} />
+			<BubbleChart data={projectTags} colorBy="category" groupBy="layer" onclick={tagID => history.push('/tags/' + tagID)} />
 		</div>
 		<div>Bottom bar</div>
 	</div>
