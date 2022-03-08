@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 
 import BubbleChart from '../components/BubbleChart';
 
@@ -25,12 +26,12 @@ class Visualize extends Component {
 		this.props.loadProjectTags();
 	}
 
-	render() {
+	render() {	
 		return (
-			<BubbleChart data={this.props.projectTags} colorBy="category" groupBy="layer"/>
+			<BubbleChart data={this.props.projectTags} colorBy="category" groupBy="layer" onclick={tagID => this.props.history.push('/tags/'+tagID)}/>
 		)
 	}
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Visualize);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Visualize));

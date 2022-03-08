@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import { useD3 } from '../hooks/useD3';
 import { max, uniq } from 'lodash';
 
-const BubbleChart = ({ data, colorBy, groupBy }) => {
+const BubbleChart = ({ colorBy, data, groupBy, onclick }) => {
 	const ref = useD3(
 		(svg) => {
 			const mappedTags = data.map(tag => ({
@@ -28,17 +28,23 @@ const BubbleChart = ({ data, colorBy, groupBy }) => {
 
 			const packed = d3.packSiblings(mappedTags);
 
-			const plotArea = svg.select('.plot-area');
+			const bubblesArea = svg.select('.bubbles-area');
 
-			const items = plotArea.selectAll('.bubble')
+			const items = bubblesArea.selectAll('.bubble')
 				.data(mappedTags)
 				.enter()
 				.append('g')
 				.attr('transform', tag => `translate(${tag.x + 600},${tag.y + 400})`);
 			
 			items.append('circle')
+				// .attr('xlink:href', tag => `/#/tags/${tag.tagID}`)
 				.attr('r', tag => tag.r * 0.95)
-				.style('fill', tag => colorMap[tag[colorBy]]);
+				.style('fill', tag => colorMap[tag[colorBy]])
+				.on('click', event => {
+					if (onclick) {
+						onclick(event.target.__data__.tagID);
+					}
+				})
 
 			items.append('foreignObject')
 				.attr('width', tag => tag.r * 1.6)
@@ -51,6 +57,11 @@ const BubbleChart = ({ data, colorBy, groupBy }) => {
 				.style('display', 'flex')
 				.style('justify-content', 'center')
 				.style('align-items', 'center')
+				.on('click', event => {
+					if (onclick) {
+						onclick(event.target.__data__.tagID);
+					}
+				})
 				.append('xhtml:p')
 				.style('height', tag => `${tag.r * 1.6} px`)
 				.style('width', tag => `${tag.r * 1.6} px`)
@@ -70,7 +81,8 @@ const BubbleChart = ({ data, colorBy, groupBy }) => {
 				width: "100%",
 			}}
 		>
-			<g className="plot-area" />
+			<g className="bubbles-area" />
+			<g className="legend" />
 		</svg>
 	);
 }
