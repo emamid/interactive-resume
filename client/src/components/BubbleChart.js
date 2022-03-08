@@ -12,12 +12,12 @@ const BubbleChart = ({ colorBy, data, groupBy, onclick, colorMapChanged }) => {
 				category: tag.Tag.category,
 				layer: tag.Tag.layer,
 				projectCount: tag.projectCount,
-				r: tag.projectCount * 12
+				r: 4 + tag.projectCount * 11
 			}));
 
 			const maxProjectCount = max(mappedTags.map(tag => tag.projectCount));
 
-			const colors = d3.scaleOrdinal(d3.schemeCategory10);
+			const colors = d3.scaleOrdinal(d3.schemePastel2);
 
 			const colorValues = uniq(mappedTags.map(tag => tag[colorBy])).sort();
 
@@ -49,6 +49,8 @@ const BubbleChart = ({ colorBy, data, groupBy, onclick, colorMapChanged }) => {
 						onclick(event.target.__data__.tagID);
 					}
 				})
+				.append('title')
+				.text(tag => tag.name);
 
 			items.append('foreignObject')
 				.attr('width', tag => tag.r * 1.6)
@@ -61,6 +63,7 @@ const BubbleChart = ({ colorBy, data, groupBy, onclick, colorMapChanged }) => {
 				.style('display', 'flex')
 				.style('justify-content', 'center')
 				.style('align-items', 'center')
+				.attr('title', tag => tag.name)
 				.on('click', event => {
 					if (onclick) {
 						onclick(event.target.__data__.tagID);
@@ -72,6 +75,7 @@ const BubbleChart = ({ colorBy, data, groupBy, onclick, colorMapChanged }) => {
 				.style('margin', '0')
 				.style('text-align', 'center')
 				.style('font-size', tag => `${100 - Math.pow(maxProjectCount - tag.projectCount, 1.8)}%`)
+				.attr('title', tag => tag.name)
 				.text(tag => tag.name)
 
 		},
