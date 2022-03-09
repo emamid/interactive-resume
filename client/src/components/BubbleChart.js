@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import { useD3 } from '../hooks/useD3';
 import { max, uniq } from 'lodash';
 
-const BubbleChart = ({ colorBy, data, groupBy, onclick, colorMapChanged }) => {
+const BubbleChart = ({ colorBy, data, groupBy, onclick, colorMapChanged, svgWidth, svgHeight }) => {
 	const ref = useD3(
 		(svg) => {
 			const mappedTags = data.map(tag => ({
@@ -38,10 +38,9 @@ const BubbleChart = ({ colorBy, data, groupBy, onclick, colorMapChanged }) => {
 				.data(mappedTags)
 				.enter()
 				.append('g')
-				.attr('transform', tag => `translate(${tag.x + 600},${tag.y + 400})`);
+				.attr('transform', tag => `translate(${tag.x + svgWidth/2},${tag.y + svgHeight/2})`);
 			
 			items.append('circle')
-				// .attr('xlink:href', tag => `/#/tags/${tag.tagID}`)
 				.attr('r', tag => tag.r * 0.95)
 				.style('fill', tag => colorMap[tag[colorBy]])
 				.on('click', event => {

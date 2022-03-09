@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
@@ -24,18 +24,26 @@ const Visualize = (props) => {
 		loadProjectTags();
 	}, [loadProjectTags]);
 
+	const chartDiv = useRef(null);
+
 	const [ colorMap, setColorMap ] = useState({});
 
+	// Ensure non-zero dimensions if rendering before everything finalizes
+	const svgWidth = (chartDiv.current && chartDiv.current.clientWidth) || 128;
+	const svgHeight = (chartDiv.current && chartDiv.current.clientHeight) || 128;
+
 	return (<div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
-		<div>Top bar</div>
-		<div style={{ flexGrow: 1 }}>
+		<div>Top bar {svgWidth} {svgHeight}</div>
+		<div style={{ flexGrow: 1 }} ref={chartDiv}>
 			<BubbleChart data={projectTags}
 			  colorBy="category"
 			  groupBy="layer"
+			  svgWidth={svgWidth}
+			  svgHeight={svgHeight}
 			  onclick={tagID => history.push('/tags/' + tagID)}
 			  colorMapChanged={newColorMap => setColorMap(newColorMap)} />
 		</div>
-		<div>{map(colorMap, (color, text) => <span style={{backgroundColor: color, margin:'5px', padding:'5px'}}>{text === 'null' ? 'Other' : text}</span>)}</div>
+		<div>{map(colorMap, (color, text) => <span style={{backgroundColor: color, margin:'5px', padding:'5px'}} key={text}>{text === 'null' ? 'Other' : text}</span>)}</div>
 	</div>
 	)
 }
