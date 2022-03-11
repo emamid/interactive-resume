@@ -34,6 +34,7 @@ const Visualize = (props) => {
 	const chartDiv = useRef(null);
 
 	const [colorBy, setColorBy] = useState('category');
+	const [groupBy, setGroupBy] = useState(null);
 
 	// Ensure non-zero dimensions if rendering before everything finalizes
 	const svgWidth = (chartDiv.current && chartDiv.current.clientWidth) || 128;
@@ -59,10 +60,9 @@ const Visualize = (props) => {
 
 	return (<div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
 		<div>
-			<FormControl variant="standard">
+			<FormControl variant="standard" style={{width:'20em'}}>
 				<InputLabel>Color by</InputLabel>
 				<Select
-					labelId="demo-simple-select-standard-label"
 					value={colorBy}
 					onChange={event => setColorBy(event.target.value)}
 					label="Color by"
@@ -71,7 +71,18 @@ const Visualize = (props) => {
 					<MenuItem value={'layer'}>Layer</MenuItem>
 					<MenuItem value={'value'}>Size</MenuItem>
 				</Select>
-
+			</FormControl>
+			<FormControl variant="standard" style={{width:'20em', marginLeft:'1em'}}>
+				<InputLabel>Group by</InputLabel>
+				<Select
+					value={groupBy}
+					onChange={event => setGroupBy(event.target.value)}
+					label="Group by"
+				>
+					<MenuItem value={null}>None</MenuItem>
+					<MenuItem value={'category'}>Category</MenuItem>
+					<MenuItem value={'layer'}>Layer</MenuItem>
+				</Select>
 			</FormControl>
 		</div>
 		<div style={{ flexGrow: 1 }} ref={chartDiv}>
