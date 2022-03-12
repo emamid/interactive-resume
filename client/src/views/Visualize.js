@@ -59,7 +59,7 @@ const Visualize = (props) => {
 	}), {});
 
 	return (<div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
-		<div>
+		<div style={{marginBottom:'1em'}}>
 			<FormControl variant="standard" style={{width:'20em'}}>
 				<InputLabel>Color by</InputLabel>
 				<Select
@@ -99,7 +99,7 @@ const Visualize = (props) => {
 				colorMap={colorMap}
 			/>
 		</div>
-		<div>{map(colorMap, (color, text) => <span style={{ backgroundColor: color, margin: '5px', padding: '5px' }} key={text}>{text === 'null' ? 'Other' : text}</span>)}</div>
+		<div style={{marginTop:'1em'}}>{map(colorMap, (color, text) => <span style={{ backgroundColor: color, margin: '5px', padding: '5px' }} key={text}>{text === 'null' ? 'Other' : text}</span>)}</div>
 	</div>
 	)
 }
