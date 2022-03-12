@@ -1,6 +1,6 @@
 import React from 'react';
 import * as d3 from 'd3';
-import { groupBy, max, uniq } from 'lodash';
+import { each, groupBy, max, uniq } from 'lodash';
 
 const BubbleChart = ({ colorByProp, data, groupByProp, bubbleClick, svgWidth, svgHeight, colorMap }) => {
 
@@ -11,8 +11,10 @@ const BubbleChart = ({ colorByProp, data, groupByProp, bubbleClick, svgWidth, sv
 
 	if (groupByProp) {
 		groupValues = uniq(data.map(item => item[groupByProp])).sort();
-		groupedData = groupBy(data, groupByProp);
+		groupedData = groupBy(data, groupByProp);		
 	}
+
+	each(groupedData, group => d3.packSiblings(group));
 
 	const tileCount = groupValues.length;
 	const tileColumns = Math.max(Math.ceil(Math.sqrt(tileCount)), 1);
@@ -23,7 +25,24 @@ const BubbleChart = ({ colorByProp, data, groupByProp, bubbleClick, svgWidth, sv
 	const fixedTileScale = 0.95;
 	const fixedTileScaleWeight = 1;
 	const naiveTileScaleWeight = 1;
-	const tileScale = ((fixedTileScale * fixedTileScaleWeight) + (naiveTileScale * naiveTileScaleWeight)) / (fixedTileScaleWeight + naiveTileScale);
+
+	const bubbleExtents = data.reduce((currentExtents, item) => {
+		// console.log('currentExtents = ', currentExtents, ' item = ', item, ' item.x=', item.x);
+		// console.log(`minX=${currentExtents.minX} x=${item.x} r=${item.r} x-r=${item.x - item.r} ${Math.min(currentExtents.minX, item.x - item.r)}`);
+		// console.log(`item = ${JSON.stringify(item)} item.x = ${item.x}`);
+		return {
+		minX: Math.min(currentExtents.minX, item.x - item.r),
+		minY: Math.min(currentExtents.minY, item.y - item.r),
+		maxX: Math.max(currentExtents.maxX, item.x + item.r),
+		maxY: Math.max(currentExtents.maxY, item.y + item.r),
+	}}, {minX:0, minY:0, maxX:0, maxY:0})
+
+	const maxGroupWidth = bubbleExtents.maxX - bubbleExtents.minX;
+	const maxGroupHeight = bubbleExtents.maxY - bubbleExtents.minY;
+
+	const tileScale = maxGroupWidth && maxGroupHeight ? Math.min(tileWidth / maxGroupWidth, tileHeight / maxGroupHeight) : 1;
+
+	// const tileScale = ((fixedTileScale * fixedTileScaleWeight) + (naiveTileScale * naiveTileScaleWeight)) / (fixedTileScaleWeight + naiveTileScale);
 
 	function* lineSequence(lineCount, lineSpacing) {
 		for (let lineNum = 1; lineNum<lineCount; lineNum++) yield lineNum * lineSpacing;
@@ -40,7 +59,7 @@ const BubbleChart = ({ colorByProp, data, groupByProp, bubbleClick, svgWidth, sv
 				{groupValues.map((groupValue, groupIndex) => {
 					const column = groupIndex % tileColumns;
 					const row = Math.floor(groupIndex / tileColumns);
-					const groupData = d3.packSiblings(groupedData[groupValue]);
+					const groupData = groupedData[groupValue];
 					return (<g key={groupValue} transform={`translate(${column * tileWidth}, ${row * tileHeight})`}>
 						{/* <rect width={tileWidth} height={tileHeight} fill='white' stroke='grey' /> */}
 						<g transform={`translate(${tileWidth / 2},${tileHeight / 2}) scale(${tileScale})`}>
