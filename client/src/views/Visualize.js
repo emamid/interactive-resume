@@ -34,7 +34,7 @@ const Visualize = (props) => {
 	const chartDiv = useRef(null);
 
 	const [colorBy, setColorBy] = useState('category');
-	const [groupBy, setGroupBy] = useState(null);
+	const [groupBy, setGroupBy] = useState(false);
 
 	// Ensure non-zero dimensions if rendering before everything finalizes
 	const svgWidth = (chartDiv.current && chartDiv.current.clientWidth) || 128;
@@ -79,7 +79,7 @@ const Visualize = (props) => {
 					onChange={event => setGroupBy(event.target.value)}
 					label="Group by"
 				>
-					<MenuItem value={null}>None</MenuItem>
+					<MenuItem value={false}>None</MenuItem>
 					<MenuItem value={'category'}>Category</MenuItem>
 					<MenuItem value={'layer'}>Layer</MenuItem>
 				</Select>
@@ -87,8 +87,8 @@ const Visualize = (props) => {
 		</div>
 		<div style={{ flexGrow: 1 }} ref={chartDiv}>
 			<BubbleChart data={mappedTags}
-				colorBy={colorBy}
-				groupBy="layer"
+				colorByProp={colorBy}
+				groupByProp={groupBy}
 				svgWidth={svgWidth}
 				svgHeight={svgHeight}
 				bubbleClick={
