@@ -25,6 +25,10 @@ const BubbleChart = ({ colorByProp, data, groupByProp, bubbleClick, svgWidth, sv
 	const naiveTileScaleWeight = 1;
 	const tileScale = ((fixedTileScale * fixedTileScaleWeight) + (naiveTileScale * naiveTileScaleWeight)) / (fixedTileScaleWeight + naiveTileScale);
 
+	function* lineSequence(lineCount, lineSpacing) {
+		for (let lineNum = 1; lineNum<lineCount; lineNum++) yield lineNum * lineSpacing;
+	}
+
 	return (
 		<svg
 			style={{
@@ -57,6 +61,8 @@ const BubbleChart = ({ colorByProp, data, groupByProp, bubbleClick, svgWidth, sv
 					</g>)
 				})}
 			</g>
+			{[...lineSequence(tileColumns, tileWidth)].map(x => (<line x1={x} y1={0} x2={x} y2={svgHeight} stroke="black" strokeDasharray={[2,2]}/>))}
+			{[...lineSequence(tileRows, tileHeight)].map(y => (<line x1={0} y1={y} x2={svgWidth} y2={y} stroke="black" strokeDasharray={[2,2]}/>))}
 		</svg>
 	);
 
