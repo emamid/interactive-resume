@@ -32,6 +32,12 @@ function getModel(app) {
 			},
 			endDate: {
 				type: Sequelize.DATE
+			},
+			latitude: {
+				type: Sequelize.NUMBER
+			},
+			longitude: {
+				type: Sequelize.NUMBER
 			}
 		}, {
 			tableName: 'employers'
