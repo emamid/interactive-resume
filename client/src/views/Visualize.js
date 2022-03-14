@@ -49,7 +49,7 @@ const Visualize = (props) => {
 		r: 4 + tag.projectCount * 11
 	}));
 
-	const colors = d3.scaleOrdinal(d3.schemePastel2);
+	const colors = d3.scaleOrdinal(d3.schemeSet3);
 
 	const colorValues = uniq(mappedTags.map(tag => tag[colorBy])).sort();
 
