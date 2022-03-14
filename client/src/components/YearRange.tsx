@@ -17,7 +17,7 @@ const YearRange = ({ startDate, endDate, withParens }: YearRangeProps) => {
 			return <span>{yearsStr}</span>;
 		}
 	} else {
-		return '';
+		return <span/>;
 	}
 }
 
