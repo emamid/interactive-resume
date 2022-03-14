@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router'
 
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+
 import RoutableGridCard from '../components/RoutableGridCard';
 
 import { loadTag } from '../redux/Store';
@@ -23,11 +25,14 @@ const Tag = (props) => {
 
 	useEffect(() => { loadTag(match.params.tagID) }, [loadTag, match.params.tagID])
 
-	return <Grid container spacing={3}>
-		{tag.Projects.map(project => (
-			<RoutableGridCard key={project.id} to={`/projects/${project.id}`} title={project.name} subtitle={project.Employer.name} />
-		))}
-	</Grid>
+	return <div>
+		<Typography component="h5" variant="h5" gutterBottom={true}>{tag.name}</Typography>
+		<Grid container spacing={3}>
+			{tag.Projects.map(project => (
+				<RoutableGridCard key={project.id} to={`/projects/${project.id}`} title={project.name} subtitle={project.Employer.name} />
+			))}
+		</Grid>
+	</div>
 
 }
 
