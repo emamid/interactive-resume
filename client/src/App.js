@@ -15,6 +15,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 import HomeIcon from '@material-ui/icons/Home';
+import MapIcon from '@material-ui/icons/Map';
 import MenuIcon from '@material-ui/icons/Menu';
 import ProjectIcon from '@material-ui/icons/Build';
 import TagIcon from '@material-ui/icons/LocalOffer';
@@ -26,6 +27,7 @@ import RoutableListItem from './components/RoutableListItem';
 
 import Home from './views/Home';
 import Employer from './views/Employer';
+import Map from './views/Map';
 import Project from './views/Project';
 import Projects from './views/Projects';
 import Tag from './views/Tag';
@@ -94,6 +96,7 @@ class App extends Component {
 					<RoutableListItem to='/projects' icon={<ProjectIcon />} text={'Projects'} onNavigated={this.closeMenuDrawer}></RoutableListItem>
 					<RoutableListItem to='/tags' icon={<TagIcon />} text={'Tags'} onNavigated={this.closeMenuDrawer}></RoutableListItem>
 					<RoutableListItem to='/visualize' icon={<VisualizeIcon />} text={'Visualize'} onNavigated={this.closeMenuDrawer}></RoutableListItem>
+					<RoutableListItem to='/map' icon={<MapIcon />} text={'Map'} onNavigated={this.closeMenuDrawer}></RoutableListItem>
 				</List>
 			</Drawer>
 		);    
@@ -123,6 +126,7 @@ class App extends Component {
 								<Route exact path='/tags' component={Tags}/>
 								<Route path='/tags/:tagID' component={Tag}/>
 								<Route path='/visualize' component={Visualize}/>
+								<Route path='/map' component={Map}/>
 								<Redirect to="/"/>
 							</Switch>
 						</main>        
