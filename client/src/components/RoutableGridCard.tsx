@@ -8,12 +8,12 @@ import Typography from '@material-ui/core/Typography';
 
 import { withRouter, RouteComponentProps } from 'react-router';
 
-export interface RoutableGridCardProps extends RouteComponentProps {
+interface RoutableGridCardProps extends RouteComponentProps {
 	title: string;
 	subtitle: string;
 	to: string;
-	onClick: MouseEventHandler;
-	onNavigated: Function;
+	onClick?: MouseEventHandler;
+	onNavigated?: Function;
 }
 
 const RoutableGridCard = ({

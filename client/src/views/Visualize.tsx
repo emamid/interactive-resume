@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
+import { withRouter, RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 
 import InputLabel from '@material-ui/core/InputLabel';
@@ -15,7 +14,12 @@ import BubbleChart from '../components/BubbleChart';
 
 import { loadProjectTags } from '../redux/Store';
 
-const mapStateToProps = state => ({
+interface VisualizeProps extends RouteComponentProps {
+	projectTags: any[];
+	loadProjectTags: Function;
+}
+
+const mapStateToProps = (state: any) => ({
 	projectTags: state.projectTags
 });
 
@@ -23,18 +27,16 @@ const mapDispatchToProps = {
 	loadProjectTags
 };
 
-const Visualize = (props) => {
-
-	const { projectTags, loadProjectTags, history } = props;
+const Visualize = ({ projectTags, loadProjectTags, history }: VisualizeProps) => {
 
 	useEffect(() => {
 		loadProjectTags();
 	}, [loadProjectTags]);
 
-	const chartDiv = useRef(null);
+	const chartDiv = useRef<HTMLDivElement>(null);
 
-	const [colorBy, setColorBy] = useState('category');
-	const [groupBy, setGroupBy] = useState(false);
+	const [colorBy, setColorBy] = useState<string>('category');
+	const [groupBy, setGroupBy] = useState<string | false>(false);
 
 	// Ensure non-zero dimensions if rendering before everything finalizes
 	const svgWidth = (chartDiv.current && chartDiv.current.clientWidth) || 128;
@@ -51,11 +53,11 @@ const Visualize = (props) => {
 
 	const colors = d3.scaleOrdinal(d3.schemeSet3);
 
-	const colorValues = uniq(mappedTags.map(tag => tag[colorBy])).sort();
+	const colorValues = uniq(mappedTags.map((tag: any) => tag[colorBy])).sort();
 
 	const colorMap = colorValues.reduce((currentMap, value, index) => ({
 		...currentMap,
-		[value]: colors(index)
+		[value]: colors(value) //TODO: Check this, was index with JS but TS says it's a string
 	}), {});
 
 	return (<div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -64,8 +66,8 @@ const Visualize = (props) => {
 				<InputLabel>Color by</InputLabel>
 				<Select
 					value={colorBy}
-					onChange={event => setColorBy(event.target.value)}
-					label="Color by"
+					// onChange={event => setColorBy(event.target.value || '')}  //TODO: Fix after upgrading Material UI
+					// label="Color by" //TODO: Fix after upgrading Material UI
 				>
 					<MenuItem value={'category'}>Category</MenuItem>
 					<MenuItem value={'layer'}>Layer</MenuItem>
@@ -76,10 +78,10 @@ const Visualize = (props) => {
 				<InputLabel>Group by</InputLabel>
 				<Select
 					value={groupBy}
-					onChange={event => setGroupBy(event.target.value)}
-					label="Group by"
+					// onChange={event => { setGroupBy(event?.target?.value as string)}} / TODO: Fix after setting allowJs = false
+					// label="Group by" //TODO: Fix after upgrading Material UI
 				>
-					<MenuItem value={false}>None</MenuItem>
+					<MenuItem value={0}>None</MenuItem>
 					<MenuItem value={'category'}>Category</MenuItem>
 					<MenuItem value={'layer'}>Layer</MenuItem>
 				</Select>
@@ -88,11 +90,11 @@ const Visualize = (props) => {
 		<div style={{ flexGrow: 1 }} ref={chartDiv}>
 			<BubbleChart data={mappedTags}
 				colorByProp={colorBy}
-				groupByProp={groupBy}
+				groupByProp={groupBy ? groupBy as string: undefined}
 				svgWidth={svgWidth}
 				svgHeight={svgHeight}
 				bubbleClick={
-					(item) => {
+					(item: any) => {
 						history.push(`/tags/${item.id}`)
 					}
 				}
@@ -102,10 +104,6 @@ const Visualize = (props) => {
 		<div style={{marginTop:'1em'}}>{map(colorMap, (color, text) => <span style={{ backgroundColor: color, margin: '5px', padding: '5px' }} key={text}>{text === 'null' ? 'Other' : text}</span>)}</div>
 	</div>
 	)
-}
-
-Visualize.propTypes = {
-	projectTags: PropTypes.array.isRequired
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Visualize));

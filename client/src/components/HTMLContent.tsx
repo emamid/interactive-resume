@@ -2,7 +2,7 @@ import React from 'react';
 
 import Typography from '@material-ui/core/Typography';
 
-export interface HTMLContentProps {
+interface HTMLContentProps {
 	html: string;
 }
 

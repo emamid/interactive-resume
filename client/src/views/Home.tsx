@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
@@ -15,7 +14,13 @@ import Typography from '@material-ui/core/Typography';
 import HTMLContent from '../components/HTMLContent';
 import YearRange from '../components/YearRange';
 
-const mapStateToProps = state => ({
+export interface HomeProps {
+	myself: any;
+	employers: any[];
+	loadEmployers: Function;
+}
+
+const mapStateToProps = (state: any) => ({
 	myself: state.myself,
 	employers: state.employers
 });
@@ -24,11 +29,10 @@ const mapDispatchToProps = {
 	loadEmployers
 };
 
-const Home = (props) => {
-
-	const { myself, employers, loadEmployers } = props;
-
-	useEffect(() => { loadEmployers() }, [loadEmployers]);
+const Home = ({ myself, employers, loadEmployers }: HomeProps) => {
+	useEffect(() => {
+		loadEmployers();
+	}, [loadEmployers]);
 
 	const employerTable = (
 		<Table size="small">
@@ -40,11 +44,24 @@ const Home = (props) => {
 				</TableRow>
 			</TableHead>
 			<TableBody>
-				{employers.map(employer => (
+				{employers.map((employer) => (
 					<TableRow key={employer.id}>
-						<TableCell><YearRange startDate={employer.startDate} endDate={employer.endDate} /></TableCell>
-						<TableCell><a href={`/#/employers/${employer.id}`}>{employer.name}</a></TableCell>
-						<TableCell><a href={`/#/employers/${employer.id}`}>{employer.position}</a></TableCell>
+						<TableCell>
+							<YearRange
+								startDate={employer.startDate}
+								endDate={employer.endDate}
+							/>
+						</TableCell>
+						<TableCell>
+							<a href={`/#/employers/${employer.id}`}>
+								{employer.name}
+							</a>
+						</TableCell>
+						<TableCell>
+							<a href={`/#/employers/${employer.id}`}>
+								{employer.position}
+							</a>
+						</TableCell>
 					</TableRow>
 				))}
 			</TableBody>
@@ -59,10 +76,19 @@ const Home = (props) => {
 				</TableRow>
 			</TableHead>
 			<TableBody>
-				{myself.Projects.map(project => (
+				{myself.Projects.map((project: any) => (
 					<TableRow key={project.id}>
-						<TableCell><YearRange startDate={project.startDate} endDate={project.endDate} /></TableCell>
-						<TableCell><a href={`/#/projects/${project.id}`}>{project.name}</a></TableCell>
+						<TableCell>
+							<YearRange
+								startDate={project.startDate}
+								endDate={project.endDate}
+							/>
+						</TableCell>
+						<TableCell>
+							<a href={`/#/projects/${project.id}`}>
+								{project.name}
+							</a>
+						</TableCell>
 					</TableRow>
 				))}
 			</TableBody>
@@ -77,13 +103,7 @@ const Home = (props) => {
 			<Typography>Personal Projects</Typography>
 			{personalProjectTable}
 		</div>
-	)
-
-}
-
-Home.propTypes = {
-	myself: PropTypes.object.isRequired,
-	employers: PropTypes.array.isRequired
+	);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

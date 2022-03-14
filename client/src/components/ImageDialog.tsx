@@ -4,7 +4,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export interface ImageDialogProps {
+interface ImageDialogProps {
 	image: any;
 	onClose: MouseEventHandler;
 }
@@ -41,7 +41,7 @@ const ImageDialog = ({ image, onClose }: ImageDialogProps) => {
 			</Dialog>
 		);
 	} else {
-		return '';
+		return <span/>;
 	}
 };
 

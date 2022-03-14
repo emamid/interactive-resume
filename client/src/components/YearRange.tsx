@@ -1,6 +1,6 @@
 import React from 'react'
 
-export interface YearRangeProps {
+interface YearRangeProps {
 	startDate?: string;
 	endDate?: string;
 	withParens?: boolean;

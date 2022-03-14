@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
-export interface ImageCardProps {
+interface ImageCardProps {
 	image: any;
 	onClick: MouseEventHandler;
 }

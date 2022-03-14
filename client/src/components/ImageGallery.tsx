@@ -5,9 +5,9 @@ import Typography from '@material-ui/core/Typography';
 
 import ImageCard from '../components/ImageCard';
 
-export interface ImageGalleryProps {
+interface ImageGalleryProps {
 	images: any[];
-	onClick: MouseEventHandler;
+	onClick: Function;
 }
 
 const ImageGallery = ({ images, onClick }: ImageGalleryProps) => {
@@ -31,7 +31,7 @@ const ImageGallery = ({ images, onClick }: ImageGalleryProps) => {
 			</div>
 		);
 	} else {
-		return '';
+		return <span/>;
 	}
 };
 

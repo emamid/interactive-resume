@@ -2,7 +2,7 @@ import React from 'react';
 import * as d3 from 'd3';
 import { groupBy, map, max, reduce, uniq } from 'lodash';
 
-export interface BubbleChartProps {
+interface BubbleChartProps {
 	colorByProp: string;
 	data: any[];
 	groupByProp?: string;

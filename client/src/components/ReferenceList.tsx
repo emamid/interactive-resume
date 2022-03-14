@@ -2,7 +2,7 @@ import React from 'react';
 
 import Typography from '@material-ui/core/Typography';
 
-export interface ReferenceListProps {
+interface ReferenceListProps {
 	references: any[];
 }
 
@@ -29,7 +29,7 @@ const ReferenceList = ({ references }: ReferenceListProps) => {
 			</div>
 		);
 	} else {
-		return '';
+		return <span/>;
 	}
 };
 

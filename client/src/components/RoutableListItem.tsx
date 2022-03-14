@@ -4,7 +4,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { withRouter, RouteComponentProps } from 'react-router';
 
-export interface RoutableListItemProps extends RouteComponentProps {
+interface RoutableListItemProps extends RouteComponentProps {
 	icon: any;
 	text: string;
 	to: string;
