@@ -12,6 +12,8 @@ import YearRange from '../components/YearRange';
 import ImageGallery from '../components/ImageGallery';
 import ImageDialog from '../components/ImageDialog';
 
+import { Image } from '../api/types';
+
 interface ProjectRoute {
 	projectID: string;
 }
@@ -21,7 +23,7 @@ interface ProjectProps extends RouteComponentProps<ProjectRoute> {}
 const Project = ({ match }: ProjectProps) => {
 	const { data: project } = useGetProject(match.params.projectID);
 
-	const [dialogImage, setDialogImage] = useState(null);
+	const [dialogImage, setDialogImage] = useState<Image | undefined>(undefined);
 
 	const employerText = project?.isPersonal ? (
 		''
@@ -46,7 +48,7 @@ const Project = ({ match }: ProjectProps) => {
 				{employerText}
 			</Typography>
 			<div>
-				{project?.Tags.map((tag: any) => (
+				{project?.Tags.map(tag => (
 					<Chip
 						label={tag.name}
 						component="a"
@@ -61,13 +63,13 @@ const Project = ({ match }: ProjectProps) => {
 			<ImageDialog
 				image={dialogImage}
 				onClose={() => {
-					setDialogImage(null);
+					setDialogImage(undefined);
 				}}
 			/>
 			{/* <ImageGallery images={project.Images} onClick={(image) => { this.setState({ dialogImage: { ...image } }) }} /> */}
 			<ImageGallery
 				images={project?.Images || []}
-				onClick={(image: any) => {
+				onClick={image => {
 					setDialogImage({ ...image });
 				}}
 			/>

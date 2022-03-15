@@ -2,8 +2,10 @@ import React from 'react';
 
 import Typography from '@mui/material/Typography';
 
+import { Reference } from '../api/types';
+
 interface ReferenceListProps {
-	references: any[];
+	references: Reference[];
 }
 
 const ReferenceList = ({ references }: ReferenceListProps) => {

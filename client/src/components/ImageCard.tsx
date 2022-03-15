@@ -7,14 +7,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
+import { Image } from '../api/types';
+
 interface ImageCardProps {
-	image: any;
+	image: Image;
 	onClick: MouseEventHandler;
 }
 
 const ImageCard = ({ image, onClick }: ImageCardProps) => {
 	return (
-		<Grid item xs={12} md={4} xl={3} key={image.id}>
+		<Grid item xs={12} md={4} xl={3} key={image.filename}>
 			<Card style={{ textAlign: 'center' }}>
 				<CardActionArea onClick={onClick}>
 					<CardMedia

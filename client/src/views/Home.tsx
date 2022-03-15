@@ -59,7 +59,7 @@ const Home = () => {
 				</TableRow>
 			</TableHead>
 			<TableBody>
-				{myself?.Projects.map((project: any) => (
+				{myself?.Projects.map(project => (
 					<TableRow key={project.id}>
 						<TableCell>
 							<YearRange

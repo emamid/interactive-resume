@@ -4,8 +4,10 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import { Image } from '../api/types';
+
 interface ImageDialogProps {
-	image: any;
+	image?: Image;
 	onClose: MouseEventHandler;
 }
 

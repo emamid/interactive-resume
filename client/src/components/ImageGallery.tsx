@@ -5,9 +5,13 @@ import Typography from '@mui/material/Typography';
 
 import ImageCard from '../components/ImageCard';
 
+import { Image } from '../api/types';
+
+interface ImageEvent { (image: Image): void };
+
 interface ImageGalleryProps {
-	images: any[];
-	onClick: Function;
+	images: Image[];
+	onClick: ImageEvent;
 }
 
 const ImageGallery = ({ images, onClick }: ImageGalleryProps) => {
