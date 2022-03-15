@@ -20,7 +20,7 @@ const Employer = ({ match }: EmployerProps) => {
 	const { data: employer } = useGetEmployer(match.params.employerID);
 
 	return (
-		<div>
+		<div style={{ overflow: 'auto', height: '100%' }}>
 			<Typography component="h5" variant="h5">
 				{employer?.position} at {employer?.name}{' '}
 				<YearRange

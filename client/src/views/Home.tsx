@@ -59,7 +59,7 @@ const Home = () => {
 				</TableRow>
 			</TableHead>
 			<TableBody>
-				{myself?.Projects.map(project => (
+				{myself?.Projects.map((project) => (
 					<TableRow key={project.id}>
 						<TableCell>
 							<YearRange
@@ -78,7 +78,7 @@ const Home = () => {
 		</Table>
 	);
 	return (
-		<div>
+		<div style={{ overflow: 'auto', height: '100%' }}>
 			<HTMLContent html={myself?.pageContent} />
 			<Typography>Employment History</Typography>
 			{employerTable}

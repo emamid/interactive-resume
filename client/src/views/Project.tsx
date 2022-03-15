@@ -42,7 +42,7 @@ const Project = ({ match }: ProjectProps) => {
 		</span>
 	);
 	return (
-		<div>
+		<div style={{ overflow: 'auto', height: '100%' }}>
 			<Typography component="h5" variant="h5" gutterBottom={true}>
 				{project?.name}
 				{employerText}
