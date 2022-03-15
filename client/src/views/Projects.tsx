@@ -11,7 +11,12 @@ import useGetProjects from '../api/hooks/useGetProjects';
 import YearRange from '../components/YearRange';
 
 const Projects = () => {
-	const { status: projectsStatus, data: projects, error: projectsError, isFetching: isFetchingProjects } = useGetProjects();
+	const {
+		status: projectsStatus,
+		data: projects,
+		error: projectsError,
+		isFetching: isFetchingProjects
+	} = useGetProjects();
 
 	return (
 		<Table size="small">

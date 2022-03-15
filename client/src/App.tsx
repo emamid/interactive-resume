@@ -183,7 +183,7 @@ const queryClient = new QueryClient();
 
 const AppWithQueryProvider = () => (
 	<QueryClientProvider client={queryClient}>
-		<App/>
+		<App />
 	</QueryClientProvider>
 );
 

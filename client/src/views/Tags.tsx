@@ -6,8 +6,12 @@ import Button from '@mui/material/Button';
 import useGetTags from '../api/hooks/useGetTags';
 
 const Tags = () => {
-
-	const { status: tagsStatus, data: tags, error: tagsError, isFetching: isFetchingTags } = useGetTags();
+	const {
+		status: tagsStatus,
+		data: tags,
+		error: tagsError,
+		isFetching: isFetchingTags
+	} = useGetTags();
 
 	return (
 		<Grid container spacing={1} rowSpacing="1em" sm={true}>

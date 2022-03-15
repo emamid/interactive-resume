@@ -9,10 +9,10 @@ import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 const apiKey = 'AIzaSyC7z-889WgwZ7WGmjXR76NqT5GAdFs6OTQ';
 
-const Home = ({ 
-	google, 
-	history, 
- }) => {
+const Home = ({
+	google,
+	history,
+}) => {
 
 	const { status, data: employers, error, isFetching } = useGetEmployers();
 
