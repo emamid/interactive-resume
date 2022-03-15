@@ -1,27 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { connect } from 'react-redux';
+import useGetEmployers from '../api/hooks/useGetEmployers';
 
 import { withRouter } from 'react-router';
-
-import { loadEmployers } from '../redux/Store';
 
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 const apiKey = 'AIzaSyC7z-889WgwZ7WGmjXR76NqT5GAdFs6OTQ';
 
-const mapStateToProps = state => ({
-	employers: state.employers
-});
+const Home = ({ 
+	google, 
+	history, 
+ }) => {
 
-const mapDispatchToProps = {
-	loadEmployers
-};
-
-const Home = ({ employers, google, history, loadEmployers }) => {
-
-	useEffect(() => { loadEmployers() }, [loadEmployers]);
+	const { status, data: employers, error, isFetching } = useGetEmployers();
 
 	return (
 		<>
@@ -53,4 +46,4 @@ Home.propTypes = {
 	employers: PropTypes.array.isRequired
 };
 
-export default withRouter(GoogleApiWrapper({ apiKey })(connect(mapStateToProps, mapDispatchToProps)(Home)));
+export default withRouter(GoogleApiWrapper({ apiKey })(Home));

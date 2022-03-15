@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { QueryClient, QueryClientProvider, useQueryClient } from 'react-query';
+
 import './App.css';
 
 import {
@@ -177,10 +179,18 @@ const App = () => {
 	);
 };
 
+const queryClient = new QueryClient();
+
+const AppWithQueryProvider = () => (
+	<QueryClientProvider client={queryClient}>
+		<App/>
+	</QueryClientProvider>
+);
+
 const AppWithThemeProvider = () => (
 	<StyledEngineProvider injectFirst>
 		<ThemeProvider theme={theme}>
-			<App />
+			<AppWithQueryProvider />
 		</ThemeProvider>
 	</StyledEngineProvider>
 );

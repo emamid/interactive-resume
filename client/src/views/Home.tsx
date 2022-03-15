@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { connect } from 'react-redux';
-
-import { loadEmployers } from '../redux/Store';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,28 +9,23 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 
+import useGetEmployers from '../api/hooks/useGetEmployers';
+
 import HTMLContent from '../components/HTMLContent';
 import YearRange from '../components/YearRange';
 
 export interface HomeProps {
 	myself: any;
-	employers: any[];
-	loadEmployers: Function;
 }
 
 const mapStateToProps = (state: any) => ({
-	myself: state.myself,
-	employers: state.employers
+	myself: state.myself
 });
 
-const mapDispatchToProps = {
-	loadEmployers
-};
+const mapDispatchToProps = {};
 
-const Home = ({ myself, employers, loadEmployers }: HomeProps) => {
-	useEffect(() => {
-		loadEmployers();
-	}, [loadEmployers]);
+const Home = ({ myself }: HomeProps) => {
+	const { status, data: employers, error, isFetching } = useGetEmployers();
 
 	const employerTable = (
 		<Table size="small">
@@ -44,7 +37,7 @@ const Home = ({ myself, employers, loadEmployers }: HomeProps) => {
 				</TableRow>
 			</TableHead>
 			<TableBody>
-				{employers.map((employer) => (
+				{employers?.map((employer) => (
 					<TableRow key={employer.id}>
 						<TableCell>
 							<YearRange
