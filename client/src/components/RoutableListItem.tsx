@@ -4,12 +4,14 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { withRouter, RouteComponentProps } from 'react-router';
 
+import NavigateEvent from './NavigateEvent';
+
 interface RoutableListItemProps extends RouteComponentProps {
-	icon: any;
+	icon: JSX.Element;
 	text: string;
 	to: string;
 	onClick?: MouseEventHandler;
-	onNavigated?: Function;
+	onNavigated?: NavigateEvent;
 }
 
 const RoutableListItem = ({

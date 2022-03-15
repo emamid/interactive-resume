@@ -8,12 +8,14 @@ import Typography from '@mui/material/Typography';
 
 import { withRouter, RouteComponentProps } from 'react-router';
 
+import NavigateEvent from './NavigateEvent';
+
 interface RoutableGridCardProps extends RouteComponentProps {
 	title: string;
 	subtitle: string;
 	to: string;
 	onClick?: MouseEventHandler;
-	onNavigated?: Function;
+	onNavigated?: NavigateEvent;
 }
 
 const RoutableGridCard = ({
