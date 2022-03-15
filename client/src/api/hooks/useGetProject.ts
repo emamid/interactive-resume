@@ -12,7 +12,7 @@ const getProjectByID = async (id: string) => {
 };
 
 const useGetProject = (id: string) => {
-	return useQuery<Project, Error>(['employer', id], () => getProjectByID(id), { enabled: !!id });
+	return useQuery<Project, Error>(['project', id], () => getProjectByID(id), { enabled: !!id });
 }
 
 export default useGetProject;

@@ -1,44 +1,35 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router';
+
+import useGetTag from '../api/hooks/useGetTag';
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import RoutableGridCard from '../components/RoutableGridCard';
 
-import { loadTag } from '../redux/Store';
-
 interface TagRoute {
 	tagID: string;
 }
 
-export interface TagProps extends RouteComponentProps<TagRoute> {
-	tag: any;
-	loadTag: Function;
-}
+export interface TagProps extends RouteComponentProps<TagRoute> {}
 
-const mapStateToProps = (state: any) => ({
-	tag: state.tag
-});
-
-const mapDispatchToProps = {
-	loadTag
-};
-
-const Tag = ({ tag, loadTag, match }: TagProps) => {
-	useEffect(() => {
-		loadTag(match.params.tagID);
-	}, [loadTag, match.params.tagID]);
+const Tag = ({ match }: TagProps) => {
+	const {
+		status: tagStatus,
+		data: tag,
+		error: tagError,
+		isFetching: isFetchingTag
+	} = useGetTag(match.params.tagID);
 
 	return (
 		<div>
 			<Typography component="h5" variant="h5" gutterBottom={true}>
-				{tag.name}
+				{tag?.name}
 			</Typography>
 			<Grid container spacing={3}>
-				{tag.Projects.map((project: any) => (
+				{tag?.Projects.map((project: any) => (
 					<RoutableGridCard
 						key={project.id}
 						to={`/projects/${project.id}`}
@@ -51,4 +42,4 @@ const Tag = ({ tag, loadTag, match }: TagProps) => {
 	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Tag));
+export default withRouter(Tag);
