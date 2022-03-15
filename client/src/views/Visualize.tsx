@@ -78,7 +78,7 @@ const Visualize = ({ projectTags, loadProjectTags, history }: VisualizeProps) =>
 				<InputLabel>Group by</InputLabel>
 				<Select
 					value={groupBy}
-					// onChange={event => { setGroupBy(event?.target?.value as string)}} / TODO: Fix after setting allowJs = false
+					// onChange={event => { setGroupBy(event?.target?.value as string)}} // TODO: Fix after setting allowJs = false
 					// label="Group by" //TODO: Fix after upgrading Material UI
 				>
 					<MenuItem value={0}>None</MenuItem>

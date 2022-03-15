@@ -8,8 +8,8 @@ interface RoutableListItemProps extends RouteComponentProps {
 	icon: any;
 	text: string;
 	to: string;
-	onClick: MouseEventHandler;
-	onNavigated: Function;
+	onClick?: MouseEventHandler;
+	onNavigated?: Function;
 }
 
 const RoutableListItem = ({
