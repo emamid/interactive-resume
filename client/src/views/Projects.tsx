@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -6,29 +6,12 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
+import useGetProjects from '../api/hooks/useGetProjects';
+
 import YearRange from '../components/YearRange';
 
-import { connect } from 'react-redux';
-
-import { loadProjects } from '../redux/Store';
-
-export interface ProjectsProps {
-	projects: any[];
-	loadProjects: Function;
-}
-
-const mapStateToProps = (state: any) => ({
-	projects: state.projects
-});
-
-const mapDispatchToProps = {
-	loadProjects
-};
-
-const Projects = ({ projects, loadProjects }: ProjectsProps) => {
-	useEffect(() => {
-		loadProjects();
-	}, [loadProjects]);
+const Projects = () => {
+	const { status: projectsStatus, data: projects, error: projectsError, isFetching: isFetchingProjects } = useGetProjects();
 
 	return (
 		<Table size="small">
@@ -40,7 +23,7 @@ const Projects = ({ projects, loadProjects }: ProjectsProps) => {
 				</TableRow>
 			</TableHead>
 			<TableBody>
-				{projects.map((project) => (
+				{projects?.map((project) => (
 					<TableRow key={project.id}>
 						<TableCell>
 							<YearRange
@@ -69,4 +52,4 @@ const Projects = ({ projects, loadProjects }: ProjectsProps) => {
 	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Projects);
+export default Projects;
