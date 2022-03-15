@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Typography from '@mui/material/Typography';
 
-import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 
-import { loadEmployer } from '../redux/Store';
+import useGetEmployer from '../api/hooks/useGetEmployer';
 
 import HTMLContent from '../components/HTMLContent';
 import ReferenceList from '../components/ReferenceList';
@@ -15,39 +14,31 @@ interface EmployerRoute {
 	employerID: string;
 }
 
-interface EmployerProps extends RouteComponentProps<EmployerRoute> {
-	employer: any;
-	loadEmployer: Function;
-}
+interface EmployerProps extends RouteComponentProps<EmployerRoute> {}
 
-const mapStateToProps = (state: any) => ({
-	employer: state.employer
-});
-
-const mapDispatchToProps = {
-	loadEmployer
-};
-
-const Employer = ({ employer, loadEmployer, match }: EmployerProps) => {
-	useEffect(() => {
-		loadEmployer(match.params.employerID);
-	}, [loadEmployer, match]);
+const Employer = ({ match }: EmployerProps) => {
+	const {
+		status: employerStatus,
+		data: employer,
+		error: employerError,
+		isFetching: isFetchingEmployer
+	} = useGetEmployer(match.params.employerID);
 
 	return (
 		<div>
 			<Typography component="h5" variant="h5">
-				{employer.position} at {employer.name}{' '}
+				{employer?.position} at {employer?.name}{' '}
 				<YearRange
-					startDate={employer.startDate}
-					endDate={employer.endDate}
+					startDate={employer?.startDate}
+					endDate={employer?.endDate}
 					withParens={true}
 				/>
 			</Typography>
-			<HTMLContent html={employer.pageContent} />
+			<HTMLContent html={employer?.pageContent} />
 			<br />
-			<ReferenceList references={employer.References} />
+			<ReferenceList references={employer?.References || []} />
 		</div>
 	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Employer);
+export default Employer;
