@@ -45,6 +45,12 @@ export interface Myself {
 	Projects: BaseProject[];
 }
 
+export interface ProjectTag {
+	projectCount: number;
+	tagID: string;
+	Tag: BaseTag;
+}
+
 export interface Reference {
 	id: string;
 	name: string;
@@ -71,5 +77,7 @@ export interface Tag extends BaseTag {
 export type Employers = BaseEmployer[];
 
 export type Projects = Project[];
+
+export type ProjectTags = ProjectTag[];
 
 export type Tags = BaseTag[];

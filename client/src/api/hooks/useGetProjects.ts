@@ -12,7 +12,7 @@ const getProjects = async () => {
 };
 
 const useGetProjects = () => {
-	return useQuery<Projects, Error>(['employers'], () => getProjects());
+	return useQuery<Projects, Error>(['projects'], () => getProjects());
 }
 
 export default useGetProjects;
