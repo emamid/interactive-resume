@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';

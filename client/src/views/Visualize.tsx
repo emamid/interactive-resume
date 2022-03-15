@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 import * as d3 from 'd3';
 import { map, uniq } from 'lodash';

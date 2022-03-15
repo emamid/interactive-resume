@@ -1,24 +1,26 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './App.css';
 
-import { withStyles } from '@material-ui/core/styles';
+import { ThemeProvider, Theme, StyledEngineProvider, createTheme } from '@mui/material/styles';
+
+import makeStyles from '@mui/styles/makeStyles';
 
 import classNames from 'classnames';
 
-import AppBar from '@material-ui/core/AppBar';
-import Drawer from '@material-ui/core/Drawer';
-import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import AppBar from '@mui/material/AppBar';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 
-import HomeIcon from '@material-ui/icons/Home';
-import MapIcon from '@material-ui/icons/Map';
-import MenuIcon from '@material-ui/icons/Menu';
-import ProjectIcon from '@material-ui/icons/Build';
-import TagIcon from '@material-ui/icons/LocalOffer';
-import VisualizeIcon from '@material-ui/icons/BubbleChart';
+import HomeIcon from '@mui/icons-material/Home';
+import MapIcon from '@mui/icons-material/Map';
+import MenuIcon from '@mui/icons-material/Menu';
+import ProjectIcon from '@mui/icons-material/Build';
+import TagIcon from '@mui/icons-material/LocalOffer';
+import VisualizeIcon from '@mui/icons-material/BubbleChart';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 
@@ -36,7 +38,16 @@ import Visualize from './views/Visualize';
 import { Provider } from 'react-redux';
 import { store, loadMyself } from './redux/Store';
 
-const styles = (theme: any) => ({
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
+
+const theme = createTheme();
+
+const useStyles = makeStyles(theme => ({
 	appFrame: {
 		height: '100%',
 		zIndex: 1,
@@ -54,9 +65,11 @@ const styles = (theme: any) => ({
 		padding: theme.spacing(3),
 		marginTop: 64
 	},
-});
+}));
 
-const App = ({ classes } : any) => {
+const App = () => {
+
+	const classes = useStyles();
 
 	const [ menuDrawerOpen, setMenuDrawerOpen ] = useState(false);
 
@@ -86,15 +99,12 @@ const App = ({ classes } : any) => {
 	);    
 
 	return (
-		<Provider store={store}>
+        <Provider store={store}>
 			<div className='App'>
 				<div className={classes.appFrame}>
 					<AppBar className={classNames(classes.appBar)} position="static">
 						<Toolbar disableGutters={true}>
-							<IconButton
-								color='inherit'
-								onClick={() => setMenuDrawerOpen(true)}
-							>
+							<IconButton color='inherit' onClick={() => setMenuDrawerOpen(true)} size="large">
 								<MenuIcon />
 							</IconButton>
 							<Typography variant='h6' color='inherit' noWrap>Interactive Resume</Typography>
@@ -117,10 +127,12 @@ const App = ({ classes } : any) => {
 				</div>
 			</div>
 		</Provider>
-	)
+    );
 
 }
 
-//@ts-ignore
-export default withStyles(styles)(App); //TODO: Change after upgrading Material UI
+const AppWithThemeProvider = () => (<StyledEngineProvider injectFirst>
+    <ThemeProvider theme={theme}><App/></ThemeProvider>
+</StyledEngineProvider>);
 
+export default AppWithThemeProvider;
