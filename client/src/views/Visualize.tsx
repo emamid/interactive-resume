@@ -55,9 +55,9 @@ const Visualize = ({ projectTags, loadProjectTags, history }: VisualizeProps) =>
 
 	const colorValues = uniq(mappedTags.map((tag: any) => tag[colorBy])).sort();
 
-	const colorMap = colorValues.reduce((currentMap, value, index) => ({
+	const colorMap = colorValues.reduce((currentMap, value) => ({
 		...currentMap,
-		[value]: colors(value) //TODO: Check this, was index with JS but TS says it's a string
+		[value]: colors(value)
 	}), {});
 
 	return (<div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -66,8 +66,8 @@ const Visualize = ({ projectTags, loadProjectTags, history }: VisualizeProps) =>
 				<InputLabel>Color by</InputLabel>
 				<Select
 					value={colorBy}
-					// onChange={event => setColorBy(event.target.value || '')}  //TODO: Fix after upgrading Material UI
-					// label="Color by" //TODO: Fix after upgrading Material UI
+					onChange={event => setColorBy(event.target.value || '')}
+					label="Color by"
 				>
 					<MenuItem value={'category'}>Category</MenuItem>
 					<MenuItem value={'layer'}>Layer</MenuItem>
@@ -78,8 +78,8 @@ const Visualize = ({ projectTags, loadProjectTags, history }: VisualizeProps) =>
 				<InputLabel>Group by</InputLabel>
 				<Select
 					value={groupBy}
-					// onChange={event => { setGroupBy(event?.target?.value as string)}} // TODO: Fix after setting allowJs = false
-					// label="Group by" //TODO: Fix after upgrading Material UI
+					onChange={event => { setGroupBy(event?.target?.value as string)}}
+					label="Group by"
 				>
 					<MenuItem value={0}>None</MenuItem>
 					<MenuItem value={'category'}>Category</MenuItem>
