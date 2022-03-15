@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { QueryClient, QueryClientProvider, useQueryClient } from 'react-query';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import './App.css';
 
@@ -42,8 +42,10 @@ import Tag from './views/Tag';
 import Tags from './views/Tags';
 import Visualize from './views/Visualize';
 
+import useGetMyself from './api/hooks/useGetMyself';
+
 import { Provider } from 'react-redux';
-import { store, loadMyself } from './redux/Store';
+import { store } from './redux/Store';
 
 declare module '@mui/styles/defaultTheme' {
 	// eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -78,9 +80,7 @@ const App = () => {
 
 	const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
 
-	useEffect(() => {
-		store.dispatch(loadMyself());
-	});
+	useGetMyself();
 
 	const closeMenuDrawer = () => {
 		setMenuDrawerOpen(false);

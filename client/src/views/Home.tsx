@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,22 +8,14 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 
 import useGetEmployers from '../api/hooks/useGetEmployers';
+import useGetMyself from '../api/hooks/useGetMyself';
 
 import HTMLContent from '../components/HTMLContent';
 import YearRange from '../components/YearRange';
 
-export interface HomeProps {
-	myself: any;
-}
-
-const mapStateToProps = (state: any) => ({
-	myself: state.myself
-});
-
-const mapDispatchToProps = {};
-
-const Home = ({ myself }: HomeProps) => {
-	const { status, data: employers, error, isFetching } = useGetEmployers();
+const Home = () => {
+	const { status: employersStatus, data: employers, error: employersError, isFetching: isFetchingEmployers } = useGetEmployers();
+	const { status: myselfStatus, data: myself, error: myselfError, isFetching: isFetchingMyself } = useGetMyself();
 
 	const employerTable = (
 		<Table size="small">
@@ -69,7 +59,7 @@ const Home = ({ myself }: HomeProps) => {
 				</TableRow>
 			</TableHead>
 			<TableBody>
-				{myself.Projects.map((project: any) => (
+				{myself?.Projects.map((project: any) => (
 					<TableRow key={project.id}>
 						<TableCell>
 							<YearRange
@@ -89,7 +79,7 @@ const Home = ({ myself }: HomeProps) => {
 	);
 	return (
 		<div>
-			<HTMLContent html={myself.pageContent} />
+			<HTMLContent html={myself?.pageContent} />
 			<Typography>Employment History</Typography>
 			{employerTable}
 			<br />
@@ -99,4 +89,4 @@ const Home = ({ myself }: HomeProps) => {
 	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
