@@ -16,12 +16,7 @@ import BubbleChart from '../components/BubbleChart';
 interface VisualizeProps extends RouteComponentProps {}
 
 const Visualize = ({ history }: VisualizeProps) => {
-	const {
-		status: projectTagsStatus,
-		data: projectTags,
-		error: projectTagsError,
-		isFetching: isFetchingProjectTags
-	} = useGetProjectTags();
+	const { data: projectTags } = useGetProjectTags();
 
 	const chartDiv = useRef<HTMLDivElement>(null);
 

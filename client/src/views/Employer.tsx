@@ -17,12 +17,7 @@ interface EmployerRoute {
 interface EmployerProps extends RouteComponentProps<EmployerRoute> {}
 
 const Employer = ({ match }: EmployerProps) => {
-	const {
-		status: employerStatus,
-		data: employer,
-		error: employerError,
-		isFetching: isFetchingEmployer
-	} = useGetEmployer(match.params.employerID);
+	const { data: employer } = useGetEmployer(match.params.employerID);
 
 	return (
 		<div>

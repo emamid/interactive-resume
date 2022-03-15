@@ -14,18 +14,8 @@ import HTMLContent from '../components/HTMLContent';
 import YearRange from '../components/YearRange';
 
 const Home = () => {
-	const {
-		status: employersStatus,
-		data: employers,
-		error: employersError,
-		isFetching: isFetchingEmployers
-	} = useGetEmployers();
-	const {
-		status: myselfStatus,
-		data: myself,
-		error: myselfError,
-		isFetching: isFetchingMyself
-	} = useGetMyself();
+	const { data: employers } = useGetEmployers();
+	const { data: myself } = useGetMyself();
 
 	const employerTable = (
 		<Table size="small">

@@ -19,12 +19,7 @@ interface ProjectRoute {
 interface ProjectProps extends RouteComponentProps<ProjectRoute> {}
 
 const Project = ({ match }: ProjectProps) => {
-	const {
-		status: projectStatus,
-		data: project,
-		error: projectError,
-		isFetching: isFetchingProject
-	} = useGetProject(match.params.projectID);
+	const { data: project } = useGetProject(match.params.projectID);
 
 	const [dialogImage, setDialogImage] = useState(null);
 

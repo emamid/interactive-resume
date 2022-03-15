@@ -14,7 +14,7 @@ const Home = ({
 	history,
 }) => {
 
-	const { status, data: employers, error, isFetching } = useGetEmployers();
+	const { data: employers } = useGetEmployers();
 
 	return (
 		<>

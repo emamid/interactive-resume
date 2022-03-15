@@ -16,12 +16,7 @@ interface TagRoute {
 export interface TagProps extends RouteComponentProps<TagRoute> {}
 
 const Tag = ({ match }: TagProps) => {
-	const {
-		status: tagStatus,
-		data: tag,
-		error: tagError,
-		isFetching: isFetchingTag
-	} = useGetTag(match.params.tagID);
+	const { data: tag } = useGetTag(match.params.tagID);
 
 	return (
 		<div>
