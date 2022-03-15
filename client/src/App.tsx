@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -43,9 +43,6 @@ import Tags from './views/Tags';
 import Visualize from './views/Visualize';
 
 import useGetMyself from './api/hooks/useGetMyself';
-
-import { Provider } from 'react-redux';
-import { store } from './redux/Store';
 
 declare module '@mui/styles/defaultTheme' {
 	// eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -129,53 +126,47 @@ const App = () => {
 	);
 
 	return (
-		<Provider store={store}>
-			<div className="App">
-				<div className={classes.appFrame}>
-					<AppBar
-						className={classNames(classes.appBar)}
-						position="static"
-					>
-						<Toolbar disableGutters={true}>
-							<IconButton
-								color="inherit"
-								onClick={() => setMenuDrawerOpen(true)}
-								size="large"
-							>
-								<MenuIcon />
-							</IconButton>
-							<Typography variant="h6" color="inherit" noWrap>
-								Interactive Resume
-							</Typography>
-						</Toolbar>
-					</AppBar>
-					{menuDrawer}
-					<main className={classNames(classes.content)}>
-						<Switch>
-							<Route exact path="/" component={Home} />
-							<Route
-								exact
-								path="/projects"
-								component={Projects}
-							/>
-							<Route
-								path="/projects/:projectID"
-								component={Project}
-							/>
-							<Route
-								path="/employers/:employerID"
-								component={Employer}
-							/>
-							<Route exact path="/tags" component={Tags} />
-							<Route path="/tags/:tagID" component={Tag} />
-							<Route path="/visualize" component={Visualize} />
-							<Route path="/map" component={Map} />
-							<Redirect to="/" />
-						</Switch>
-					</main>
-				</div>
+		<div className="App">
+			<div className={classes.appFrame}>
+				<AppBar
+					className={classNames(classes.appBar)}
+					position="static"
+				>
+					<Toolbar disableGutters={true}>
+						<IconButton
+							color="inherit"
+							onClick={() => setMenuDrawerOpen(true)}
+							size="large"
+						>
+							<MenuIcon />
+						</IconButton>
+						<Typography variant="h6" color="inherit" noWrap>
+							Interactive Resume
+						</Typography>
+					</Toolbar>
+				</AppBar>
+				{menuDrawer}
+				<main className={classNames(classes.content)}>
+					<Switch>
+						<Route exact path="/" component={Home} />
+						<Route exact path="/projects" component={Projects} />
+						<Route
+							path="/projects/:projectID"
+							component={Project}
+						/>
+						<Route
+							path="/employers/:employerID"
+							component={Employer}
+						/>
+						<Route exact path="/tags" component={Tags} />
+						<Route path="/tags/:tagID" component={Tag} />
+						<Route path="/visualize" component={Visualize} />
+						<Route path="/map" component={Map} />
+						<Redirect to="/" />
+					</Switch>
+				</main>
 			</div>
-		</Provider>
+		</div>
 	);
 };
 
