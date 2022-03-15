@@ -26,10 +26,9 @@ const Tags = ({ tags, loadTags }: TagsProps) => {
 	}, [loadTags]);
 
 	return (
-		<Grid container spacing={4}>
+		<Grid container spacing={1} rowSpacing="1em" sm={true}>
 			{tags.map((tag) => (
-				//@ts-ignore TODO: Found out what the type mismatch is here
-				<Grid item xs={6} m={4} xl={2} key={tag.id}>
+				<Grid item key={tag.id}>
 					<Button
 						variant="outlined"
 						color="primary"

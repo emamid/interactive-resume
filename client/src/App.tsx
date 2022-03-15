@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 import './App.css';
 
-import { ThemeProvider, Theme, StyledEngineProvider, createTheme } from '@mui/material/styles';
+import {
+	ThemeProvider,
+	Theme,
+	StyledEngineProvider,
+	createTheme
+} from '@mui/material/styles';
 
 import makeStyles from '@mui/styles/makeStyles';
 
@@ -38,23 +43,21 @@ import Visualize from './views/Visualize';
 import { Provider } from 'react-redux';
 import { store, loadMyself } from './redux/Store';
 
-
 declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
+	// eslint-disable-next-line @typescript-eslint/no-empty-interface
+	interface DefaultTheme extends Theme {}
 }
-
 
 const theme = createTheme();
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
 	appFrame: {
 		height: '100%',
 		zIndex: 1,
 		overflow: 'hidden',
 		position: 'relative',
 		display: 'flex',
-		width: '100%',
+		width: '100%'
 	},
 	appBar: {
 		position: 'absolute'
@@ -63,76 +66,123 @@ const useStyles = makeStyles(theme => ({
 		flexGrow: 1,
 		backgroundColor: theme.palette.background.default,
 		padding: theme.spacing(3),
-		marginTop: 64
-	},
+		marginTop: 64,
+		width: '100%'
+	}
 }));
 
 const App = () => {
-
 	const classes = useStyles();
 
-	const [ menuDrawerOpen, setMenuDrawerOpen ] = useState(false);
+	const [menuDrawerOpen, setMenuDrawerOpen] = useState(false);
 
 	useEffect(() => {
 		store.dispatch(loadMyself());
-	})
+	});
 
 	const closeMenuDrawer = () => {
-		setMenuDrawerOpen(false)
-	}
+		setMenuDrawerOpen(false);
+	};
 
 	const menuDrawer = (
 		<Drawer
-			variant='temporary'
-			anchor='left'
+			variant="temporary"
+			anchor="left"
 			open={menuDrawerOpen}
 			onClose={closeMenuDrawer}
 		>
 			<List>
-				<RoutableListItem to='/' icon={<HomeIcon />} text={'Home'} onNavigated={closeMenuDrawer}></RoutableListItem>
-				<RoutableListItem to='/projects' icon={<ProjectIcon />} text={'Projects'} onNavigated={closeMenuDrawer}></RoutableListItem>
-				<RoutableListItem to='/tags' icon={<TagIcon />} text={'Tags'} onNavigated={closeMenuDrawer}></RoutableListItem>
-				<RoutableListItem to='/visualize' icon={<VisualizeIcon />} text={'Visualize'} onNavigated={closeMenuDrawer}></RoutableListItem>
-				<RoutableListItem to='/map' icon={<MapIcon />} text={'Map'} onNavigated={closeMenuDrawer}></RoutableListItem>
+				<RoutableListItem
+					to="/"
+					icon={<HomeIcon />}
+					text={'Home'}
+					onNavigated={closeMenuDrawer}
+				></RoutableListItem>
+				<RoutableListItem
+					to="/projects"
+					icon={<ProjectIcon />}
+					text={'Projects'}
+					onNavigated={closeMenuDrawer}
+				></RoutableListItem>
+				<RoutableListItem
+					to="/tags"
+					icon={<TagIcon />}
+					text={'Tags'}
+					onNavigated={closeMenuDrawer}
+				></RoutableListItem>
+				<RoutableListItem
+					to="/visualize"
+					icon={<VisualizeIcon />}
+					text={'Visualize'}
+					onNavigated={closeMenuDrawer}
+				></RoutableListItem>
+				<RoutableListItem
+					to="/map"
+					icon={<MapIcon />}
+					text={'Map'}
+					onNavigated={closeMenuDrawer}
+				></RoutableListItem>
 			</List>
 		</Drawer>
-	);    
+	);
 
 	return (
-        <Provider store={store}>
-			<div className='App'>
+		<Provider store={store}>
+			<div className="App">
 				<div className={classes.appFrame}>
-					<AppBar className={classNames(classes.appBar)} position="static">
+					<AppBar
+						className={classNames(classes.appBar)}
+						position="static"
+					>
 						<Toolbar disableGutters={true}>
-							<IconButton color='inherit' onClick={() => setMenuDrawerOpen(true)} size="large">
+							<IconButton
+								color="inherit"
+								onClick={() => setMenuDrawerOpen(true)}
+								size="large"
+							>
 								<MenuIcon />
 							</IconButton>
-							<Typography variant='h6' color='inherit' noWrap>Interactive Resume</Typography>
+							<Typography variant="h6" color="inherit" noWrap>
+								Interactive Resume
+							</Typography>
 						</Toolbar>
 					</AppBar>
 					{menuDrawer}
 					<main className={classNames(classes.content)}>
 						<Switch>
-							<Route exact path='/' component={Home}/>
-							<Route exact path='/projects' component={Projects}/>
-							<Route path='/projects/:projectID' component={Project}/>
-							<Route path='/employers/:employerID' component={Employer}/>
-							<Route exact path='/tags' component={Tags}/>
-							<Route path='/tags/:tagID' component={Tag}/>
-							<Route path='/visualize' component={Visualize}/>
-							<Route path='/map' component={Map}/>
-							<Redirect to="/"/>
+							<Route exact path="/" component={Home} />
+							<Route
+								exact
+								path="/projects"
+								component={Projects}
+							/>
+							<Route
+								path="/projects/:projectID"
+								component={Project}
+							/>
+							<Route
+								path="/employers/:employerID"
+								component={Employer}
+							/>
+							<Route exact path="/tags" component={Tags} />
+							<Route path="/tags/:tagID" component={Tag} />
+							<Route path="/visualize" component={Visualize} />
+							<Route path="/map" component={Map} />
+							<Redirect to="/" />
 						</Switch>
-					</main>        
+					</main>
 				</div>
 			</div>
 		</Provider>
-    );
+	);
+};
 
-}
-
-const AppWithThemeProvider = () => (<StyledEngineProvider injectFirst>
-    <ThemeProvider theme={theme}><App/></ThemeProvider>
-</StyledEngineProvider>);
+const AppWithThemeProvider = () => (
+	<StyledEngineProvider injectFirst>
+		<ThemeProvider theme={theme}>
+			<App />
+		</ThemeProvider>
+	</StyledEngineProvider>
+);
 
 export default AppWithThemeProvider;
