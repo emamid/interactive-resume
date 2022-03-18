@@ -13,6 +13,7 @@
     "axios": "^0.19.0",
     "classnames": "^2.3.1",
     "d3": "^7.3.0",
+    "fast-equals": "^3.0.0",
     "google-maps-react": "^2.0.6",
     "install": "^0.13.0",
     "lodash": "^4.17.21",
@@ -46,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "@googlemaps/typescript-guards": "^1.0.10",
     "@types/d3": "^7.1.0",
     "@types/google.maps": "^3.48.2",
     "@types/jest": "^27.4.1",

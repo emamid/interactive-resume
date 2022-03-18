@@ -9,7 +9,7 @@ import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 const apiKey = 'AIzaSyC7z-889WgwZ7WGmjXR76NqT5GAdFs6OTQ';
 
-const Home = ({
+const MapView = ({
 	google,
 	history,
 }) => {
@@ -46,4 +46,4 @@ Home.propTypes = {
 	employers: PropTypes.array.isRequired
 };
 
-export default withRouter(GoogleApiWrapper({ apiKey })(Home));
+export default withRouter(GoogleApiWrapper({ apiKey })(MapView));

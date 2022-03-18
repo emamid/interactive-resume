@@ -35,7 +35,7 @@ import RoutableListItem from './components/RoutableListItem';
 
 import Home from './views/Home';
 import Employer from './views/Employer';
-import Map from './views/Map';
+import MapView from './views/MapView';
 import Project from './views/Project';
 import Projects from './views/Projects';
 import Tag from './views/Tag';
@@ -161,7 +161,7 @@ const App = () => {
 						<Route exact path="/tags" component={Tags} />
 						<Route path="/tags/:tagID" component={Tag} />
 						<Route path="/visualize" component={Visualize} />
-						<Route path="/map" component={Map} />
+						<Route path="/map" component={MapView} />
 						<Redirect to="/" />
 					</Switch>
 				</main>
