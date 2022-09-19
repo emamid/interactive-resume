@@ -12,13 +12,16 @@ code {
     monospace;
 }
 
+main {
+	padding: 24px;
+}
+
 .mdc-data-table {
 	border: none;
 	width: 100%;
 }
 
 .mdc-data-table__table {
-	padding: 1rem;
 	width: 100%;
 }
 
