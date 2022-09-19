@@ -7,11 +7,11 @@ import YearRange from './YearRange.svelte';
 export let projects: BaseProject[] = [];
 </script>
 
-<DataTable table$aria-label="Personal projects" style="max-width: 100%;">
+<DataTable table$aria-label="Personal projects">
   <Head>
     <Row>
-      <Cell>Dates</Cell>
-      <Cell>Project</Cell>
+      <Cell style="width:30%">Dates</Cell>
+      <Cell style="width:70%">Project</Cell>
     </Row>
   </Head>
 	<Body>

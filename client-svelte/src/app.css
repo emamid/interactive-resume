@@ -11,3 +11,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.mdc-data-table {
+	border: none;
+	width: 100%;
+}
+
+.mdc-data-table__table {
+	padding: 1rem;
+	width: 100%;
+}
+
+.mdc-data-table__header-row {
+	height: 2rem;
+}
+
+.mdc-data-table__header-cell {
+	padding: 6px 16px;
+	text-align: left;
+}
+
+.mdc-data-table__row {
+	height: 2rem;
+}
+
+.mdc-data-table__cell {
+	padding: 6px 16px;
+}
