@@ -1,10 +1,15 @@
 <script lang="ts">
-	import Home from './views/Home.svelte'
+import axios from 'axios';
+
+import Home from './views/Home.svelte';
+
+axios.defaults.withCredentials = true;
 </script>
 
 <main>
 	<Home/>
 </main>
+
 
 <style>
 </style>
