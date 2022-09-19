@@ -11,7 +11,7 @@ interface BaseEmployer {
 	latitude: number;	
 }
 
-interface BaseProject {
+export interface BaseProject {
 	id: string;
 	name: string;
 	pageContent: string;

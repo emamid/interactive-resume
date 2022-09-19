@@ -1,10 +1,10 @@
 <script lang="ts">
 import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 
-import type { Project } from '@/api/types';
+import type { BaseProject } from '@/api/types';
 import YearRange from './YearRange.svelte';
 
-export let projects: any[] = [];
+export let projects: BaseProject[] = [];
 </script>
 
 <DataTable table$aria-label="Personal projects" style="max-width: 100%;">
