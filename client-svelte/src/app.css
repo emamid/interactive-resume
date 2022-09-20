@@ -16,6 +16,16 @@ main {
 	padding: 24px;
 }
 
+.mdc-chip {
+	background-color: white;
+	border-width: 1px;
+	border-color: rgb(98, 0, 238);
+	border-style: solid;
+	color: rgb(98, 0, 238);
+	margin-right: 8px;
+	margin-bottom: 16px;
+}
+
 .mdc-data-table {
 	border: none;
 	width: 100%;

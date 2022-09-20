@@ -1,6 +1,5 @@
 <script lang="ts">
-	import LayoutGrid, { Cell } from '@smui/layout-grid';	
-	import Chip, { Set, LeadingIcon, TrailingIcon, Text } from '@smui/chips';
+	import Chip, { Text } from '@smui/chips';
 
 	import type { Tag } from '@/api/types';
 	import getTags from '@/api/axios/getTags';
