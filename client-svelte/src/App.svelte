@@ -5,6 +5,7 @@ import IconButton from '@smui/icon-button';
 import TopAppBar, { Row, Section, Title } from '@smui/top-app-bar';
 
 import Home from './views/Home.svelte';
+import Projects from './views/Projects.svelte';
 import MenuDrawer from './components/MenuDrawer.svelte'
 
 axios.defaults.withCredentials = true;
@@ -24,7 +25,8 @@ const toggleMenuDrawer = () => menuDrawerOpen = !menuDrawerOpen;
 </TopAppBar>
 <AppContent>
 	<main>
-		<Home/>
+		<!-- <Home/> -->
+		<Projects />
 	</main>
 </AppContent>
 
