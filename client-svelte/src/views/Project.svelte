@@ -20,7 +20,7 @@
 		{project?.name}
 		{#if !project?.isPersonal}
 		{' '}at{' '}
-		<a href={`/#/employers/${project?.employerID}`}>{project?.Employer.name}</a>
+		<a href={`./#/employers/${project?.employerID}`}>{project?.Employer.name}</a>
 		{' '}<YearRange startDate={project?.startDate} endDate={project?.endDate}	withParens />
 		{/if}
 	</div>

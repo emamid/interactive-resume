@@ -25,8 +25,8 @@ let employers: Employer[] = [];
 	{#each employers as employer}
 		<Row>
 			<Cell><YearRange startDate={employer.startDate} endDate={employer.endDate} /></Cell>
-			<LinkCell path={`/#/employers/${employer.id}`} text={employer.name} />
-			<LinkCell path={`/#/employers/${employer.id}`} text={employer.position} />
+			<LinkCell path={`./#/employers/${employer.id}`} text={employer.name} />
+			<LinkCell path={`./#/employers/${employer.id}`} text={employer.position} />
 		</Row>	
 	{/each}		
 	</Body>

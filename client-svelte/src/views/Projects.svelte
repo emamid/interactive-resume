@@ -26,8 +26,8 @@
 		{#each projects as project}
 			<Row>
 				<Cell><YearRange startDate={project.startDate} endDate={project.endDate} /></Cell>
-				<LinkCell path={`/#/projects/${project.id}`} text={project.name} />
-				<LinkCell path={`/#/employers/${project?.Employer.id}`} text={project.Employer?.name} />
+				<LinkCell path={`./#/projects/${project.id}`} text={project.name} />
+				<LinkCell path={`./#/employers/${project?.Employer.id}`} text={project.Employer?.name} />
 			</Row>	
 		{/each}		
 		</Body>

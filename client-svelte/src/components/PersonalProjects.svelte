@@ -19,7 +19,7 @@ export let projects: BaseProject[] = [];
 	{#each projects as project}
 		<Row>
 			<Cell><YearRange startDate={project.startDate} endDate={project.endDate} /></Cell>
-			<LinkCell path={`/#/projects/${project.id}`} text={project.name} />
+			<LinkCell path={`./#/projects/${project.id}`} text={project.name} />
 		</Row>	
 	{/each}		
 	</Body>

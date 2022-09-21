@@ -1,7 +1,4 @@
 <script lang="ts">
-	import Chip, { Text } from '@smui/chips';
-	import { push } from 'svelte-spa-router';
-
 	import type { Tag } from '@/api/types';
 	import getTags from '@/api/axios/getTags';
 
