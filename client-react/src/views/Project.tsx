@@ -31,7 +31,7 @@ const Project = ({ match }: ProjectProps) => {
 		<span>
 			{' '}
 			at{' '}
-			<a href={`/#/employers/${project?.employerID}`}>
+			<a href={`./#/employers/${project?.employerID}`}>
 				{project?.Employer.name}
 			</a>{' '}
 			<YearRange
@@ -52,7 +52,7 @@ const Project = ({ match }: ProjectProps) => {
 					<Chip
 						label={tag.name}
 						component="a"
-						href={`/#/tags/${tag.id}`}
+						href={`./#/tags/${tag.id}`}
 						clickable
 						variant="outlined"
 						key={tag.id}

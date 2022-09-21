@@ -15,7 +15,7 @@ const Tags = () => {
 					<Button
 						variant="outlined"
 						color="primary"
-						href={`/#/tags/${tag.id}`}
+						href={`./#/tags/${tag.id}`}
 					>
 						{tag.name}
 					</Button>

@@ -33,7 +33,7 @@ const Projects = () => {
 								/>
 							</TableCell>
 							<TableCell>
-								<a href={`/#/projects/${project.id}`}>
+								<a href={`./#/projects/${project.id}`}>
 									{project.name}
 								</a>
 							</TableCell>
@@ -42,7 +42,7 @@ const Projects = () => {
 									''
 								) : (
 									<a
-										href={`/#/employers/${project.employerID}`}
+										href={`./#/employers/${project.employerID}`}
 									>
 										{project.Employer.name}
 									</a>

@@ -36,12 +36,12 @@ const Home = () => {
 							/>
 						</TableCell>
 						<TableCell>
-							<a href={`/#/employers/${employer.id}`}>
+							<a href={`./#/employers/${employer.id}`}>
 								{employer.name}
 							</a>
 						</TableCell>
 						<TableCell>
-							<a href={`/#/employers/${employer.id}`}>
+							<a href={`./#/employers/${employer.id}`}>
 								{employer.position}
 							</a>
 						</TableCell>
@@ -68,7 +68,7 @@ const Home = () => {
 							/>
 						</TableCell>
 						<TableCell>
-							<a href={`/#/projects/${project.id}`}>
+							<a href={`./#/projects/${project.id}`}>
 								{project.name}
 							</a>
 						</TableCell>
