@@ -1,4 +1,10 @@
 <script lang="ts">
+  import Card, {
+    PrimaryAction,
+  } from '@smui/card';	
+	import LayoutGrid, { Cell } from '@smui/layout-grid';
+	import { push } from 'svelte-spa-router';
+
 	import type { Tag } from '@/api/types';
 	import getTag from '@/api/axios/getTag';
 	import type { IDParams } from '@/types';
@@ -11,10 +17,22 @@
 		tag = await getTag(params?.id);
 	}());
 </script>
-	
+
+
 <div class="tag">
-	Tag view, in progress
-	<div>{JSON.stringify(tag)}</div>
+	<div class="mdc-typography--headline5">{tag?.name}</div>
+	<LayoutGrid>
+		{#each (tag?.Projects || []) as project}
+			<Cell span={3}>
+				<Card>
+					<PrimaryAction on:click={() => push(`/projects/${project.id}`)} padded>
+						<div class="mdc-typography--headline5">{project.name}</div>
+						<div>{project.Employer?.name || 'Personal'}</div>
+					</PrimaryAction>
+				</Card>			
+			</Cell>
+		{/each}
+	</LayoutGrid>
 </div>
 
 <style>

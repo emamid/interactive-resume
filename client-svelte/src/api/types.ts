@@ -70,7 +70,7 @@ export interface Project extends BaseProject {
 }
 
 export interface Tag extends BaseTag {
-	Projects: BaseProject[];
+	Projects: Project[];
 }
 
 // List types
