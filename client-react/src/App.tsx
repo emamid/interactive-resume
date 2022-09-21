@@ -16,9 +16,12 @@ import makeStyles from '@mui/styles/makeStyles';
 import classNames from 'classnames';
 
 import AppBar from '@mui/material/AppBar';
+import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
@@ -96,31 +99,41 @@ const App = () => {
 					icon={<HomeIcon />}
 					text={'Home'}
 					onNavigated={closeMenuDrawer}
-				></RoutableListItem>
+				/>
 				<RoutableListItem
 					to="/projects"
 					icon={<ProjectIcon />}
 					text={'Projects'}
 					onNavigated={closeMenuDrawer}
-				></RoutableListItem>
+				/>
 				<RoutableListItem
 					to="/tags"
 					icon={<TagIcon />}
 					text={'Tags'}
 					onNavigated={closeMenuDrawer}
-				></RoutableListItem>
+				/>
 				<RoutableListItem
 					to="/visualize"
 					icon={<VisualizeIcon />}
 					text={'Visualize'}
 					onNavigated={closeMenuDrawer}
-				></RoutableListItem>
-				<RoutableListItem
+				/>
+				{/* <RoutableListItem
 					to="/map"
 					icon={<MapIcon />}
 					text={'Map'}
 					onNavigated={closeMenuDrawer}
-				></RoutableListItem>
+				/> */}
+				<Divider />
+				<ListItem
+					button
+					onClick={() => {
+						window.location.href = '/svelte_client'
+					}}
+						>
+					<img className="client-logo" alt="logo" src="./svelte_logo.svg" height="24px" width="24px" />
+					<ListItemText primary="Svelte" />
+				</ListItem>
 			</List>
 		</Drawer>
 	);

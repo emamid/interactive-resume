@@ -33,3 +33,7 @@ body {
 #root {
 	height: 100%;
 }
+
+.client-logo {
+	margin-right: 32px;
+}
