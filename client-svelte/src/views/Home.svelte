@@ -15,7 +15,9 @@ let myself: Myself = null;
 
 <div class="home">
 	<HTMLContent html={myself?.pageContent} />
+	<div>Employment History</div>
 	<Employers />
+	<div class="personal-projects-title">Personal Projects</div>
 	<PersonalProjects projects={myself?.Projects}/>
 </div>
 
@@ -23,5 +25,8 @@ let myself: Myself = null;
 	.home {
 		height: '100%';
 		overflow: 'auto';
+	}
+	.personal-projects-title {
+		margin-top: 2rem;
 	}
 </style>
