@@ -2,12 +2,12 @@
 export let html: string = '';
 </script>
 
-<div class="custom-html-content">
+<div class="mdc-typography--body1">
 	{@html html}
 </div>
 
 <style>
-	.custom-html-content {
-		padding: 10px;
-	}
+	/* .custom-html-content {
+
+	} */
 </style>

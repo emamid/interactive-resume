@@ -2,7 +2,7 @@
 </script>
 	
 <div class="visualize">
-	Visualize view, in progress
+	Visualize view, implementation in progress
 </div>
 
 <style>

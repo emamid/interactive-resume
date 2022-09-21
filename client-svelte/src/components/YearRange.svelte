@@ -3,9 +3,14 @@
 	export let endDate: string;
 	export let withParens: boolean = false;
 
-	const startYear = startDate ? new Date(startDate).getFullYear() : null;
-	const endYear = endDate ? new Date(endDate).getFullYear() : null;
-	const yearsStr = (startYear === endYear) ? startYear : (endYear ? `${startYear} - ${endYear}` : `${startYear} -`);
+	let startYear;
+	let endYear;
+	let yearsStr;
+	$: {
+		startYear = startDate ? new Date(startDate).getFullYear() : null;
+    endYear = endDate ? new Date(endDate).getFullYear() : null;
+	  yearsStr = (startYear === endYear) ? startYear : (endYear ? `${startYear} - ${endYear}` : `${startYear} -`);
+	}
 </script>
 
 {#if startYear || endYear}
