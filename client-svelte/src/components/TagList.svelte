@@ -3,14 +3,14 @@
 	import Chip, { Text } from '@smui/chips';
 	import { push } from 'svelte-spa-router';
 
-	import type { Tag } from '@/api/types';
+	import type { BaseTag } from '@/api/types';
 
-	export let tags: Tag[] = [];
-	export let useChips = false;
+	export let tags: BaseTag[] = [];
+	export let chips = false;
 </script>
 
 {#each tags as tag}
-  {#if useChips}
+  {#if chips}
 	<Chip chip={tag.id} on:click={() => push(`/tags/${tag.id}`)}>
 		<Text>{tag.name}</Text>
 	</Chip>
