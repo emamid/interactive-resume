@@ -1,11 +1,12 @@
 <script lang="ts">
 	import Chip, { Text } from '@smui/chips';
+	import { push } from 'svelte-spa-router';
 
 	import type { Tag } from '@/api/types';
 	import getTags from '@/api/axios/getTags';
 	
 	let tags: Tag[] = [];
-	
+
 	(async function() {
 		tags = await getTags();
 	}());
@@ -13,7 +14,7 @@
 	
 <div class="tags">
 	{#each tags as tag}
-		<Chip chip={tag.id}><Text>{tag.name}</Text></Chip>
+		<Chip chip={tag.id} on:click={() => push(`/tags/${tag.id}`)}><Text>{tag.name}</Text></Chip>
 	{/each}
 </div>
 

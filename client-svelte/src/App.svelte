@@ -14,7 +14,7 @@ let menuDrawerOpen = false;
 
 const routes = {
 	'/': Home,	
-	'/employer/:id': wrap({
+	'/employers/:id': wrap({
 	  asyncComponent: () => import('./views/Employer.svelte')
   }),
 	'/projects': wrap({

@@ -3,7 +3,7 @@
   import Drawer, {
     Content,
   } from '@smui/drawer';
-	import List from '@smui/list';
+	import List, { Separator } from '@smui/list';
 	
 	import MenuDrawerItem from './MenuDrawerItem.svelte';
 
@@ -18,10 +18,12 @@
 <Drawer variant="modal" bind:open on:SMUIDrawer:closed={() => dispatch('closed')}>
 	<Content>
 		<List>
-			<MenuDrawerItem icon="home" path="/" text="Home" on:navigated={navigated} />
-			<MenuDrawerItem icon="build" path="/projects" text="Projects" on:navigated={navigated} />
-			<MenuDrawerItem icon="sell" path="/tags" text="Tags" on:navigated={navigated} />
-			<MenuDrawerItem icon="bubble_chart" path="/visualize" text="Visualize" on:navigated={navigated} />
+			<MenuDrawerItem href="/#/" icon="home" text="Home" on:navigated={navigated} />
+			<MenuDrawerItem href="/#/projects" icon="build" text="Projects" on:navigated={navigated} />
+			<MenuDrawerItem href="/#/tags" icon="sell" text="Tags" on:navigated={navigated} />
+			<MenuDrawerItem href="/#/visualize" icon="bubble_chart" text="Visualize" on:navigated={navigated} />
+			<Separator />
+			<MenuDrawerItem href="/react" text="React" />
 		</List>
 	</Content>
 </Drawer>

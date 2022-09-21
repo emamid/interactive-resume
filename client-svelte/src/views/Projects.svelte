@@ -3,6 +3,7 @@
 	
 	import type { Project } from '@/api/types';
 	import getProjects from '@/api/axios/getProjects';
+	import LinkCell from '@/components/LinkCell.svelte';
 	import YearRange from '@/components/YearRange.svelte';
 	
 	let projects: Project[] = [];
@@ -25,8 +26,8 @@
 		{#each projects as project}
 			<Row>
 				<Cell><YearRange startDate={project.startDate} endDate={project.endDate} /></Cell>
-				<Cell>{project.name}</Cell>
-				<Cell>{project.Employer?.name}</Cell>
+				<LinkCell path={`/#/projects/${project.id}`} text={project.name} />
+				<LinkCell path={`/#/employers/${project?.Employer.id}`} text={project.Employer?.name} />
 			</Row>	
 		{/each}		
 		</Body>

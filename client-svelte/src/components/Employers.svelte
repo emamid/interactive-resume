@@ -3,6 +3,7 @@ import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 
 import type { Employer } from '@/api/types';
 import getEmployers from '@/api/axios/getEmployers';
+import LinkCell from './LinkCell.svelte';
 import YearRange from './YearRange.svelte';
 
 let employers: Employer[] = [];
@@ -24,8 +25,8 @@ let employers: Employer[] = [];
 	{#each employers as employer}
 		<Row>
 			<Cell><YearRange startDate={employer.startDate} endDate={employer.endDate} /></Cell>
-			<Cell>{employer.name}</Cell>
-			<Cell>{employer.position}</Cell>
+			<LinkCell path={`/#/employers/${employer.id}`} text={employer.name} />
+			<LinkCell path={`/#/employers/${employer.id}`} text={employer.position} />
 		</Row>	
 	{/each}		
 	</Body>
