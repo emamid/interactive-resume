@@ -9,29 +9,24 @@ import {wrap} from 'svelte-spa-router/wrap';
 import Home from './views/Home.svelte';
 import MenuDrawer from './components/MenuDrawer.svelte'
 
+import Employer from './views/Employer.svelte';
+import Project from './views/Project.svelte';
+import Projects from './views/Projects.svelte';
+import Tag from './views/Tag.svelte';
+import Tags from './views/Tags.svelte';
+import Visualize from './views/Visualize.svelte';
+
 axios.defaults.withCredentials = true;
 let menuDrawerOpen = false;
 
 const routes = {
 	'/': Home,	
-	'/employers/:id': wrap({
-	  asyncComponent: () => import('./views/Employer.svelte')
-  }),
-	'/projects': wrap({
-	  asyncComponent: () => import('./views/Projects.svelte')
-  }),
-	'/projects/:id': wrap({
-	  asyncComponent: () => import('./views/Project.svelte')
-  }),
-	'/tags': wrap({
-	  asyncComponent: () => import('./views/Tags.svelte')
-  }),
-	'/tags/:id': wrap({
-	  asyncComponent: () => import('./views/Tag.svelte')
-  }),
-	'/visualize': wrap({
-	  asyncComponent: () => import('./views/Visualize.svelte')
-  }),
+	'/employers/:id': Employer,
+	'/projects': Projects,
+	'/projects/:id': Project,
+	'/tags': Tags,
+	'/tags/:id': Tag,
+	'/visualize': Visualize,
 	'*': Home,
 }
 
