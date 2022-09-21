@@ -42,7 +42,9 @@ function initApp() {
 	console.log(process.env.RESUME_DATA_DIR);
     app.use('/images', express.static(`${process.env.RESUME_DATA_DIR}/images`));
     app.use('/thumbnails', express.static(`${process.env.RESUME_DATA_DIR}/thumbnails`));    
-    app.use('/', express.static('../client/build'));
+    app.use('/react_client', express.static(process.env.REACT_CLIENT_DIR));
+		app.use('/svelte_client', express.static(process.env.SVELTE_CLIENT_DIR));
+		app.use('/', express.static(`${process.env.RESUME_DATA_DIR}/redirect`));
 };
 
 initApp();
