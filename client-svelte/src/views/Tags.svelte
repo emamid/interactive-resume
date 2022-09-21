@@ -4,6 +4,8 @@
 
 	import type { Tag } from '@/api/types';
 	import getTags from '@/api/axios/getTags';
+
+	import TagList from '@/components/TagList.svelte';
 	
 	let tags: Tag[] = [];
 
@@ -13,9 +15,7 @@
 </script>
 	
 <div class="tags">
-	{#each tags as tag}
-		<Chip chip={tag.id} on:click={() => push(`/tags/${tag.id}`)}><Text>{tag.name}</Text></Chip>
-	{/each}
+	<TagList {tags} />
 </div>
 
 <style>
