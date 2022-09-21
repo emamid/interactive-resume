@@ -23,7 +23,7 @@
 			<MenuDrawerItem href="/#/tags" icon="sell" text="Tags" on:navigated={navigated} />
 			<MenuDrawerItem href="/#/visualize" icon="bubble_chart" text="Visualize" on:navigated={navigated} />
 			<Separator />
-			<MenuDrawerItem href="/react" imageSrc="/react_logo.svg" text="React" />
+			<MenuDrawerItem href="/react_client" imageSrc="./react_logo.svg" text="React" />
 		</List>
 	</Content>
 </Drawer>

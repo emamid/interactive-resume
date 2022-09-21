@@ -16,7 +16,7 @@
 >
 	<Graphic class="material-icons">
 		{#if imageSrc}
-		<img alt="React logo" src={imageSrc} />
+		<img alt="Logo" src={imageSrc} />
 		{/if}
 		{icon}
 	</Graphic>
