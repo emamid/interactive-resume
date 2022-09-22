@@ -31,7 +31,9 @@
 	<br />
 	<HTMLContent html={project?.pageContent} />
 	<br />
-	<ImageGallery images={project?.Images} />
+	<ImageGallery images={project?.Images} on:clicked={event => {
+		console.log('clicked ', event.detail)
+	}}/>
 </div>
 
 <style>

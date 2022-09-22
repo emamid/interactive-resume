@@ -6,6 +6,9 @@
 
 	export let images: Image[] = [];
 
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
 </script>
 
 
@@ -14,7 +17,7 @@
 	<LayoutGrid>
 		{#each images as image}
 			<Cell span={3}>
-				<ImageCard {image} />
+				<ImageCard {image} on:clicked={event => dispatch('clicked', event.detail)} />
 			</Cell>
 		{/each}
 	</LayoutGrid>
