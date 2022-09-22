@@ -2,9 +2,11 @@
 	import type { Project } from '@/api/types';
 	import getProject from '@/api/axios/getProject';
 	import HTMLContent from '@/components/HTMLContent.svelte';
+	import ImageCallery from '@/components/ImageGallery.svelte';
 	import TagList from '@/components/TagList.svelte';
 	import YearRange from '@/components/YearRange.svelte';
 	import type { IDParams } from '@/types';
+	import ImageGallery from '@/components/ImageGallery.svelte';
 	
 	export let params: IDParams;
 
@@ -28,6 +30,8 @@
 	<TagList tags={project?.Tags} chips />
 	<br />
 	<HTMLContent html={project?.pageContent} />
+	<br />
+	<ImageGallery images={project?.Images} />
 </div>
 
 <style>

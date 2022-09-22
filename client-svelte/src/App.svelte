@@ -4,7 +4,6 @@ import { AppContent, Scrim } from '@smui/drawer';
 import IconButton from '@smui/icon-button';
 import TopAppBar, { Row, Section, Title } from '@smui/top-app-bar';
 import Router from 'svelte-spa-router';
-import {wrap} from 'svelte-spa-router/wrap';
 
 import Home from './views/Home.svelte';
 import MenuDrawer from './components/MenuDrawer.svelte'

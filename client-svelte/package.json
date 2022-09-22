@@ -16,6 +16,7 @@
     "@smui/data-table": "^6.1.0",
     "@smui/drawer": "^6.1.0",
     "@smui/icon-button": "^6.1.0",
+    "@smui/image-list": "^6.1.0",
     "@smui/linear-progress": "^6.1.0",
     "@smui/list": "^6.1.0",
     "@smui/top-app-bar": "^6.1.0",
