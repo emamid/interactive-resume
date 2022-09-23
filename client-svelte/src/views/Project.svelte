@@ -1,15 +1,17 @@
 <script lang="ts">
-	import type { Project } from '@/api/types';
+	import type { Image, Project } from '@/api/types';
 	import getProject from '@/api/axios/getProject';
 	import HTMLContent from '@/components/HTMLContent.svelte';
-	import ImageCallery from '@/components/ImageGallery.svelte';
+	import ImageDialog from '@/components/ImageDialog.svelte';
+	import ImageGallery from '@/components/ImageGallery.svelte';
 	import TagList from '@/components/TagList.svelte';
 	import YearRange from '@/components/YearRange.svelte';
 	import type { IDParams } from '@/types';
-	import ImageGallery from '@/components/ImageGallery.svelte';
 	
 	export let params: IDParams;
 
+	let dialogImage: Image;
+	let imageDialogOpen = false;
 	let project: Project;
 	
 	(async function() {
@@ -32,8 +34,10 @@
 	<HTMLContent html={project?.pageContent} />
 	<br />
 	<ImageGallery images={project?.Images} on:clicked={event => {
-		console.log('clicked ', event.detail)
+		dialogImage = event.detail;
+		imageDialogOpen = true;
 	}}/>
+	<ImageDialog image={dialogImage} open={imageDialogOpen} on:closed={() => imageDialogOpen = false} />
 </div>
 
 <style>
