@@ -3,14 +3,20 @@ import Select, { Option } from '@smui/select';
 import { scaleOrdinal, schemeSet3 } from 'd3';
 import { uniq } from 'lodash';
 
-import type { TagBubble } from '@/types';
 import type { ProjectTags } from '@/api/types';
 import getProjectTags from '@/api/axios/getProjectTags';
 import ColorLegend from '@/components/ColorLegend.svelte';
+import type { BubbleData } from '@/components/BubbleChart/types';
+import BubbleChart from '@/components/BubbleChart/index.svelte';
+
+interface TagBubbleData extends BubbleData {
+	value: number,
+	r: number,
+}
 
 let projectTags: ProjectTags = [];
 let colorBy = 'category';
-let groupBy: boolean | string = false;
+let groupBy: string = '';
 
 // const svgWidth = (chartDiv.current && chartDiv.current.clientWidth) || 128;
 // const svgHeight =	(chartDiv.current && chartDiv.current.clientHeight) || 128;
@@ -19,7 +25,7 @@ let svgWidth = 128;
 let svgHeight = 128;
 
 let colors = scaleOrdinal(schemeSet3);
-let mappedTags: TagBubble[] = [];
+let mappedTags: TagBubbleData[] = [];
 let colorValues: string[] = [];
 let colorMap: Record<string, string> = {};
 
@@ -56,12 +62,22 @@ $: {
 			<Option value={'value'}>Size</Option>
     </Select>	
     <Select value={groupBy} label="Group By" on:SMUISelect:change={event => groupBy=event.detail.value}>
-			<Option value={false}>None</Option>
+			<Option value={''}>None</Option>
 			<Option value={'category'}>Category</Option>
 			<Option value={'layer'}>Layer</Option>
     </Select>		
 	</div>
 	Visualize view, implementation in progress
+	<BubbleChart
+		chartConfig={{
+			colorByProp: colorBy,
+			groupByProp: groupBy,
+			colorMap,
+		}}		
+		data={mappedTags}
+		{svgWidth}
+		{svgHeight}
+	/>
 	<ColorLegend {colorMap} />
 </div>
 
