@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
 	import { packSiblings} from 'd3';
 	import { groupBy, map, max, reduce, uniq } from 'lodash';
 
@@ -12,9 +11,9 @@
 		colorMap: {},
 	}
 	export let data: BubbleData[] = [];
-	export let svgWidth = 1;
-	export let svgHeight = 1;
-
+	
+	let svgWidth = 1;
+	let svgHeight = 1;
 	let maxValue: number;
 	let groupValues: string[];
 	let groupedData: Record<string, BubbleData[]>;
@@ -29,14 +28,17 @@
 	let maxExtents: Extents = {
 		minX: 0,
 		minY: 0,
-		maxX: 0,
-		maxY: 0,
+		maxX: 1,
+		maxY: 1,
 	}
 	let maxGroupWidth = 1;
 	let maxGroupHeight = 1;
 	let tileScale = 1;
+	let containerDiv;
 
 	$: {
+		svgWidth = (containerDiv && containerDiv.clientWidth) || 128;
+		svgHeight =	(containerDiv && containerDiv.clientHeight) || 128;		
 		maxValue = max(data.map(tag => tag.value));
 		groupValues = chartConfig.groupByProp
 			? uniq(data.map((item) => item[chartConfig.groupByProp])).sort()
@@ -104,24 +106,44 @@
 				? Math.min(tileWidth / maxGroupWidth, tileHeight / maxGroupHeight)
 				: 1;
 	}
-
-	function* lineSequence(lineCount: number, lineSpacing: number) {
-		for (let lineNum = 1; lineNum < lineCount; lineNum++)
-			yield lineNum * lineSpacing;
-	}
-
-	const dispatch = createEventDispatcher();
 </script>
 
-<svg
-	style="height: 100%; width: 100%"
->
-	<g class="bubbles-area">
-		{#each map(groups) as data}
-			<BubbleGroup {data} />
+<div class={$$props.class} bind:this={containerDiv}>
+	<svg>
+		<g class="bubbles-area">
+			{#each map(groups) as data}
+				<BubbleGroup {data} {chartConfig} {maxValue} {tileScale} {tileWidth} {tileHeight} on:bubbleClicked />
+			{/each}
+		</g>
+		{#each {length: tileColumns - 1} as _, columnNum}
+			<line
+				x1={(columnNum + 1) * tileWidth}
+				y1={0}
+				x2={(columnNum + 1) * tileWidth}
+				y2={svgHeight}
+				stroke="black"
+				stroke-dasharray="2, 2"
+			/>
 		{/each}
-	</g>
-</svg>
+		{#each {length: tileRows - 1} as _, rowNum}
+			<line
+					x1={0}
+					y1={(rowNum + 1) * tileHeight}
+					x2={svgWidth}
+					y2={(rowNum + 1) * tileHeight}
+					stroke="black"
+				stroke-dasharray="2, 2"
+			/>
+		{/each}
+	</svg>
+</div>
+
+<style>
+	svg {
+		height: 100%;
+		width: 100%;
+	}
+</style>
 
 <!-- <g className="bubbles-area">
 	{map(

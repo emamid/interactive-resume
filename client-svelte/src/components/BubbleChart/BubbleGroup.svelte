@@ -1,9 +1,6 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-	import { packSiblings} from 'd3';
-	import { groupBy, map, max, reduce, uniq } from 'lodash';
-
-	import type { BubbleGroupData } from './types';
+	import type { BubbleChartConfig, BubbleGroupData } from './types';
+	import Bubble from './Bubble.svelte';
 
 	export let data: BubbleGroupData = {
 		data: [],
@@ -13,9 +10,12 @@
 		centerY: 0,
 		title: '',
 	};
-	export let tileWidth = 1;
-	export let tileHeight = 1;
-	export let tileScale = 1;
+	export let maxValue;
+	export let chartConfig: BubbleChartConfig;
+	export let tileWidth;
+	export let tileHeight;
+	export let tileScale;
+
 </script>
 
 <g class="bubble-group-outer"
@@ -27,13 +27,24 @@
 		transform={`translate(${data.centerX},${data.centerY}) scale(${tileScale})`}
 	>
 	{#if data.data}
+		{#each data.data as bubbleData}
+			<Bubble data={bubbleData} {chartConfig} {maxValue} on:bubbleClicked />
+		{/each}
+	{/if}
+	</g>
+	{#if data?.title !== 'All'}
 		<text
 			x={16}
 			y={24}
-			style="fontSize: 90%"
+			class="bubble-group-caption"
 		>
 			{data.title || 'Other'}
 		</text>
 	{/if}
-	</g>
 </g>
+
+<style>
+	.bubble-group-caption {
+		font-size: 90%;
+	}
+</style>

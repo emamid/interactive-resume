@@ -1,6 +1,7 @@
 <script lang="ts">
+import { push } from 'svelte-spa-router';
 import Select, { Option } from '@smui/select';
-import { scaleOrdinal, schemeSet3 } from 'd3';
+import * as d3 from 'd3';
 import { uniq } from 'lodash';
 
 import type { ProjectTags } from '@/api/types';
@@ -18,13 +19,7 @@ let projectTags: ProjectTags = [];
 let colorBy = 'category';
 let groupBy: string = '';
 
-// const svgWidth = (chartDiv.current && chartDiv.current.clientWidth) || 128;
-// const svgHeight =	(chartDiv.current && chartDiv.current.clientHeight) || 128;
-
-let svgWidth = 128;
-let svgHeight = 128;
-
-let colors = scaleOrdinal(schemeSet3);
+let colors = d3.scaleOrdinal(d3.schemeSet3);
 let mappedTags: TagBubbleData[] = [];
 let colorValues: string[] = [];
 let colorMap: Record<string, string> = {};
@@ -67,16 +62,15 @@ $: {
 			<Option value={'layer'}>Layer</Option>
     </Select>		
 	</div>
-	Visualize view, implementation in progress
 	<BubbleChart
+		class="chart-container"
 		chartConfig={{
 			colorByProp: colorBy,
 			groupByProp: groupBy,
 			colorMap,
 		}}		
 		data={mappedTags}
-		{svgWidth}
-		{svgHeight}
+		on:bubbleClicked={event => push(`/tags/${event.detail.id}`)}
 	/>
 	<ColorLegend {colorMap} />
 </div>
@@ -92,4 +86,5 @@ $: {
 .control-section {
 	margin-bottom: 1em;
 }
+
 </style>
