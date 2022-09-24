@@ -42,7 +42,7 @@
 
 <style>
 	.project {
-		height: '100%';
-		overflow: 'auto';
+		height: 100%;
+		overflow: auto;
 	}
 </style>

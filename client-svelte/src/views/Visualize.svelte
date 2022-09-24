@@ -51,12 +51,12 @@ $: {
 	
 <div class="visualize">
 	<div class="control-section">
-    <Select value={colorBy} label="Color By" on:SMUISelect:change={event => colorBy=event.detail.value}>
+    <Select style="width: 20em" value={colorBy} label="Color By" on:SMUISelect:change={event => colorBy=event.detail.value}>
 			<Option value={'category'}>Category</Option>
 			<Option value={'layer'}>Layer</Option>
 			<Option value={'value'}>Size</Option>
     </Select>	
-    <Select value={groupBy} label="Group By" on:SMUISelect:change={event => groupBy=event.detail.value}>
+    <Select style="width: 20em" value={groupBy} label="Group By" on:SMUISelect:change={event => groupBy=event.detail.value}>
 			<Option value={''}>None</Option>
 			<Option value={'category'}>Category</Option>
 			<Option value={'layer'}>Layer</Option>
@@ -81,6 +81,7 @@ $: {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 }
 
 .control-section {
