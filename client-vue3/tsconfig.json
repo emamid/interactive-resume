@@ -1,6 +1,32 @@
 {
-  "extends": "@quasar/app-vite/tsconfig-preset",
   "compilerOptions": {
-    "baseUrl": "."
-  }
+    "target": "ESNext",
+    "module": "ESNext",
+    "strict": true,
+    "jsx": "preserve",
+    "moduleResolution": "Node",
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+		"baseUrl": ".",
+		"paths": {
+			"@/*": [
+				"src/*"
+			]
+		},
+    "lib": ["ESNext", "DOM"],
+    "useDefineForClassFields": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+		"typeRoots": [
+			"./src/@types",
+			"./node_modules/@types"
+		],
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

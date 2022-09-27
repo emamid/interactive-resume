@@ -1,37 +1,33 @@
 {
-  "name": "client-vue3",
-  "version": "0.0.1",
-  "description": "Interactive Resume",
-  "productName": "Interactive Resume",
-  "author": "David Emami <emamid@gmail.com>",
+  "name": "nebula-client",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "lint": "eslint --ext .js,.ts,.vue ./",
-    "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
-    "test": "echo \"No test specified\" && exit 0"
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^0.21.1",
-    "@quasar/extras": "^1.0.0",
-    "quasar": "^2.6.0",
-    "vue": "^3.0.0",
-    "vue-router": "^4.0.0"
+    "@mdi/font": "^7.0.96",
+    "axios": "^0.27.2",
+    "d3": "^7.6.1",
+    "lodash": "^4.17.21",
+    "remove": "^0.1.5",
+    "vue": "^3.2.37",
+    "vue-material-design-icons": "^5.1.2",
+    "vue-router": "^4.1.5",
+    "vuetify": "^3.0.0-beta.10"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.10.0",
-    "@typescript-eslint/parser": "^5.10.0",
-    "eslint": "^8.10.0",
-    "eslint-plugin-vue": "^9.0.0",
-    "eslint-config-prettier": "^8.1.0",
-    "prettier": "^2.5.1",
-    "@types/node": "^12.20.21",
-    "@quasar/app-vite": "^1.0.0",
-    "autoprefixer": "^10.4.2",
-    "typescript": "^4.5.4"
-  },
-  "engines": {
-    "node": "^18 || ^16 || ^14.19",
-    "npm": ">= 6.13.4",
-    "yarn": ">= 1.21.1"
+    "@types/d3": "^7.4.0",
+    "@types/lodash": "^4.14.184",
+    "@vitejs/plugin-vue": "^3.0.3",
+    "sass": "^1.54.8",
+    "typescript": "^4.6.4",
+    "url": "^0.11.0",
+    "vite": "^3.0.7",
+    "vite-tsconfig-paths": "^3.5.0",
+    "vue-tsc": "^0.39.5"
   }
 }
