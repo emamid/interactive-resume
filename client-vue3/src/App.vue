@@ -11,11 +11,11 @@
 				<menu-item title="Svelte"/>
 			</v-list>
 		</v-navigation-drawer>
-		<v-app-bar dark color="primary" app>
+		<v-toolbar dark color="primary" app>
 			<v-app-bar-nav-icon @click.stop="drawerOpen = !drawerOpen"></v-app-bar-nav-icon>
-			<v-toolbar-title v-text="title"/>
+			<v-toolbar-title>Interactive Resume</v-toolbar-title>
 			<v-spacer></v-spacer>
-		</v-app-bar>
+		</v-toolbar>
 		<v-main>
 			<v-container class="fill-height app-main-container" fluid>
 				<router-view />
@@ -24,20 +24,15 @@
 	</v-app>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref } from 'vue';
+import axios from 'axios';
+
 import menuItem from '@/components/MenuItem.vue';
 
-export default {
-	name: 'App',
-	components: {
-		'menu-item': menuItem
-	},
-	data() {
-		return {
-			drawerOpen: false
-		}
-	},
-}
+axios.defaults.withCredentials = true;
+
+const drawerOpen = ref(false);
 </script>
 
 <style>

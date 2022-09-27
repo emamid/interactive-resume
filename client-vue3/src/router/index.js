@@ -1,6 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 import Home from '@/views/Home.vue';
+import Employer from '@/views/Employer.vue';
+import Project from '@/views/Project.vue';
 import Projects from '@/views/Projects.vue';
 import Tags from '@/views/Tags.vue';
 import Visualize from '@/views/Visualize.vue';
@@ -12,9 +14,19 @@ const routes = [
 		component: Home,
 	},
 	{
+		path: '/employers/:id',
+		name: 'Employer',
+		component: Employer,
+	},
+	{
 		path: '/projects',
 		name: 'Projects',
 		component: Projects,
+	},
+	{
+		path: '/projects/:id',
+		name: 'Project',
+		component: Project,
 	},
 	{
 		path: '/tags',
@@ -29,6 +41,6 @@ const routes = [
 ];
 
 export default () => createRouter({
-	history: createWebHistory(),
+	history: createWebHashHistory(),
 	routes:  routes,
 });
