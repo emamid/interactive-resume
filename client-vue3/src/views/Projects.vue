@@ -20,7 +20,7 @@
       >
         <td><YearRange :startDate="project.startDate" :endDate="project.endDate" /></td>
 				<LinkCell :path="`./#/projects/${project.id}`" :text="project.name" />
-				<LinkCell :path="`./#/employers/${project.Employer.id}`" :text="project.Employer.name" />
+				<LinkCell :path="`./#/employers/${project.employerID}`" :text="project.Employer.name" />
       </tr>
     </tbody>
   </v-table>
