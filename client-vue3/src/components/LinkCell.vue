@@ -3,5 +3,8 @@
 </template>
 
 <script setup lang="ts">
-	const { path, text } = defineProps(['path', 'text']);
+	const { path, text } = defineProps<{
+		path: string,
+		text: string,
+	}>();
 </script>

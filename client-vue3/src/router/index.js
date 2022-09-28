@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue';
 import Employer from '@/views/Employer.vue';
 import Project from '@/views/Project.vue';
 import Projects from '@/views/Projects.vue';
+import Tag from '@/views/Tag.vue';
 import Tags from '@/views/Tags.vue';
 import Visualize from '@/views/Visualize.vue';
 
@@ -32,6 +33,11 @@ const routes = [
 		path: '/tags',
 		name: 'Tags',
 		component: Tags,
+	},
+	{
+		path: '/tags/:id',
+		name: 'Tag',
+		component: Tag,
 	},
 	{
 		path: '/visualize',
