@@ -12,9 +12,8 @@
 		<TagList :tags="project?.Tags || []" chips />
 		<div v-html="project?.pageContent" />
 		<br />
+		<ImageDialog :image="dialogImage" v-model:open="imageDialogOpen"/>
 		<ImageGallery :images="project?.Images || []" @clicked="imageClicked"/>
-		<div>{{JSON.stringify(dialogImage)}}</div>
-		<div>{{JSON.stringify(imageDialogOpen)}}</div>
 	</div>
 </template>
 
@@ -24,6 +23,7 @@ import { useRoute } from 'vue-router';
 
 import getProject from '@/api/axios/getProject';
 import { Image, Project } from '@/api/types';
+import ImageDialog from '@/components/ImageDialog.vue';
 import ImageGallery from '@/components/ImageGallery.vue';
 import TagList from '@/components/TagList.vue';
 import YearRange from '@/components/YearRange.vue';
@@ -33,6 +33,11 @@ const { params: { id } } = useRoute()
 const imageClicked = (image: Image) => {
 	dialogImage.value = image;
 	imageDialogOpen.value = true;
+}
+
+const imageDialogClosed = () => {
+	imageDialogOpen.value = false;
+	dialogImage.value = undefined;
 }
 
 const project = ref<Project>();

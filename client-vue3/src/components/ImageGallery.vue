@@ -1,5 +1,5 @@
 <template>
-	<v-div v-if="images?.length">
+	<div v-if="images?.length">
 		<h3>Gallery</h3>
 		<v-row>
 			<v-col
@@ -10,7 +10,7 @@
 				<ImageCard :image="image" @clicked="() => imageClicked(image)"/>
 			</v-col>
 		</v-row>
-	</v-div>
+	</div>
 </template>
 
 <script setup lang="ts">
