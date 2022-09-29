@@ -18,7 +18,6 @@
 	}());
 </script>
 
-
 <div class="tag">
 	<div class="mdc-typography--headline5">{tag?.name}</div>
 	<LayoutGrid>
