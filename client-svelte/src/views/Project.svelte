@@ -23,7 +23,7 @@
 	<div class="mdc-typography--headline5">
 		{project?.name}
 		{#if !project?.isPersonal}
-		{' '}at{' '}
+		{' at '}
 		<a href={`./#/employers/${project?.employerID}`}>{project?.Employer.name}</a>
 		{' '}<YearRange startDate={project?.startDate} endDate={project?.endDate}	withParens />
 		{/if}

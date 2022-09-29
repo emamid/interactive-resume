@@ -21,11 +21,11 @@
 
 <script setup lang="ts">
 	import { useRouter } from 'vue-router';
-	import { Tag } from '@/api/types';
+	import { BaseTag } from '@/api/types';
 
 	const { chips, tags } = defineProps<{
 		chips?: boolean,
-		tags: Tag[],
+		tags: BaseTag[],
 	}>();
 	const router = useRouter();
 	const goToTag = (id: string) => router.push(`/tags/${id}`);

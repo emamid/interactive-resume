@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 import getTag from '@/api/axios/getTag';
@@ -33,11 +33,7 @@ const router = useRouter();
 
 const tag = ref<Tag>();
 const goToProject = (id: string) => router.push(`/projects/${id}`);
-
-onMounted(async () => {
-	tag.value = await getTag(Array.isArray(id) ? id[0] : id);
-})
-
+tag.value = await getTag(Array.isArray(id) ? id[0] : id);
 </script>
 
 <style>

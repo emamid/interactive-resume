@@ -18,7 +18,9 @@
 		</v-toolbar>
 		<v-main>
 			<v-container class="fill-height app-main-container" fluid>
-				<router-view />
+				<Suspense>
+					<router-view />
+				</Suspense>
 			</v-container>
 		</v-main>
 	</v-app>

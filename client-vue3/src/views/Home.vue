@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-	import { onMounted, ref } from 'vue';
+	import { ref } from 'vue';
 
 	import getMyself from '@/api/axios/getMyself';
 	import { Myself } from '@/api/types'	
@@ -19,11 +19,7 @@
 	import PersonalProjects from '@/components/PersonalProjects.vue';
 	
 	const myself = ref<Myself>();
-
-	onMounted(async () => {
-		myself.value = await getMyself();
-	})
-
+	myself.value = await getMyself();
 </script>
 
 <style>

@@ -1,15 +1,17 @@
 <template>
-	<span v-if="startYear || endYear">{{ withParens ? `($yearsStr)` : yearsStr }}</span>
+	<span v-if="startDate || endDate">{{ withParens ? `(${yearsStr})` : yearsStr }}</span>
 	<span v-else />
 </template>
 
 <script setup lang="ts">
+	import { computed } from 'vue';
+
 	const { startDate, endDate, withParens } = defineProps<{
 		startDate?: string,
 		endDate?: string,
 		withParens?: boolean,
 	}>();
-	const startYear = startDate ? new Date(startDate).getFullYear() : null;
-  const endYear = endDate ? new Date(endDate).getFullYear() : null;
-	const yearsStr = (startYear === endYear) ? startYear : (endYear ? `${startYear} - ${endYear}` : `${startYear} -`);
+	let startYear = startDate ? new Date(startDate || '').getFullYear() : null;
+  let endYear = endDate ? new Date(endDate).getFullYear() : null;
+	let yearsStr = (startYear === endYear) ? startYear : (endYear ? `${startYear} - ${endYear}` : `${startYear} -`);
 </script>

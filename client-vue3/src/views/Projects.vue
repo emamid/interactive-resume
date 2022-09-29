@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 
 import getProjects from '@/api/axios/getProjects';
 import { Project } from '@/api/types';
@@ -37,11 +37,7 @@ import LinkCell from '@/components/LinkCell.vue';
 import YearRange from '@/components/YearRange.vue';
 
 const projects = ref<Project[]>([]);
-
-onMounted(async () => {
-	projects.value = await getProjects();
-})
-
+projects.value = await getProjects();
 </script>
 
 <style>
