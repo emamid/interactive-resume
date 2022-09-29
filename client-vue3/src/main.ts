@@ -15,6 +15,7 @@ import getRouter from './router';
 // CSS
 import '@mdi/font/css/materialdesignicons.css';
 import 'vuetify/styles';
+import './app.css';
 
 const app = createApp(App);
 

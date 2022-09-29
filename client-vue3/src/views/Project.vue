@@ -8,9 +8,13 @@
 			<a :href="`./#/employers/${project?.employerID}`">{{project?.Employer?.name}}</a>
 			{{' '}}<YearRange :startDate="project?.startDate" :endDate="project?.endDate" withParens/>
 		</h2>
+		<br />
 		<TagList :tags="project?.Tags || []" chips />
 		<div v-html="project?.pageContent" />
 		<br />
+		<ImageGallery :images="project?.Images || []" @clicked="imageClicked"/>
+		<div>{{JSON.stringify(dialogImage)}}</div>
+		<div>{{JSON.stringify(imageDialogOpen)}}</div>
 	</div>
 </template>
 
@@ -19,13 +23,21 @@ import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 import getProject from '@/api/axios/getProject';
-import { Project } from '@/api/types';
+import { Image, Project } from '@/api/types';
+import ImageGallery from '@/components/ImageGallery.vue';
 import TagList from '@/components/TagList.vue';
 import YearRange from '@/components/YearRange.vue';
 
 const { params: { id } } = useRoute()
 
+const imageClicked = (image: Image) => {
+	dialogImage.value = image;
+	imageDialogOpen.value = true;
+}
+
 const project = ref<Project>();
+const dialogImage = ref<Image>();
+const imageDialogOpen = ref<boolean>(false);
 
 project.value = await getProject(Array.isArray(id) ? id[0] : id);
 

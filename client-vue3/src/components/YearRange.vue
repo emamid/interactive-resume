@@ -4,8 +4,6 @@
 </template>
 
 <script setup lang="ts">
-	import { computed } from 'vue';
-
 	const { startDate, endDate, withParens } = defineProps<{
 		startDate?: string,
 		endDate?: string,
