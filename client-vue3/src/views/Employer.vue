@@ -20,8 +20,6 @@ import YearRange from '@/components/YearRange.vue';
 
 const { params: { id } } = useRoute()
 
-// const { id } = defineProps(['id']);
-
 const employer = ref<Employer>();
 
 onMounted(async () => {

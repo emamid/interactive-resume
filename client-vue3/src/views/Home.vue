@@ -1,11 +1,13 @@
 <template>
-	<div v-html="myself?.pageContent" />
-	<br />
-	<h4>Employment History</h4>
-	<Employers />
-	<br />
-	<h4>Personal Projects</h4>
-	<PersonalProjects :projects="myself?.Projects" />
+	<div class="home">
+		<div v-html="myself?.pageContent" />
+		<br />
+		<h4>Employment History</h4>
+		<Employers />
+		<br />
+		<h4>Personal Projects</h4>
+		<PersonalProjects :projects="myself?.Projects" />
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -23,3 +25,10 @@
 	})
 
 </script>
+
+<style>
+	.home {
+		height: 100%;
+		overflow: auto;
+	}
+</style>

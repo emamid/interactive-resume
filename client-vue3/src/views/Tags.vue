@@ -19,7 +19,6 @@ onMounted(async () => {
 
 </script>
 
-
 <style>
 	.tags {
 		height: 100%;
