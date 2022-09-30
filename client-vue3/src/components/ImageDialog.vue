@@ -16,8 +16,6 @@
 		emit('update:open', open);
 	}
 
-	const maxHeight = window.innerHeight * 0.9;
-
 	const { image, open } = defineProps<{
 		image?: Image,
 		open: boolean
