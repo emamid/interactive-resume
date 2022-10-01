@@ -40,10 +40,12 @@ function initApp() {
 
     // Path to client (production build)
 	console.log(process.env.RESUME_DATA_DIR);
+    app.use('/icons', express.static(`${process.env.RESUME_DATA_DIR}/icons`));
     app.use('/images', express.static(`${process.env.RESUME_DATA_DIR}/images`));
     app.use('/thumbnails', express.static(`${process.env.RESUME_DATA_DIR}/thumbnails`));    
     app.use('/react_client', express.static(process.env.REACT_CLIENT_DIR));
 		app.use('/svelte_client', express.static(process.env.SVELTE_CLIENT_DIR));
+		app.use('/vue3_client', express.static(process.env.VUE3_CLIENT_DIR));
 		app.use('/', express.static(`${process.env.RESUME_DATA_DIR}/redirect`));
 };
 

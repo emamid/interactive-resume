@@ -7,8 +7,8 @@
 				<menu-item to="/tags" icon="mdi-tag" title="Tags"/>
 				<menu-item to="/visualize" icon="mdi-chart-bubble" title="Visualize"/>
 				<v-divider />
-				<menu-item title="React"/>
-				<menu-item title="Svelte"/>
+				<menu-item imageSrc="/icons/react_logo.svg" href="/react_client" title="React"/>
+				<menu-item imageSrc="/icons/svelte_logo.svg" href="/svelte_client" title="Svelte"/>
 			</v-list>
 		</v-navigation-drawer>
 		<v-toolbar dark color="primary" app>

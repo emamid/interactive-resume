@@ -21,6 +21,11 @@ export default defineConfig({
 				ws: true,
 				changeOrigin: true
 			},
+			'^/icons': {
+				target: 'http://localhost:3001',
+				ws: true,
+				changeOrigin: true
+			},
 			'^/images': {
 				target: 'http://localhost:3001',
 				ws: true,

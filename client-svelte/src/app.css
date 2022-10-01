@@ -1,3 +1,7 @@
+:root {
+  --mdc-theme-primary: #ff3e00;
+}
+
 html {
 	height: 100%;
 }

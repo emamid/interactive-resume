@@ -52,7 +52,13 @@ declare module '@mui/styles/defaultTheme' {
 	interface DefaultTheme extends Theme {}
 }
 
-const theme = createTheme();
+const theme = createTheme({
+	palette: {
+		primary: {
+			main: '#00d8ff'
+		}
+	}
+});
 
 const useStyles = makeStyles((theme) => ({
 	appFrame: {
@@ -131,8 +137,17 @@ const App = () => {
 						window.location.href = '/svelte_client'
 					}}
 						>
-					<img className="client-logo" alt="logo" src="./svelte_logo.svg" height="24px" width="24px" />
+					<img className="client-logo" alt="logo" src="/icons/svelte_logo.svg" height="24px" width="24px" />
 					<ListItemText primary="Svelte" />
+				</ListItem>
+				<ListItem
+					button
+					onClick={() => {
+						window.location.href = '/vue3_client'
+					}}
+						>
+					<img className="client-logo" alt="logo" src="/icons/vue_logo.svg" height="24px" width="24px" />
+					<ListItemText primary="Vue 3" />
 				</ListItem>
 			</List>
 		</Drawer>
