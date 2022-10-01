@@ -29,7 +29,7 @@
 		y={data.r * -0.8}
 	>
 		<body
-		  style={`height: ${data.r * 1.6}; width: ${data.r * 1.6}`}
+		  style={`height: ${data.r * 1.6}px; width: ${data.r * 1.6}px`}
 			class="bubble"
 			title={data.name}
 			on:click={bubbleClicked}

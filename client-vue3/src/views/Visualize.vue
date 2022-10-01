@@ -22,16 +22,12 @@
 				/>
 			</v-col>
 		</v-row>
-		<!-- <BubbleChart
+		<BubbleChart
 			class="chart-container"
-			chartConfig={{
-				colorByProp: colorBy,
-				groupByProp: groupBy,
-				colorMap,
-			}}		
-			data={mappedTags}
-			on:bubbleClicked={event => push(`/tags/${event.detail.id}`)}
-		/> -->
+			:chartConfig="{	colorByProp: colorBy,	colorMap, groupByProp: groupBy }"
+			:data="mappedTags"
+			@bubbleClicked="data => router.push(`/tags/${data.id}`)"
+		/>
 		<ColorLegend :colorMap="colorMap" />
 	</div>
 </template>
@@ -39,17 +35,21 @@
 <script setup lang="ts">
 import * as d3 from 'd3';
 import { uniq } from 'lodash';
-import { computed, ref, watch } from 'vue';
+import { computed, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 import type { ProjectTags } from '@/api/types';
 import getProjectTags from '@/api/axios/getProjectTags';
 import ColorLegend from '@/components/ColorLegend.vue';
 import type { BubbleData } from '@/components/BubbleChart/types';
+import BubbleChart from '@/components/BubbleChart/index.vue';
 
 interface TagBubbleData extends BubbleData {
 	value: number,
 	r: number,
 }
+
+const router = useRouter();
 
 const colorByItems = [{
 	value: 'category',
@@ -79,13 +79,15 @@ const groupBy = ref<string>('');
 const projectTags = ref<ProjectTags>([]);
 projectTags.value = await getProjectTags();
 
-const mappedTags = projectTags.value?.map((tag) => ({
+const mappedTags: TagBubbleData[] = projectTags.value?.map((tag) => ({
 	id: tag.tagID,
 	name: tag.Tag.name,
 	category: tag.Tag.category,
 	layer: tag.Tag.layer,
 	value: tag.projectCount,
-	r: 4 + tag.projectCount * 11
+	r: 4 + tag.projectCount * 11,
+	x: 0,
+	y: 0,
 })) || [];
 const colorValues = computed(() => uniq(mappedTags.map((tag: any) => tag[colorBy.value])).sort());
 const colorMap = computed(() => colorValues.value.reduce(
@@ -107,7 +109,12 @@ const colorMap = computed(() => colorValues.value.reduce(
 	justify-content: space-between;
 }
 
+.chart-container {
+	flex-grow: 1;
+}
+
 .control-section {
+	flex-grow: 0;
 	margin-bottom: 1em;
 }
 

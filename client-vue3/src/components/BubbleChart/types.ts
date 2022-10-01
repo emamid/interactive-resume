@@ -1,12 +1,15 @@
-export interface BubbleData {
+interface MinimumBubbleData {
 	id: string,
 	name: string,
 	value: number,
 	r: number,
-	x?: number,
-	y?: number,
+	x: number,
+	y: number,
 }
 
+type AnyBubbleData = Record<string, any>;
+
+export interface BubbleData extends AnyBubbleData, MinimumBubbleData {};
 export interface Extents {
 	minX?: number;
 	minY?: number;
