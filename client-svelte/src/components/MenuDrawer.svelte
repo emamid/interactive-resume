@@ -24,7 +24,7 @@
 			<MenuDrawerItem href="./#/visualize" icon="bubble_chart" text="Visualize" on:navigated={navigated} />
 			<Separator />
 			<MenuDrawerItem href="/react_client" imageSrc="/icons/react_logo.svg" text="React" />
-			<MenuDrawerItem href="/react_vue3" imageSrc="/icons/vue_logo.svg" text="Vue 3" />
+			<MenuDrawerItem href="/vue3_client" imageSrc="/icons/vue_logo.svg" text="Vue 3" />
 		</List>
 	</Content>
 </Drawer>
