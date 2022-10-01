@@ -28,7 +28,7 @@
 				stroke="black"
 				stroke-dasharray="2, 2"
 			/>
-		</svg>
+		</svg>		
 	</div>
 </template>
 
@@ -98,7 +98,7 @@
 	)
 );
 const maxExtents = computed(() => reduce(
-	groups,
+	groups.value,
 	(currentExtents, group) => ({
 		minX: Math.min(currentExtents.minX, group.minX),
 		minY: Math.min(currentExtents.minY, group.minY),

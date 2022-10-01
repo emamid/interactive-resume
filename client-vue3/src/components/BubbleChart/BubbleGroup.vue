@@ -16,8 +16,8 @@
 		</g>
 		<text
 			v-if="data?.title !== 'All'"
-			x={16}
-			y={24}
+			x="16"
+			y="24"
 			class="bubble-group-caption"
 		>
 			{{data.title || 'Other'}}
