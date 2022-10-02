@@ -4,9 +4,9 @@
 			{{project?.name}}
 			<template v-if="!project?.isPersonal">
 				{{' at '}}
+				<a :href="`./#/employers/${project?.employerID}`">{{project?.Employer?.name}}</a>
+				{{' '}}<YearRange :startDate="project?.startDate" :endDate="project?.endDate" withParens/>
 			</template>
-			<a :href="`./#/employers/${project?.employerID}`">{{project?.Employer?.name}}</a>
-			{{' '}}<YearRange :startDate="project?.startDate" :endDate="project?.endDate" withParens/>
 		</h2>
 		<br />
 		<TagList :tags="project?.Tags || []" chips />
