@@ -9,19 +9,21 @@ const Tags = () => {
 	const { data: tags } = useGetTags();
 
 	return (
-		<Grid container spacing={1} rowSpacing="1em" sm={true}>
-			{tags?.map((tag) => (
-				<Grid item key={tag.id}>
-					<Button
-						variant="outlined"
-						color="primary"
-						href={`./#/tags/${tag.id}`}
-					>
-						{tag.name}
-					</Button>
-				</Grid>
-			))}
-		</Grid>
+		<div className="scrollable-view">
+			<Grid container spacing={1} rowSpacing="1em" sm={true}>
+				{tags?.map((tag) => (
+					<Grid item key={tag.id}>
+						<Button
+							variant="outlined"
+							color="primary"
+							href={`./#/tags/${tag.id}`}
+						>
+							{tag.name}
+						</Button>
+					</Grid>
+				))}
+			</Grid>
+		</div>
 	);
 };
 

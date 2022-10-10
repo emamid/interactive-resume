@@ -19,7 +19,7 @@ const Tag = ({ match }: TagProps) => {
 	const { data: tag } = useGetTag(match.params.tagID);
 
 	return (
-		<div>
+		<div className="scrollable-view">
 			<Typography component="h5" variant="h5" gutterBottom={true}>
 				{tag?.name}
 			</Typography>

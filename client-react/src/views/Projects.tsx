@@ -14,7 +14,7 @@ const Projects = () => {
 	const { data: projects } = useGetProjects();
 
 	return (
-		<div style={{ overflow: 'auto', height: '100%' }}>
+		<div className="scrollable-view">
 			<Table size="small" style={{ height: '100%' }}>
 				<TableHead>
 					<TableRow>

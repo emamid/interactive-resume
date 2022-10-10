@@ -78,7 +78,7 @@ const Home = () => {
 		</Table>
 	);
 	return (
-		<div style={{ overflow: 'auto', height: '100%' }}>
+		<div className="scrollable-view">
 			<HTMLContent html={myself?.pageContent} />
 			<Typography>Employment History</Typography>
 			{employerTable}

@@ -37,3 +37,8 @@ body {
 .client-logo {
 	margin-right: 32px;
 }
+
+.scrollable-view {
+	height: 100%;
+	overflow: auto;
+}
