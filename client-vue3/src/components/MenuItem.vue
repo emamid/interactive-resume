@@ -1,12 +1,10 @@
 <template>
 	<v-list-item :to="to" :href=href>
-		<v-list-item>
-			<v-list-item-title v-text="title" />
-			<template v-slot:prepend>
-				<v-icon v-if="icon">{{icon}}</v-icon>
-				<v-img v-if="imageSrc" class="menu-image" :src="imageSrc" height="24px" width="24px" />
-			</template>
-		</v-list-item>
+		<v-list-item-title v-text="title" active />
+		<template v-slot:prepend>
+			<v-icon v-if="icon">{{icon}}</v-icon>
+			<v-img v-if="imageSrc" class="menu-image" :src="imageSrc" height="24px" width="24px" />
+		</template>
 	</v-list-item>
 </template>
 
