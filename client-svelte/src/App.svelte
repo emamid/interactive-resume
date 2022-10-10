@@ -42,7 +42,7 @@ const toggleMenuDrawer = () => menuDrawerOpen = !menuDrawerOpen;
 		</Section>
 	</Row>
 </TopAppBar>
-<AppContent>
+<AppContent class="app-content">
 	<main>
 		<Router {routes} />
 	</main>
@@ -50,4 +50,7 @@ const toggleMenuDrawer = () => menuDrawerOpen = !menuDrawerOpen;
 
 
 <style>
+	main {
+		height: 100%;
+	}
 </style>

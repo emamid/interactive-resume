@@ -79,3 +79,7 @@ main {
 .chart-container {
 	flex-grow: 1;
 }
+
+.app-content {
+	overflow: auto;
+}

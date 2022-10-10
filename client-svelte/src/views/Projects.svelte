@@ -37,6 +37,5 @@
 <style>
 	.projects {
 		height: 100%;
-		overflow: auto;
 	}
 </style>

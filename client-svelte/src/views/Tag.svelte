@@ -37,6 +37,5 @@
 <style>
 	.tag {
 		height: 100%;
-		overflow: auto;
 	}
 </style>

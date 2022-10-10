@@ -24,7 +24,6 @@ let myself: Myself = null;
 <style>
 	.home {
 		height: 100%;
-		overflow: auto;
 	}
 	.personal-projects-title {
 		margin-top: 2rem;
