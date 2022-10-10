@@ -16,8 +16,8 @@ interface TagBubbleData extends BubbleData {
 }
 
 let projectTags: ProjectTags = [];
-let colorBy = 'category';
-let groupBy: string = '';
+let colorBy = localStorage.getItem('visualize-colorBy') || 'category';
+let groupBy: string = localStorage.getItem('visualize-groupBy') || '';
 
 let colors = d3.scaleOrdinal(d3.schemeSet3);
 let mappedTags: TagBubbleData[] = [];
@@ -25,6 +25,8 @@ let colorValues: string[] = [];
 let colorMap: Record<string, string> = {};
 
 $: {
+	localStorage.setItem('visualize-colorBy', colorBy);
+	localStorage.setItem('visualize-groupBy', groupBy);
 	mappedTags = projectTags?.map((tag) => ({
 		id: tag.tagID,
 		name: tag.Tag.name,

@@ -20,8 +20,8 @@ const Visualize = ({ history }: VisualizeProps) => {
 
 	const chartDiv = useRef<HTMLDivElement>(null);
 
-	const [colorBy, setColorBy] = useState<string>('category');
-	const [groupBy, setGroupBy] = useState<string | false>(false);
+	const [colorBy, setColorBy] = useState<string>(localStorage.getItem('visualize-colorBy') || 'category');
+	const [groupBy, setGroupBy] = useState<string>(localStorage.getItem('visualize-groupBy') || '');
 
 	// Ensure non-zero dimensions if rendering before everything finalizes
 	const svgWidth = (chartDiv.current && chartDiv.current.clientWidth) || 128;
@@ -64,9 +64,10 @@ const Visualize = ({ history }: VisualizeProps) => {
 					<InputLabel>Color by</InputLabel>
 					<Select
 						value={colorBy}
-						onChange={(event) =>
-							setColorBy(event.target.value || '')
-						}
+						onChange={(event) => {
+							localStorage.setItem('visualize-colorBy', event?.target?.value);
+							setColorBy(event.target.value || '');
+						}}
 						label="Color by"
 					>
 						<MenuItem value={'category'}>Category</MenuItem>
@@ -82,11 +83,12 @@ const Visualize = ({ history }: VisualizeProps) => {
 					<Select
 						value={groupBy}
 						onChange={(event) => {
+							localStorage.setItem('visualize-groupBy', event?.target?.value);
 							setGroupBy(event?.target?.value as string);
 						}}
 						label="Group by"
 					>
-						<MenuItem value={0}>None</MenuItem>
+						<MenuItem value={''}>None</MenuItem>
 						<MenuItem value={'category'}>Category</MenuItem>
 						<MenuItem value={'layer'}>Layer</MenuItem>
 					</Select>

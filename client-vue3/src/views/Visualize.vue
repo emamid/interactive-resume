@@ -35,7 +35,7 @@
 <script setup lang="ts">
 import * as d3 from 'd3';
 import { uniq } from 'lodash';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 import type { ProjectTags } from '@/api/types';
@@ -74,10 +74,13 @@ const groupByItems = [{
 }];
 const colors = d3.scaleOrdinal(d3.schemeSet3);
 
-const colorBy = ref<string>('category');
-const groupBy = ref<string>('');
+const colorBy = ref<string>(localStorage.getItem('visualize-colorBy') || 'category');
+const groupBy = ref<string>(localStorage.getItem('visualize-groupBy') || '');
 const projectTags = ref<ProjectTags>([]);
 projectTags.value = await getProjectTags();
+
+watch(colorBy, newColorBy => localStorage.setItem('visualize-colorBy', newColorBy));
+watch(groupBy, newGroupBy => localStorage.setItem('visualize-groupBy', newGroupBy));
 
 const mappedTags: TagBubbleData[] = projectTags.value?.map((tag) => ({
 	id: tag.tagID,
