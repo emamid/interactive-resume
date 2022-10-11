@@ -8,7 +8,9 @@
 				<v-col
 					v-for="project in tag?.Projects"
 					:key="project.id"
-					cols="3"
+					md="3"
+					sm="6"
+					cols="12"
 				>
 					<v-card
 						:title="project.name"
