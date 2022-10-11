@@ -16,8 +16,8 @@
 			<v-toolbar-title>Interactive Resume</v-toolbar-title>
 			<v-spacer></v-spacer>
 			<v-select
-			  style="padding-right: 2em; max-width: 11em"
-				variant="underlined"
+			  style="padding-right: 2em; width: 144px; max-width: 144px; min-width: 144px"
+				variant="plain"
 				:items="frameworkItems"
 				item-title="text"
 				item-value="value"

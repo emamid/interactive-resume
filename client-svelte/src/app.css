@@ -83,3 +83,27 @@ main {
 .app-content {
 	overflow: auto;
 }
+
+.mdc-top-app-bar__section--align-end {
+	padding-right: 0;
+}
+
+.mdc-top-app-bar__section--align-end .mdc-line-ripple {
+	display: none;
+}
+
+.framework-select {
+	padding-right: 2em; 
+	max-width: 11em; 
+	height: 48px; 
+	width: 112px;
+	margin-top: -8px;
+}
+
+.framework-select svg {
+	fill: white;
+}
+
+.framework-select .mdc-select__selected-text-container .mdc-select__selected-text {
+	color: white;
+}

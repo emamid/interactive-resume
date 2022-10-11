@@ -44,3 +44,12 @@ p {
     background-color: #f9f9f9;
   }
 }
+
+html {
+	overflow-y: hidden;
+	width: 100%;
+}
+
+.v-field__append-inner {
+	margin-top: 5px;
+}
