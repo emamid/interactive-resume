@@ -42,3 +42,23 @@ body {
 	height: 100%;
 	overflow: auto;
 }
+
+img.framework-logo {
+	height: 24px;
+	width: 24px;
+	padding-right: 32px;
+}
+
+.framework-select {
+	width: 192px;
+	margin-right: 24px;
+	margin-top: -8px;
+}
+
+li.framework-select-item {
+  padding: 6px 0 6px 16px;
+}
+
+.MuiOutlinedInput-notchedOutline {
+	display: none;
+}

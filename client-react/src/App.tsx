@@ -22,11 +22,13 @@ import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 import HomeIcon from '@mui/icons-material/Home';
-import MapIcon from '@mui/icons-material/Map';
+// import MapIcon from '@mui/icons-material/Map';
 import MenuIcon from '@mui/icons-material/Menu';
 import ProjectIcon from '@mui/icons-material/Build';
 import TagIcon from '@mui/icons-material/LocalOffer';
@@ -168,9 +170,18 @@ const App = () => {
 						>
 							<MenuIcon />
 						</IconButton>
-						<Typography variant="h6" color="inherit" noWrap>
+						<Typography variant="h6" color="inherit" noWrap sx={{flexGrow:1}}>
 							Interactive Resume
 						</Typography>
+							<Select
+								value={'react'}
+								onChange={event => window.location.pathname = `/${event.target.value}_client/`}
+								className="framework-select"
+							>
+								<MenuItem value={'react'} className="framework-select-item"><img alt="React" src="/icons/react_logo.svg" className="framework-logo" />React</MenuItem>
+								<MenuItem value={'svelte'} className="framework-select-item"><img alt="Svelte" src="/icons/svelte_logo.svg" className="framework-logo" />Svelte</MenuItem>
+								<MenuItem value={'vue3'} className="framework-select-item"><img alt="Vue 3" src="/icons/vue_logo.svg" className="framework-logo" />Vue 3</MenuItem>
+							</Select>
 					</Toolbar>
 				</AppBar>
 				{menuDrawer}
