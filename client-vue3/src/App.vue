@@ -32,8 +32,8 @@
 				</template>
 			</v-select>
 		</v-toolbar>
-		<v-main>
-			<v-container class="fill-height app-main-container" fluid>
+		<v-main style="overflow: auto; flex: inherit">
+			<v-container class="app-main-container" fluid>
 				<Suspense>
 					<router-view />
 				</Suspense>
@@ -76,8 +76,8 @@ const framework = ref('vue3');
 <style>
 
 .app-main-container {
-	display: flex; 
-	flex-direction: column;
+	/* display: flex; 
+	flex-direction: column; */
 }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<div class="projects">
-		<v-table density="compact">
+		<v-table density="compact" class="projects-table">
 			<thead>
 				<tr>
 					<th class="text-left">
@@ -43,6 +43,5 @@ projects.value = await getProjects();
 <style>
 	.projects {
 		height: 100%;
-		overflow: auto;
 	}
 </style>

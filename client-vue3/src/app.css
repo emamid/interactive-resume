@@ -45,11 +45,38 @@ p {
   }
 }
 
+.v-field__append-inner {
+	margin-top: 5px;
+}
+
 html {
 	overflow-y: hidden;
 	width: 100%;
+	height: 100%;
 }
 
-.v-field__append-inner {
-	margin-top: 5px;
+body {
+	height: 100%;
+}
+
+div#app {
+	height: 100%;
+}
+
+div.v-application {
+	height: 100% !important;
+	position: static !important;
+	display: block !important;
+}
+
+div.v-application__wrap {
+	min-height: 100%;
+	height: 100%;
+	position: static !important;
+	display: flex;
+	flex-direction: column;
+}
+
+div.app-main-container {
+	height: 100%;
 }
