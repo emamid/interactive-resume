@@ -1,14 +1,12 @@
-import React from 'react';
-
 import Typography from '@mui/material/Typography';
 
 import { RouteComponentProps } from 'react-router';
 
-import useGetEmployer from '../api/hooks/useGetEmployer';
+import useGetEmployer from '@/api/hooks/useGetEmployer';
 
-import HTMLContent from '../components/HTMLContent';
-import ReferenceList from '../components/ReferenceList';
-import YearRange from '../components/YearRange';
+import HTMLContent from '@/components/HTMLContent';
+import ReferenceList from '@/components/ReferenceList';
+import YearRange from '@/components/YearRange';
 
 interface EmployerRoute {
 	employerID: string;

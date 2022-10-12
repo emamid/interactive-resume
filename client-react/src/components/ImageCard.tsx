@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import { MouseEventHandler } from 'react';
 
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
-import { Image } from '../api/types';
+import { Image } from '@/api/types';
 
 interface ImageCardProps {
 	image: Image;

@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import { MouseEventHandler } from 'react';
 
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';

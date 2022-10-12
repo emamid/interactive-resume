@@ -1,11 +1,8 @@
-import React from 'react';
-
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-import ImageCard from '../components/ImageCard';
-
-import { Image } from '../api/types';
+import { Image } from '@/api/types';
+import ImageCard from '@/components/ImageCard';
 
 interface ImageEvent { (image: Image): void };
 

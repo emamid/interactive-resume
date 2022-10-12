@@ -1,9 +1,7 @@
-import React from 'react';
-
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 
-import useGetTags from '../api/hooks/useGetTags';
+import useGetTags from '@/api/hooks/useGetTags';
 
 const Tags = () => {
 	const { data: tags } = useGetTags();

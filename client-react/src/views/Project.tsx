@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 
 import { RouteComponentProps } from 'react-router';
 
-import useGetProject from '../api/hooks/useGetProject';
+import useGetProject from '@/api/hooks/useGetProject';
 
-import HTMLContent from '../components/HTMLContent';
-import YearRange from '../components/YearRange';
-import ImageGallery from '../components/ImageGallery';
-import ImageDialog from '../components/ImageDialog';
+import HTMLContent from '@/components/HTMLContent';
+import YearRange from '@/components/YearRange';
+import ImageGallery from '@/components/ImageGallery';
+import ImageDialog from '@/components/ImageDialog';
 
-import { Image } from '../api/types';
+import { Image } from '@/api/types';
 
 interface ProjectRoute {
 	projectID: string;

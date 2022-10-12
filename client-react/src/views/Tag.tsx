@@ -1,13 +1,11 @@
-import React from 'react';
-
 import { withRouter, RouteComponentProps } from 'react-router';
 
-import useGetTag from '../api/hooks/useGetTag';
+import useGetTag from '@/api/hooks/useGetTag';
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-import RoutableGridCard from '../components/RoutableGridCard';
+import RoutableGridCard from '@/components/RoutableGridCard';
 
 interface TagRoute {
 	tagID: string;

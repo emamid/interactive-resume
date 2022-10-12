@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router';
 
 import InputLabel from '@mui/material/InputLabel';
@@ -6,12 +6,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-import useGetProjectTags from '../api/hooks/useGetProjectTags';
+import useGetProjectTags from '@/api/hooks/useGetProjectTags';
 
 import * as d3 from 'd3';
 import { map, uniq } from 'lodash';
 
-import BubbleChart from '../components/BubbleChart';
+import BubbleChart from '@/components/BubbleChart';
 
 interface VisualizeProps extends RouteComponentProps {}
 

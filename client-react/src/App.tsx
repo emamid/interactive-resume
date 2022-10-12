@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -36,18 +36,18 @@ import VisualizeIcon from '@mui/icons-material/BubbleChart';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import RoutableListItem from './components/RoutableListItem';
+import RoutableListItem from '@/components/RoutableListItem';
 
-import Home from './views/Home';
-import Employer from './views/Employer';
-import Map from './views/Map';
-import Project from './views/Project';
-import Projects from './views/Projects';
-import Tag from './views/Tag';
-import Tags from './views/Tags';
-import Visualize from './views/Visualize';
+import Home from '@/views/Home';
+import Employer from '@/views/Employer';
+// import Map from './views/Map';
+import Project from '@/views/Project';
+import Projects from '@/views/Projects';
+import Tag from '@/views/Tag';
+import Tags from '@/views/Tags';
+import Visualize from '@/views/Visualize';
 
-import useGetMyself from './api/hooks/useGetMyself';
+import useGetMyself from '@/api/hooks/useGetMyself';
 
 declare module '@mui/styles/defaultTheme' {
 	// eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -200,7 +200,7 @@ const App = () => {
 						<Route exact path="/tags" component={Tags} />
 						<Route path="/tags/:tagID" component={Tag} />
 						<Route path="/visualize" component={Visualize} />
-						<Route path="/map" component={Map} />
+						{/* <Route path="/map" component={Map} /> */}
 						<Redirect to="/" />
 					</Switch>
 				</main>
