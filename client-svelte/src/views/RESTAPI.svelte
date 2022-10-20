@@ -9,7 +9,7 @@ import HelperText from '@smui/textfield/helper-text';
 import { apiURL } from '@/api/utils';
 
 let endpoint = localStorage.getItem('rest-endpoint') || 'employers';
-let id = localStorage.getItem('rest-id');
+let id = localStorage.getItem('rest-id') || '';
 let data: any = null;
 let lastURL: string = null;
 let lastEndpoint: string = null;
@@ -39,7 +39,7 @@ const makeRequest = async () => {
 }
 
 const clearID = () => {
-	id = null;
+	id = '';
 }
 
 const itemClicked = (itemID: string) => {
@@ -50,7 +50,7 @@ const itemClicked = (itemID: string) => {
 
 const setEndpoint = (newEndpoint: string) => {
 	endpoint = newEndpoint;
-	id = null;
+	id = '';
 }
 
 $: {
