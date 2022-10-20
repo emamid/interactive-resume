@@ -2,6 +2,9 @@
 
 module.exports = function (context) {
 	context.params.sequelize = {
+		attributes: {
+			exclude: ['pageContent']
+		},
 		include: [{
 			association: 'Employer',
 			attributes: ['name']

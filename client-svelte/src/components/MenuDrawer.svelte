@@ -22,6 +22,7 @@
 			<MenuDrawerItem href="./#/projects" icon="build" text="Projects" on:navigated={navigated} />
 			<MenuDrawerItem href="./#/tags" icon="sell" text="Tags" on:navigated={navigated} />
 			<MenuDrawerItem href="./#/visualize" icon="bubble_chart" text="Visualize" on:navigated={navigated} />
+			<MenuDrawerItem href="./#/api/rest" icon="api" text="REST API" on:navigated={navigated} />
 			<Separator />
 			<MenuDrawerItem href="/react_client" imageSrc="/icons/react_logo.svg" text="React" />
 			<MenuDrawerItem href="/vue3_client" imageSrc="/icons/vue_logo.svg" text="Vue 3" />

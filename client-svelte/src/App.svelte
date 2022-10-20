@@ -4,23 +4,25 @@
 	import IconButton from '@smui/icon-button';
 	import Select, { Option } from '@smui/select';
 	import TopAppBar, { Row, Section, Title } from '@smui/top-app-bar';
-	import Router, { location } from 'svelte-spa-router';
+	import Router from 'svelte-spa-router';
 	
-	import Home from './views/Home.svelte';
-	import MenuDrawer from './components/MenuDrawer.svelte'
+	import MenuDrawer from '@/components/MenuDrawer.svelte'
 	
-	import Employer from './views/Employer.svelte';
-	import Project from './views/Project.svelte';
-	import Projects from './views/Projects.svelte';
-	import Tag from './views/Tag.svelte';
-	import Tags from './views/Tags.svelte';
-	import Visualize from './views/Visualize.svelte';
+	import Employer from '@/views/Employer.svelte';
+	import Home from '@/views/Home.svelte';
+	import Project from '@/views/Project.svelte';
+	import Projects from '@/views/Projects.svelte';
+	import RESTAPI from '@/views/RESTAPI.svelte';
+	import Tag from '@/views/Tag.svelte';
+	import Tags from '@/views/Tags.svelte';
+	import Visualize from '@/views/Visualize.svelte';
 	
 	axios.defaults.withCredentials = true;
 	let menuDrawerOpen = false;
 	
 	const routes = {
-		'/': Home,	
+		'/': Home,
+		'/api/rest': RESTAPI,
 		'/employers/:id': Employer,
 		'/projects': Projects,
 		'/projects/:id': Project,

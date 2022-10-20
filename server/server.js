@@ -21,36 +21,37 @@ const nodePort = process.env.API_PORT || 3000;
 let app = null;
 
 function initApp() {
-    app = express(feathers());
-    app.use(cors({
-        origin: true,
-        credentials: true
-    }));
+	app = express(feathers());
+	app.use(cors({
+		origin: true,
+		credentials: true
+	}));
 
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: false }));
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({extended: true}));
-    app.use(cookieParser());
-    app.configure(express.rest());
-    app.use(express.errorHandler());
+	app.use(express.json());
+	app.use(express.urlencoded({ extended: false }));
+	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({ extended: true }));
+	app.use(cookieParser());
+	app.configure(express.rest());
 
-    servicesInit(app);
-    associateModels(app);
+	servicesInit(app);
+	associateModels(app);
 
-    // Path to client (production build)
+	// Path to client (production build)
 	console.log(process.env.RESUME_DATA_DIR);
-    app.use('/icons', express.static(`${process.env.RESUME_DATA_DIR}/icons`));
-    app.use('/images', express.static(`${process.env.RESUME_DATA_DIR}/images`));
-    app.use('/thumbnails', express.static(`${process.env.RESUME_DATA_DIR}/thumbnails`));    
-    app.use('/react_client', express.static(process.env.REACT_CLIENT_DIR));
-		app.use('/svelte_client', express.static(process.env.SVELTE_CLIENT_DIR));
-		app.use('/vue3_client', express.static(process.env.VUE3_CLIENT_DIR));
-		app.use('/', express.static(`${process.env.RESUME_DATA_DIR}/redirect`));
+	app.use('/icons', express.static(`${process.env.RESUME_DATA_DIR}/icons`));
+	app.use('/images', express.static(`${process.env.RESUME_DATA_DIR}/images`));
+	app.use('/thumbnails', express.static(`${process.env.RESUME_DATA_DIR}/thumbnails`));
+	app.use('/react_client', express.static(process.env.REACT_CLIENT_DIR));
+	app.use('/svelte_client', express.static(process.env.SVELTE_CLIENT_DIR));
+	app.use('/vue3_client', express.static(process.env.VUE3_CLIENT_DIR));
+	app.use('/', express.static(`${process.env.RESUME_DATA_DIR}/redirect`));
+	app.use(express.notFound({ verbose: true }));
+	app.use(express.errorHandler());
 };
 
 initApp();
 
-app.listen(nodePort, function() {
-    console.log('Server listening on ', nodePort);
+app.listen(nodePort, function () {
+	console.log('Server listening on ', nodePort);
 });    
