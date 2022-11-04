@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 import Home from '@/views/Home.vue';
 import Employer from '@/views/Employer.vue';
+import RESTAPI from '@/views/RESTAPI.vue'
 import Project from '@/views/Project.vue';
 import Projects from '@/views/Projects.vue';
 import Tag from '@/views/Tag.vue';
@@ -13,6 +14,11 @@ const routes = [
 		path: '/',
 		name: 'Home',
 		component: Home,
+	},
+	{
+		path: '/api/rest',
+		name: 'API-REST',
+		component: RESTAPI,
 	},
 	{
 		path: '/employers/:id',
@@ -48,5 +54,5 @@ const routes = [
 
 export default () => createRouter({
 	history: createWebHashHistory(),
-	routes:  routes,
+	routes: routes,
 });
