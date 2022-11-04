@@ -7,6 +7,7 @@ import Textfield from '@smui/textfield';
 import HelperText from '@smui/textfield/helper-text';
 
 import { apiURL } from '@/api/utils';
+import JSONViewer from '@/components/JSONViewer.svelte';
 
 let endpoint = localStorage.getItem('rest-endpoint') || 'employers';
 let id = localStorage.getItem('rest-id') || '';
@@ -91,17 +92,7 @@ makeRequest();
 	</div>
 	{#if data}
 		<div class="mdc-typography--headline5">Response data for {lastURL}:</div>
-		{#if Array.isArray(data) && allowsID(lastEndpoint)}
-			<div class="data">
-				<pre class="bracket">[</pre>
-				{#each data as line}
-					<pre class="item" on:click={() => itemClicked(line.id)}>{JSON.stringify(line, null, '  ')}{#if line !== data[data.length-1]},{/if}</pre>
-				{/each}		
-				<pre class="bracket">]</pre>
-			</div>
-		{:else}
-			<pre class="data">{JSON.stringify(data, null, '  ')}</pre>
-		{/if}
+		<JSONViewer {data} allowsID={allowsID(lastEndpoint)} on:itemClicked={event => itemClicked(event.detail)}/>
 	{/if}
 	{#if statusMessage}
 		<div class="mdc-typography--headline5">Response data for {lastURL}:</div>
@@ -137,24 +128,4 @@ makeRequest();
 		justify-content: center;
 		margin-left: -40px;
 	}
-
-	.data {
-		flex-grow: 1;
-		width: 100%;
-		overflow: auto;
-		border: 1px black solid;
-		padding: 5px;
-	}
-
-	pre.bracket {
-		margin: 0;
-	}
-	pre.item {
-		margin: 0 0 0 2em;
-	}
-
-	pre.item:hover {
-		background-color: lightgrey;
-	}
-
 </style>
