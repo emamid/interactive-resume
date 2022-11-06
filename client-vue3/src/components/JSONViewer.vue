@@ -25,9 +25,9 @@ const lineText = (line: any): string =>
 
 <style>
 .data {
+	overflow: auto;
 	flex-grow: 1;
 	width: 100%;
-	overflow: auto;
 	border: 1px black solid;
 	padding: 5px;
 }
@@ -35,6 +35,7 @@ const lineText = (line: any): string =>
 pre.bracket {
 	margin: 0;
 }
+
 pre.item {
 	margin: 0 0 0 2em;
 }

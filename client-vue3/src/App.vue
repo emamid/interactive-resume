@@ -33,7 +33,7 @@
 				</template>
 			</v-select>
 		</v-toolbar>
-		<v-main style="overflow: auto; flex: inherit">
+		<v-main :class="{main: true, 'allow-overflow': allowOverflow, 'prevent-overflow': !allowOverflow}">
 			<v-container class="app-main-container" fluid>
 				<Suspense>
 					<router-view />
@@ -44,8 +44,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import axios from 'axios';
+import { useRoute } from 'vue-router';
 
 import menuItem from '@/components/MenuItem.vue';
 
@@ -72,13 +73,23 @@ const frameworkItems = [{
 
 const framework = ref('vue3');
 
+const route = useRoute();
+
+const allowOverflow = computed(() => route?.name !== 'API-REST');
 </script>
 
 <style>
 
-.app-main-container {
-	/* display: flex; 
-	flex-direction: column; */
+.main {
+	flex: inherit;	
+}
+
+.allow-overflow {
+	overflow: auto;
+}
+
+.prevent-overflow {
+	overflow: hidden;
 }
 
 </style>

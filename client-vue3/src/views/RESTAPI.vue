@@ -1,54 +1,47 @@
 <template>
 	<div class="rest-api">
-		<div>
-			<h2>REST API</h2>
-			<div class="controls">
-				<div class="control-field" style="width: 15em">
-					<v-select
-						:items="endpointItems"
-						label="Endpoint"
-						variant="underlined"
-						v-model="endpoint"
-					/>
-				</div>
-				<div
-					v-if="allowsID(endpoint)"
-					class="control-field"
-					style="width: 20em"
-				>
-					<v-text-field
-						label="id"
-						variant="underlined"
-						v-model="id"
-						append-inner-icon="mdi-delete"
-						:hint="helperText[endpoint]"
-						@click:append-inner="clearID"
-					/>
-				</div>
+		<h2>REST API</h2>
+		<div :class="{controls: true, 'controld-no-id': !allowsID(endpoint)}">
+			<div class="control-field" style="width: 15em">
+				<v-select
+					:items="endpointItems"
+					label="Endpoint"
+					variant="underlined"
+					v-model="endpoint"
+				/>
 			</div>
-			<v-btn style="width: 7.5em" color="primary" @click="makeRequest"
-				>Request</v-btn
+			<div
+				v-if="allowsID(endpoint)"
+				class="control-field"
+				style="width: 20em"
 			>
+				<v-text-field
+					label="id"
+					variant="underlined"
+					v-model="id"
+					append-inner-icon="mdi-delete"
+					:hint="helperText[endpoint]"
+					@click:append-inner="clearID"
+				/>
+			</div>
 		</div>
-		<div v-if="data">
-			<h2>Response data for {{ lastURL }}:</h2>
-			<JSONViewer
-				v-if="data"
-				:data="data"
-				:allowsID="allowsID(lastEndpoint)"
-				@item-clicked="itemClicked"
-			/>
-		</div>
-		<div v-if="statusMessage">
-			<h2>Response data for {{ lastURL }}:</h2>
-			<pre>{{ statusMessage }}</pre>
-		</div>
+		<v-btn color="primary" class="request-button" @click="makeRequest"
+			>Request</v-btn
+		>
+		<h2 v-if="data" class="response-caption">Response data for {{ lastURL }}:</h2>
+		<JSONViewer
+			v-if="data"
+			:data="data"
+			:allowsID="allowsID(lastEndpoint)"
+			@item-clicked="itemClicked"
+		/>
+		<pre v-if="statusMessage">{{ statusMessage }}</pre>
 	</div>
 </template>
 
 <script setup lang="ts">
 import axios from 'axios';
-import { computed, ref, watch } from 'vue';
+import { ref, watch, watchSyncEffect } from 'vue';
 
 import { apiURL } from '@/api/utils';
 import JSONViewer from '@/components/JSONViewer.vue';
@@ -79,7 +72,9 @@ const statusMessage = ref<string>();
 const allowsID = (testEndpoint?: string) =>
 	!!testEndpoint && idEndpoints.indexOf(testEndpoint) !== -1;
 
-const clearID = () => (id.value = '');
+const clearID = () => {
+	id.value = ''
+};
 
 const itemClicked = (itemID: string) => {
 	endpoint.value = lastEndpoint.value || '';
@@ -109,9 +104,14 @@ const makeRequest = async () => {
 	}
 };
 
-watch(endpoint, (newEndpoint) =>
-	localStorage.setItem('rest-endpoint', newEndpoint)
-);
+watch(endpoint, newEndpoint => {
+	localStorage.setItem('rest-endpoint', newEndpoint);
+	clearID();
+});
+
+watch(id, newID => localStorage.setItem('rest-id', newID));
+
+makeRequest();
 </script>
 
 <style>
@@ -126,6 +126,7 @@ watch(endpoint, (newEndpoint) =>
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
+	margin-top: 0.5em;
 }
 
 .controls-no-id {
@@ -141,5 +142,13 @@ watch(endpoint, (newEndpoint) =>
 	flex-direction: column;
 	justify-content: center;
 	margin-left: -40px;
+}
+
+.request-button {
+	width: 7.5em;
+}
+
+.response-caption {
+	margin-top: 1em;
 }
 </style>
