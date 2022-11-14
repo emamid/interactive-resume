@@ -31,6 +31,7 @@ import HomeIcon from '@mui/icons-material/Home';
 // import MapIcon from '@mui/icons-material/Map';
 import MenuIcon from '@mui/icons-material/Menu';
 import ProjectIcon from '@mui/icons-material/Build';
+import RESTAPIIcon from '@mui/icons-material/Api';
 import TagIcon from '@mui/icons-material/LocalOffer';
 import VisualizeIcon from '@mui/icons-material/BubbleChart';
 
@@ -43,6 +44,7 @@ import Employer from '@/views/Employer';
 // import Map from './views/Map';
 import Project from '@/views/Project';
 import Projects from '@/views/Projects';
+import RESTAPI from '@/views/RESTAPI';
 import Tag from '@/views/Tag';
 import Tags from '@/views/Tags';
 import Visualize from '@/views/Visualize';
@@ -126,6 +128,12 @@ const App = () => {
 					text={'Visualize'}
 					onNavigated={closeMenuDrawer}
 				/>
+				<RoutableListItem
+					to="/api/rest"
+					icon={<RESTAPIIcon />}
+					text={'REST API'}
+					onNavigated={closeMenuDrawer}
+				/>
 				{/* <RoutableListItem
 					to="/map"
 					icon={<MapIcon />}
@@ -198,6 +206,7 @@ const App = () => {
 							component={Employer}
 						/>
 						<Route exact path="/tags" component={Tags} />
+						<Route exact path="/api/rest" component={RESTAPI} />
 						<Route path="/tags/:tagID" component={Tag} />
 						<Route path="/visualize" component={Visualize} />
 						{/* <Route path="/map" component={Map} /> */}
