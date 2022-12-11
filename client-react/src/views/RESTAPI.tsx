@@ -1,7 +1,4 @@
-import { useRef, useState } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router';
-
-import clsx from 'classnames';
+import { useState } from 'react';
 
 import axios from 'axios';
 
@@ -15,8 +12,10 @@ import Typography from '@mui/material/Typography';
 
 import { apiURL } from '@/api/utils';
 
+import JSONViewer from '@/components/JSONViewer';
+
 const idEndpoints = ['employers', 'projects', 'tags'];
-const helperText = {
+const helperText: Record<string, string> = {
 	'employers': 'employerID',
 	'projects': 'projectID',
 	'tags': 'tagID',
@@ -47,7 +46,13 @@ const RESTAPI = () => {
 			setStatusMessage(`${status}: ${statusText}`);
 		}
 	}
-	
+
+	const itemClicked = (id: string) => {
+		setID(id);
+		setEndpoint(lastEndpoint);
+		makeRequest();
+	}
+
 	return (
 		<div className="rest-api">
 			<div>
@@ -75,6 +80,7 @@ const RESTAPI = () => {
 						label="id"
 						variant="standard"
 						value={id}
+						helperText={helperText[endpoint]}
 						onChange={event => {
 							localStorage.setItem('rest-id', event?.target?.value);
 							setID(event.target.value || '');
@@ -83,8 +89,15 @@ const RESTAPI = () => {
 				</FormControl>}
 				</div>
 				<Button variant="contained" onClick={makeRequest}>Request</Button>
-			</div>
-			<div>{JSON.stringify(data)}</div>
+			</div>			
+			{data && <>
+				<Typography component="h5" variant="h5">Response data for {lastURL}:</Typography>
+				<JSONViewer data={data} allowsID={allowsID(endpoint)} itemClicked={itemClicked}/>
+			</>}
+			{statusMessage && <>
+				<Typography component="h5" variant="h5">Response data for {lastURL}:</Typography>
+				<pre>{statusMessage}</pre>
+			</>}
 		</div>
 	);
 };
