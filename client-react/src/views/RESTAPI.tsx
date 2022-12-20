@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import axios from 'axios';
 
@@ -53,6 +53,10 @@ const RESTAPI = () => {
 		makeRequest();
 	}
 
+	useEffect(() => {
+		makeRequest();
+	});
+
 	return (
 		<div className="rest-api">
 			<div>
@@ -75,7 +79,7 @@ const RESTAPI = () => {
 						<MenuItem value={'tags'}>tags</MenuItem>
 					</Select>
 				</FormControl>
-				{allowsID(endpoint) && <FormControl variant="standard" style={{ width: '15em' }}>
+				{allowsID(endpoint) && <FormControl variant="standard" style={{ width: '20em' }}>
 					<TextField
 						label="id"
 						variant="standard"
