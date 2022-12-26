@@ -3,11 +3,15 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
+import IconButton from '@mui/material/IconButton';
+import Input from '@mui/material/Input';
+import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 import { apiURL } from '@/api/utils';
@@ -34,9 +38,10 @@ const RESTAPI = () => {
 	const makeRequest = async () => {
 		try {
 			setLastEndpoint(endpoint);
+			localStorage.setItem('rest-endpoint', endpoint);
+			localStorage.setItem('rest-id', id);
 			const url = apiURL(`${endpoint}/${(allowsID(endpoint) && id?.length) ? id.trim() : ''}`);
 			setLastURL(url);
-			console.log('url = ', url)
 			const response = await axios.get<any>(url);
 			setData(response.data);
 			setStatusMessage('');
@@ -53,6 +58,8 @@ const RESTAPI = () => {
 		makeRequest();
 	}
 
+	const clearID = () => setID('');
+
 	useEffect(() => {
 		makeRequest();
 	});
@@ -62,35 +69,42 @@ const RESTAPI = () => {
 			<div>
 				<Typography component="h5" variant="h5" gutterBottom={true}>REST API</Typography>
 				<div className="controls">
-				<FormControl variant="standard" style={{ width: '15em' }}>
-					<InputLabel>Endpoint</InputLabel>
-					<Select
-						value={endpoint}
-						onChange={event => {
-							localStorage.setItem('rest-endpoint', event?.target?.value);
-							setEndpoint(event.target.value || '');
-						}}
-						label="Endpoint"
-					>
-						<MenuItem value={'employers'}>employers</MenuItem>
-						<MenuItem value={'myself'}>myself</MenuItem>
-						<MenuItem value={'projects'}>projects</MenuItem>
-						<MenuItem value={'project-tags'}>project-tags</MenuItem>
-						<MenuItem value={'tags'}>tags</MenuItem>
-					</Select>
-				</FormControl>
-				{allowsID(endpoint) && <FormControl variant="standard" style={{ width: '20em' }}>
-					<TextField
-						label="id"
-						variant="standard"
-						value={id}
-						helperText={helperText[endpoint]}
-						onChange={event => {
-							localStorage.setItem('rest-id', event?.target?.value);
-							setID(event.target.value || '');
-						}}
-					/>
-				</FormControl>}
+					<FormControl variant="standard" style={{ width: '15em' }}>
+						<InputLabel>Endpoint</InputLabel>
+						<Select
+							value={endpoint}
+							onChange={event => {
+								setEndpoint(event.target.value || '');
+							}}
+							label="Endpoint"
+						>
+							<MenuItem value={'employers'}>employers</MenuItem>
+							<MenuItem value={'myself'}>myself</MenuItem>
+							<MenuItem value={'projects'}>projects</MenuItem>
+							<MenuItem value={'project-tags'}>project-tags</MenuItem>
+							<MenuItem value={'tags'}>tags</MenuItem>
+						</Select>
+					</FormControl>
+					{allowsID(endpoint) && <FormControl variant="standard" style={{ width: '20em' }}>
+						<InputLabel>id</InputLabel>
+						<Input
+							value={id}
+							onChange={event => {
+								setID(event.target.value || '');
+							}}
+							endAdornment={
+								<InputAdornment position="end">
+									<IconButton
+										edge="end"
+										onClick={clearID}
+									>
+										<DeleteIcon />
+									</IconButton>
+								</InputAdornment>
+							}
+						/>
+						<FormHelperText>{helperText[endpoint]}</FormHelperText>
+					</FormControl>}
 				</div>
 				<Button variant="contained" onClick={makeRequest}>Request</Button>
 			</div>			
