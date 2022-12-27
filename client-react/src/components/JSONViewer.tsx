@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './JSONViewer.css';
+
 interface JSONViewerProps {
 	allowsID: boolean;
 	data: any;

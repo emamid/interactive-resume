@@ -62,22 +62,3 @@ li.framework-select-item {
 .MuiOutlinedInput-notchedOutline {
 	display: none;
 }
-
-.data {
-	flex-grow: 1;
-	width: 100%;
-	overflow: auto;
-	border: 1px black solid;
-	padding: 5px;
-}
-
-pre.bracket {
-	margin: 0;
-}
-pre.item {
-	margin: 0 0 0 2em;
-}
-
-pre.item:hover {
-	background-color: lightgrey;
-}
