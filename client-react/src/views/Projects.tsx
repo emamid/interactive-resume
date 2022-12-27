@@ -8,12 +8,14 @@ import useGetProjects from '@/api/hooks/useGetProjects';
 
 import YearRange from '@/components/YearRange';
 
+import './Projects.css';
+
 const Projects = () => {
 	const { data: projects } = useGetProjects();
 
 	return (
 		<div className="scrollable-view">
-			<Table size="small" style={{ height: '100%' }}>
+			<Table size="small" className="projects">
 				<TableHead>
 					<TableRow>
 						<TableCell>Dates</TableCell>
