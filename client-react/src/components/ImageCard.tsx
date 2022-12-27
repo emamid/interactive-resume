@@ -9,6 +9,8 @@ import Typography from '@mui/material/Typography';
 
 import { Image } from '@/api/types';
 
+import './ImageCard.css';
+
 interface ImageCardProps {
 	image: Image;
 	onClick: MouseEventHandler;
@@ -17,18 +19,12 @@ interface ImageCardProps {
 const ImageCard = ({ image, onClick }: ImageCardProps) => {
 	return (
 		<Grid item xs={12} md={4} xl={3} key={image.filename}>
-			<Card style={{ textAlign: 'center' }}>
+			<Card  className="card">
 				<CardActionArea onClick={onClick}>
 					<CardMedia
 						src={`/thumbnails/${image.filename}`}
 						title={image.caption}
-						style={{
-							maxHeight: 108,
-							maxWidth: 192,
-							display: 'block',
-							marginLeft: 'auto',
-							marginRight: 'auto'
-						}}
+						className="card-media"
 						component="img"
 					/>
 					<CardContent>
