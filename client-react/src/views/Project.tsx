@@ -14,6 +14,9 @@ import ImageDialog from '@/components/ImageDialog';
 
 import { Image } from '@/api/types';
 
+import './Project.css';
+
+
 interface ProjectRoute {
 	projectID: string;
 }
@@ -42,7 +45,7 @@ const Project = ({ match }: ProjectProps) => {
 		</span>
 	);
 	return (
-		<div style={{ overflow: 'auto', height: '100%' }}>
+		<div className="project">
 			<Typography component="h5" variant="h5" gutterBottom={true}>
 				{project?.name}
 				{employerText}
@@ -66,7 +69,6 @@ const Project = ({ match }: ProjectProps) => {
 					setDialogImage(undefined);
 				}}
 			/>
-			{/* <ImageGallery images={project.Images} onClick={(image) => { this.setState({ dialogImage: { ...image } }) }} /> */}
 			<ImageGallery
 				images={project?.Images || []}
 				onClick={image => {
