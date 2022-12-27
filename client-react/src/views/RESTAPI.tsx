@@ -18,6 +18,8 @@ import { apiURL } from '@/api/utils';
 
 import JSONViewer from '@/components/JSONViewer';
 
+import './RESTAPI.css';
+
 const idEndpoints = ['employers', 'projects', 'tags'];
 const helperText: Record<string, string> = {
 	'employers': 'employerID',
@@ -69,7 +71,7 @@ const RESTAPI = () => {
 			<div>
 				<Typography component="h5" variant="h5" gutterBottom={true}>REST API</Typography>
 				<div className="controls">
-					<FormControl variant="standard" style={{ width: '15em' }}>
+					<FormControl variant="standard" className="endpoint-field">
 						<InputLabel>Endpoint</InputLabel>
 						<Select
 							value={endpoint}
@@ -85,7 +87,7 @@ const RESTAPI = () => {
 							<MenuItem value={'tags'}>tags</MenuItem>
 						</Select>
 					</FormControl>
-					{allowsID(endpoint) && <FormControl variant="standard" style={{ width: '20em' }}>
+					{allowsID(endpoint) && <FormControl variant="standard" className="id-field">
 						<InputLabel>id</InputLabel>
 						<Input
 							value={id}
