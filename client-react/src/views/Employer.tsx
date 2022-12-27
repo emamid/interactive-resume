@@ -8,6 +8,8 @@ import HTMLContent from '@/components/HTMLContent';
 import ReferenceList from '@/components/ReferenceList';
 import YearRange from '@/components/YearRange';
 
+import './Employer.css';
+
 interface EmployerRoute {
 	employerID: string;
 }
@@ -18,7 +20,7 @@ const Employer = ({ match }: EmployerProps) => {
 	const { data: employer } = useGetEmployer(match.params.employerID);
 
 	return (
-		<div style={{ overflow: 'auto', height: '100%' }}>
+		<div className="employer">
 			<Typography component="h5" variant="h5">
 				{employer?.position} at {employer?.name}{' '}
 				<YearRange
