@@ -5,3 +5,7 @@
 .id-field {
 	width: 20em;
 }
+
+.MuiFormHelperText-root:not(.Mui-focused) {
+	display: none;
+}
