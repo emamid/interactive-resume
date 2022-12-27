@@ -6,6 +6,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import { Image } from '@/api/types';
 
+import './ImageDialog.css';
+
 interface ImageDialogProps {
 	image?: Image;
 	onClose: MouseEventHandler;
@@ -23,7 +25,7 @@ const ImageDialog = ({ image, onClose }: ImageDialogProps) => {
 			>
 				<DialogTitle
 					id="confirmation-dialog-title"
-					style={{ textAlign: 'center' }}
+					className="dialog-title"
 				>
 					{image.caption}
 				</DialogTitle>
@@ -31,13 +33,7 @@ const ImageDialog = ({ image, onClose }: ImageDialogProps) => {
 					<img
 						src={`/images/${image.filename}`}
 						alt={image.caption}
-						style={{
-							maxHeight: '90%',
-							maxWidth: '90%',
-							display: 'block',
-							marginLeft: 'auto',
-							marginRight: 'auto'
-						}}
+						className="dialog-image"
 					/>
 				</DialogContent>
 			</Dialog>
