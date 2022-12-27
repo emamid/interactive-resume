@@ -1,6 +1,8 @@
 import * as d3 from 'd3';
 import { groupBy, map, max, reduce, uniq } from 'lodash';
 
+import './BubbleChart.css';
+
 interface BubbleChartProps {
 	colorByProp: string;
 	data: any[];
@@ -99,12 +101,7 @@ const BubbleChart = ({
 	}
 
 	return (
-		<svg
-			style={{
-				height: '100%',
-				width: '100%'
-			}}
-		>
+		<svg className="chart-body">
 			<g className="bubbles-area">
 				{map(
 					groups,
@@ -152,13 +149,10 @@ const BubbleChart = ({
 												y={item.r * -0.8}
 											>
 												<body
+												  className="bubble-label"
 													style={{
 														height: item.r * 1.6,
 														width: item.r * 1.6,
-														display: 'flex',
-														justifyContent:
-															'center',
-														alignItems: 'center'
 													}}
 													title={item.name}
 													// xmlns='http://www.w3.org/1999/xhtml' // TODO: Find out how to make xmlns work with React and Typescript
@@ -169,8 +163,6 @@ const BubbleChart = ({
 												>
 													<p
 														style={{
-															margin: 0,
-															textAlign: 'center',
 															fontSize: `${
 																100 -
 																Math.pow(
@@ -197,7 +189,7 @@ const BubbleChart = ({
 									<text
 										x={16}
 										y={24}
-										style={{ fontSize: '90%' }}
+										className="group-label"
 									>
 										{title || 'Other'}
 									</text>

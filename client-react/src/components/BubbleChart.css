@@ -1,0 +1,19 @@
+body.bubble-label {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+body.bubble-label p {
+	margin: 0;
+	text-align: center;
+}
+
+svg.chart-body {
+	height: 100%;
+	width: 100%;
+}
+
+text.group-label {
+	font-size: 90%;
+}
