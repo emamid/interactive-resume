@@ -13,6 +13,8 @@ import { map, uniq } from 'lodash';
 
 import BubbleChart from '@/components/BubbleChart';
 
+import './Visualize.css';
+
 interface VisualizeProps extends RouteComponentProps {}
 
 const Visualize = ({ history }: VisualizeProps) => {
@@ -51,16 +53,9 @@ const Visualize = ({ history }: VisualizeProps) => {
 	);
 
 	return (
-		<div
-			style={{
-				height: '100%',
-				width: '100%',
-				display: 'flex',
-				flexDirection: 'column'
-			}}
-		>
-			<div style={{ marginBottom: '1em' }}>
-				<FormControl variant="standard" style={{ width: '20em' }}>
+		<div className='visualize'>
+			<div className="visualize-controls">
+				<FormControl variant="standard" className="visualize-colorby-select">
 					<InputLabel>Color by</InputLabel>
 					<Select
 						value={colorBy}
@@ -77,7 +72,7 @@ const Visualize = ({ history }: VisualizeProps) => {
 				</FormControl>
 				<FormControl
 					variant="standard"
-					style={{ width: '20em', marginLeft: '1em' }}
+					className="visualize-groupby-select"
 				>
 					<InputLabel>Group by</InputLabel>
 					<Select
@@ -94,7 +89,7 @@ const Visualize = ({ history }: VisualizeProps) => {
 					</Select>
 				</FormControl>
 			</div>
-			<div style={{ flexGrow: 1 }} ref={chartDiv}>
+			<div ref={chartDiv} className="visualize-chart">
 				<BubbleChart
 					data={mappedTags}
 					colorByProp={colorBy}
@@ -107,13 +102,11 @@ const Visualize = ({ history }: VisualizeProps) => {
 					colorMap={colorMap}
 				/>
 			</div>
-			<div style={{ marginTop: '1em' }}>
-				{map(colorMap, (color, text) => (
-					<span
+			<div className="visualize-legend">
+				{map(colorMap, (backgroundColor, text) => (
+					<span className="visualize-legend-item"
 						style={{
-							backgroundColor: color,
-							margin: '5px',
-							padding: '5px'
+							backgroundColor
 						}}
 						key={text}
 					>

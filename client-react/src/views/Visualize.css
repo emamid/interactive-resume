@@ -1,0 +1,32 @@
+.visualize {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+}
+
+.visualize-chart {
+	flex-grow: 1;
+}
+
+.visualize-controls {
+	margin-bottom: 1em;
+}
+
+.visualize-colorby-select {
+	width: 20em;
+}
+
+.visualize-groupby-select {
+	margin-left: 1em;
+	width: 20em;
+}
+
+.visualize-legend {
+	margin-top: 1em;
+}
+
+.visualize-legend-item {
+	margin: 5px;
+	padding: 5px;
+}
