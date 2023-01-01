@@ -1,4 +1,9 @@
+.controls {
+	margin-bottom: 16px;
+}
+
 .endpoint-field {
+	margin-right: 10px;
 	width: 15em;
 }
 
@@ -8,4 +13,8 @@
 
 .MuiFormHelperText-root:not(.Mui-focused) {
 	display: none;
+}
+
+.request-button {
+	margin-bottom: 16px;
 }
