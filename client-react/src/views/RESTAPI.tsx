@@ -30,16 +30,16 @@ const helperText: Record<string, string> = {
 const allowsID = (endpoint: string) => idEndpoints.indexOf(endpoint) !== -1;
 
 const RESTAPI = () => {
-	const [lastEndpoint, setLastEndpoint] = useState('');
 	const [lastURL, setLastURL] = useState('');
 	const [endpoint, setEndpoint] = useState<string>(localStorage.getItem('rest-endpoint') || 'employers');
 	const [id, setID] = useState<string>(localStorage.getItem('rest-id') || '');
 	const [data, setData] = useState<any>();
 	const [statusMessage, setStatusMessage] = useState<string>();
+	const [selectedEndpoint, setSelectedEndpoint] = useState<string>(localStorage.getItem('rest-endpoint') || 'employers');
+	const [selectedID, setSelectedID] = useState<string>(localStorage.getItem('rest-id') || '');
 
 	const makeRequest = async () => {
 		try {
-			setLastEndpoint(endpoint);
 			localStorage.setItem('rest-endpoint', endpoint);
 			localStorage.setItem('rest-id', id);
 			const url = apiURL(`${endpoint}/${(allowsID(endpoint) && id?.length) ? id.trim() : ''}`);
@@ -54,17 +54,22 @@ const RESTAPI = () => {
 		}
 	}
 
-	const itemClicked = (id: string) => {
-		setID(id);
-		setEndpoint(lastEndpoint);
-		makeRequest();
+	const clearSelectedID = () => setSelectedID('');
+
+	const requestClicked = () => {
+		setEndpoint(selectedEndpoint);
+		setID(selectedID);
 	}
 
-	const clearID = () => setID('');
+	const itemClicked = (itemID: string) => {
+		setSelectedEndpoint(endpoint);
+		setSelectedID(itemID);
+		setID(itemID);
+	}
 
 	useEffect(() => {
 		makeRequest();
-	});
+	}, [endpoint, id]);
 
 	return (
 		<div className="rest-api">
@@ -74,9 +79,10 @@ const RESTAPI = () => {
 					<FormControl variant="standard" className="endpoint-field">
 						<InputLabel>Endpoint</InputLabel>
 						<Select
-							value={endpoint}
+							value={selectedEndpoint}
 							onChange={event => {
-								setEndpoint(event.target.value || '');
+								setSelectedEndpoint(event.target.value || '');
+								clearSelectedID();
 							}}
 							label="Endpoint"
 						>
@@ -90,15 +96,15 @@ const RESTAPI = () => {
 					{allowsID(endpoint) && <FormControl variant="standard" className="id-field">
 						<InputLabel>id</InputLabel>
 						<Input
-							value={id}
+							value={selectedID}
 							onChange={event => {
-								setID(event.target.value || '');
+								setSelectedID(event.target.value || '');
 							}}
 							endAdornment={
 								<InputAdornment position="end">
 									<IconButton
 										edge="end"
-										onClick={clearID}
+										onClick={clearSelectedID}
 									>
 										<DeleteIcon />
 									</IconButton>
@@ -108,7 +114,7 @@ const RESTAPI = () => {
 						<FormHelperText>{helperText[endpoint]}</FormHelperText>
 					</FormControl>}
 				</div>
-				<Button variant="contained" onClick={makeRequest}>Request</Button>
+				<Button variant="contained" className="request-button" onClick={requestClicked}>Request</Button>
 			</div>			
 			{data && <>
 				<Typography component="h5" variant="h5">Response data for {lastURL}:</Typography>
