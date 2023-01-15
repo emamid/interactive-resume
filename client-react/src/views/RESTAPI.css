@@ -18,3 +18,9 @@
 .request-button {
 	margin-bottom: 16px;
 }
+
+.rest-api {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
