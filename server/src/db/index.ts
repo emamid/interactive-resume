@@ -18,4 +18,5 @@ export const initialize = (dataDir: string) => {
 	models.forEach(model => model.associateModel?.(sequelize));
 }
 
-export default () => sequelize;
+export const getSequelize = () => sequelize;
+export * from './queries';

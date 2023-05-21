@@ -1,7 +1,7 @@
 import { config as dotEnvConfig } from 'dotenv';
 import express, { Application, NextFunction, Request, Response } from 'express';
 
-import { initialize } from '@/db/sequelize';
+import { initialize } from '@/db';
 
 dotEnvConfig({ path: '../.env' });
 
@@ -40,6 +40,12 @@ app.use((request, response) => {
 		originalURL : request.originalUrl
 	})
 })
+
+const testDB = async() => {
+	console.log('testDB');
+}
+
+testDB();
 
 app.listen(nodePort, () => {
 	console.info(`Server listening on port ${nodePort}`);
