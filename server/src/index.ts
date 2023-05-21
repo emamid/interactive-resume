@@ -1,10 +1,14 @@
 import { config as dotEnvConfig } from 'dotenv';
 import express, { Application, NextFunction, Request, Response } from 'express';
 
+import { initialize } from '@/db/sequelize';
+
 dotEnvConfig({ path: '../.env' });
 
 const dataDir = process.env.RESUME_DATA_DIR;
 const nodePort = process.env.API_PORT || 3000;
+
+initialize(dataDir);
 
 const app: Application = express();
 
