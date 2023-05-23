@@ -2,6 +2,7 @@ import { config as dotEnvConfig } from 'dotenv';
 import express, { Application, NextFunction, Request, Response } from 'express';
 
 import { initialize } from '@/db';
+import rest from '@/rest';
 
 dotEnvConfig({ path: '../.env' });
 
@@ -18,6 +19,7 @@ app.use('/thumbnails', express.static(`${dataDir}/thumbnails`));
 app.use('/react_client', express.static(process.env.REACT_CLIENT_DIR));
 app.use('/svelte_client', express.static(process.env.SVELTE_CLIENT_DIR));
 app.use('/vue3_client', express.static(process.env.VUE3_CLIENT_DIR));
+app.use('/api/rest', rest);
 app.use('/', express.static(`${dataDir}/redirect`));
 
 app.use((error: Error, _request: Request, response: Response, next: NextFunction) => {

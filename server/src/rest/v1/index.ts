@@ -1,6 +1,8 @@
 import { Router } from 'express';
 
-export default () => {
-	const router = Router();
-	return router;
-}
+import myself from './myself';
+
+const router = Router();
+router.use('/myself', myself);
+
+export default router;
