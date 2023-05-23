@@ -11,7 +11,7 @@ module.exports = function (app) {
 		name: 'tags',
 		Model
 	};
-	app.use('/api/rest/project-tags', createService(options));
-	const service = app.service('/api/rest/project-tags');
+	app.use('/api/rest/v1/project-tags', createService(options));
+	const service = app.service('/api/rest/v1/project-tags');
 	service.hooks(hooks);
 };

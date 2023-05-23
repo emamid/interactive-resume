@@ -11,7 +11,7 @@ module.exports = function (app) {
 		name: 'myself',
 		Model
 	};
-	app.use('/api/rest/myself', createService(options));
-	const service = app.service('/api/rest/myself');
+	app.use('/api/rest/v1/myself', createService(options));
+	const service = app.service('/api/rest/v1/myself');
 	service.hooks(hooks);
 };
