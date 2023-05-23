@@ -54,5 +54,5 @@ export const getByID = async(id: string) => {
 		raw: false
 	});
 
-	return employer.toJSON();
+	return employer?.toJSON();
 }

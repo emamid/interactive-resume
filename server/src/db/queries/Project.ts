@@ -49,5 +49,5 @@ export const getByID = async(id: string) => {
 		raw: false
 	});
 
-	return project.toJSON();
+	return project?.toJSON();
 }

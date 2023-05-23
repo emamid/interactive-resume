@@ -36,5 +36,5 @@ export const getByID = async(id: string) => {
 		raw: false
 	});
 
-	return tag.toJSON();
+	return tag?.toJSON();
 }

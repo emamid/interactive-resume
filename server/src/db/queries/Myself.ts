@@ -20,6 +20,6 @@ export const getOnly = async() => {
 		raw: false
 	});
 
-	return myself.toJSON();
+	return myself?.toJSON();
 
 }
