@@ -5,7 +5,6 @@ import { getAll, getByID } from '@/db/queries/Employer';
 
 const getEmployer = async(request: Request, response: Response, next: NextFunction) => {
 	const employer = await getByID(request.params.id);
-	console.log('employer = ', employer);
 	if (employer) {
 		return response.json(employer);
 	}

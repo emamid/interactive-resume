@@ -43,12 +43,6 @@ app.use((request, response) => {
 	})
 })
 
-const testDB = async() => {
-	console.log('testDB');
-}
-
-testDB();
-
 app.listen(nodePort, () => {
 	console.info(`Server listening on port ${nodePort}`);
 });

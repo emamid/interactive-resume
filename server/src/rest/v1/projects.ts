@@ -5,7 +5,6 @@ import { getAll, getByID } from '@/db/queries/Project';
 
 const getProject = async(request: Request, response: Response, next: NextFunction) => {
 	const project = await getByID(request.params.id);
-	console.log('project = ', project);
 	if (project) {
 		return response.json(project);
 	}
