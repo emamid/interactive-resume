@@ -29,7 +29,7 @@
 		{/if}
 	</div>
 	<br />
-	<TagList tags={project?.Tags} chips />
+	<TagList tags={project?.Tags.sort((tag1, tag2) => tag1.name.localeCompare(tag2.name))} chips />
 	<br />
 	<HTMLContent html={project?.pageContent} />
 	<br />

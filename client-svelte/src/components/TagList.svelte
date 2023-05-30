@@ -7,10 +7,9 @@
 
 	export let tags: BaseTag[] = [];
 	export let chips = false;
-	let sortedTags = tags.sort((tag1: BaseTag, tag2: BaseTag) => tag1.name.localeCompare(tag2.name));
 </script>
 
-{#each sortedTags as tag}
+{#each tags as tag}
   {#if chips}
 	<Chip chip={tag.id} on:click={() => push(`/tags/${tag.id}`)}>
 		<Text>{tag.name}</Text>
