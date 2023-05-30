@@ -9,7 +9,7 @@
 			</template>
 		</h2>
 		<br />
-		<TagList :tags="project?.Tags || []" chips />
+		<TagList :tags="project?.Tags?.sort((tag1, tag2) => tag1.name.localeCompare(tag2.name)) || []" chips />
 		<div v-html="project?.pageContent" />
 		<br />
 		<ImageDialog :image="dialogImage" v-model:open="imageDialogOpen"/>
