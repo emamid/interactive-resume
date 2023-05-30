@@ -51,7 +51,7 @@ const Project = ({ match }: ProjectProps) => {
 				{employerText}
 			</Typography>
 			<div>
-				{project?.Tags.map(tag => (
+				{project?.Tags.sort((tag1, tag2) => tag1.name.localeCompare(tag2.name)).map(tag => (
 					<Chip
 						label={tag.name}
 						component="a"
