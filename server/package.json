@@ -7,7 +7,7 @@
     "start": "node dist/index.js",
     "dev": "NODE_ENV=dev ts-node-dev --respawn --inspect -r tsconfig-paths/register src",
     "test": "jest",
-    "build": "rm -rf dist; tsc -p .",
+    "build": "rm -rf dist; esbuild src --bundle --platform=node --external:pg-hstore --outfile=dist/index.js",
     "lint": "eslint . & echo 'lint complete'",
     "prod": "tsc && node ./dist/index.js",
     "debug": "tsc && node --inspect=0.0.0.0:9229 ./dist/index.js"
@@ -21,6 +21,7 @@
     "@types/sequelize": "^4.28.15",
     "@types/sqlite3": "^3.1.8",
     "@types/uuid": "^9.0.1",
+    "esbuild": "^0.17.19",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
