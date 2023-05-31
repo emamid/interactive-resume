@@ -1,0 +1,19 @@
+[Unit]
+Description=Resume
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/node dist/index.js
+Restart=always
+# Consider creating a dedicated user for Wiki.js here:
+User=nobody
+Environment=NODE_ENV=production
+Environment=RESUME_DATA_DIR=/home/ubuntu/resume-data
+Environment=REACT_CLIENT_DIR=/home/ubuntu/interactive-resume/client-react/dist
+Environment=SVELTE_CLIENT_DIR=/home/ubuntu/interactive-resume/client_svelte/dist
+Environment=VUE3_CLIENT_DIR=/home/ubuntu/interactive-resume/client_vue3/dist
+WorkingDirectory=/home/ubuntu/interactive-resume/server
+
+[Install]
+WantedBy=multi-user.target
