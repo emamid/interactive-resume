@@ -32,7 +32,6 @@ export default async function Home() {
 	const employers = await getEmployers();
 	return (
 		<>
-			<div>Home Page</div>
 			<HTMLContent html={myself?.pageContent || ''} />
 			<div className="relative overflow-x-auto">
 				<table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">

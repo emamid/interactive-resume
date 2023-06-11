@@ -18,7 +18,6 @@ export default function RootLayout({
 			<body>
 				<div>Toolbar</div>
 				<main>{children}</main>
-				<div>Footer</div>
 			</body>
 	  </html>
   )
