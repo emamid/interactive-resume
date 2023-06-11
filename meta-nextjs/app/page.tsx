@@ -1,3 +1,5 @@
+import HTMLContent from '@/components/HTMLContent';
+
 async function getData() {
 	console.log('About to fetch');
   const response = await fetch('http://localhost:3001/api/rest/v1/myself')
@@ -15,7 +17,7 @@ export default async function Home() {
   return (
 		<>
 	    <div>Home Page</div>
-			<div>{JSON.stringify(myself)}</div>
+			<HTMLContent html={myself?.pageContent || ''} />
 		</>
   )
 }
