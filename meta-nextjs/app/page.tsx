@@ -1,6 +1,8 @@
+import { Myself } from '@/types';
+
 import HTMLContent from '@/components/HTMLContent';
 
-async function getData() {
+async function getMyself(): Promise<Myself> {
 	console.log('About to fetch');
   const response = await fetch('http://localhost:3001/api/rest/v1/myself')
  
@@ -13,7 +15,7 @@ async function getData() {
 }
 
 export default async function Home() {
-	const myself = await getData();
+	const myself = await getMyself();
   return (
 		<>
 	    <div>Home Page</div>
