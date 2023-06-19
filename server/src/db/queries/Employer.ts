@@ -12,7 +12,7 @@ export const getAll = async() => {
 
 	const employers = await Employer.findAll({
 		attributes: {
-			exclude: ['createdAt', 'pageContent', 'updatedAt']
+			exclude: ['createdAt', 'markdownContent', 'pageContent', 'updatedAt']
 		},
 		where: {
 			id: {

@@ -11,7 +11,7 @@ module.exports = async function (context) {
 	}
 	context.params.sequelize = {
 		attributes: {
-			exclude: ['pageContent']
+			exclude: ['pageContent', 'markdownContent']
 		},
 		where: {
 			id: {

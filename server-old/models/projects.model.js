@@ -20,6 +20,9 @@ function getModel(app) {
 			pageContent: {
 				type: Sequelize.TEXT
 			},
+			markdownContent: {
+				type: Sequelize.TEXT
+			},
 			startDate: {
 				type: Sequelize.DATE
 			},

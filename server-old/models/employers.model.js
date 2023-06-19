@@ -24,6 +24,9 @@ function getModel(app) {
 			pageContent: {
 				type: Sequelize.TEXT
 			},
+			markdownContent: {
+				type: Sequelize.TEXT
+			},
 			url: {
 				type: Sequelize.TEXT
 			},

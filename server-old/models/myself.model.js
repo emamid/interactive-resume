@@ -21,6 +21,9 @@ function getModel(app) {
 			pageContent: {
 				type: Sequelize.TEXT
 			},
+			markdownContent: {
+				type: Sequelize.TEXT
+			},
 			personalEmployerID: {
 				type: Sequelize.UUIDV4,
 				defaultValue: Sequelize.UUIDV4
