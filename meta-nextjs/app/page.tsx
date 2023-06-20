@@ -4,6 +4,7 @@ import YearRange from '@/components/YearRange';
 import MDContent from '@/components/MDContent';
 
 import { Employers } from '@/types';
+import Link from 'next/link';
 
 async function getEmployers(): Promise<Employers> {
 	const response = await fetch('http://localhost:3001/api/rest/v1/employers');
@@ -57,7 +58,7 @@ export default async function Home() {
 								>
 									<YearRange startDate={employer.startDate} endDate={employer.endDate} />
 								</th>
-								<td className="px-6 py-4">{employer.name}</td>
+								<td className="px-6 py-4"><Link href={`/employers/${employer?.id}`}>{employer.name}</Link></td>
 								<td className="px-6 py-4">{employer.position}</td>
 							</tr>
 						))}
