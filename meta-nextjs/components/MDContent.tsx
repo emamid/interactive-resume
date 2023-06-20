@@ -12,7 +12,7 @@ const MDContent: React.FC<MDContentProps> = ({ markdown }: MDContentProps) => {
 				className="mb-3 text-gray-500 dark:text-gray-400"
 				children={markdown || ''}
 				linkTarget={href => href?.includes('//') ? '_blank' : ''}
-				transformLinkUri={null}
+				transformLinkUri={href => href?.replace('./#', '../')}
 			/>
 		</div>
 	);
