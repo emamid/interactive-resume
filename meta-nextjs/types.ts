@@ -4,6 +4,7 @@ interface BaseEmployer {
 	name: string;
 	position: string;
 	pageContent: string;
+	markdownContent: string;
 	url: string;
 	startDate: string;
 	endDate: string;
@@ -15,6 +16,7 @@ interface BaseProject {
 	id: string;
 	name: string;
 	pageContent: string;
+	markdownContent: string;
 	startDate: string;
 	endDate: string;
 	employerID: string;
@@ -40,7 +42,8 @@ export interface Image {
 export interface Myself {
 	id: string;
 	name: string;
-	pageContent: string;
+	pageContent: string;	
+	markdownContent: string;
 	personalEmployerID: string;
 	Projects: BaseProject[];
 }

@@ -1,7 +1,7 @@
 import { Myself } from '@/types';
 
 import YearRange from '@/components/YearRange';
-import HTMLContent from '@/components/HTMLContent';
+import MDContent from '@/components/MDContent';
 
 import { Employers } from '@/types';
 
@@ -32,7 +32,7 @@ export default async function Home() {
 	const employers = await getEmployers();
 	return (
 		<>
-			<HTMLContent html={myself?.pageContent || ''} />
+			<MDContent markdown={myself?.markdownContent} />
 			<div className="relative overflow-x-auto">
 				<table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
 					<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
