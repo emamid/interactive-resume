@@ -1,10 +1,11 @@
+import Link from 'next/link';
+
 import { Myself } from '@/types';
 
 import YearRange from '@/components/YearRange';
 import MDContent from '@/components/MDContent';
 
 import { Employers } from '@/types';
-import Link from 'next/link';
 
 async function getEmployers(): Promise<Employers> {
 	const response = await fetch('http://localhost:3001/api/rest/v1/employers');
