@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:/home/emamid/workspaces/interactive-resume/data/resume.sqlite"
+}
+
+model employer_references {
+  id          String @id
+  referenceID String
+  employerID  String
+  createdAt   DateTime
+  updatedAt   DateTime
+	Employer employers @relation(fields: [employerID], references: [id])
+	Reference references @relation(fields: [referenceID], references: [id])
+}
+
+model employers {
+  id              String @id
+  name            String?
+  position        String?
+  pageContent     String?
+  url             String?
+  startDate       DateTime?
+  endDate         DateTime?
+  createdAt       DateTime
+  updatedAt       DateTime
+  latitude        Decimal?
+  longitude       Decimal?
+  markdownContent String?
+	Projects projects[]
+	References employer_references[]
+}
+
+model images {
+  filename    String @id
+  caption     String?
+  description String?
+  projectID   String
+  createdAt   DateTime
+  updatedAt   DateTime
+  sortOrder   Int?
+	Project projects @relation(fields: [projectID], references: [id])
+}
+
+model myself {
+  id                 String @id
+  name               String?
+  pageContent        String?
+  createdAt          DateTime
+  updatedAt          DateTime
+  personalEmployerID String
+  markdownContent    String?
+}
+
+model project_tags {
+  id        String @id
+  projectID String
+  tagID     String
+  createdAt DateTime?
+  updatedAt DateTime?
+	Project projects @relation(fields: [projectID], references: [id])
+	Tag tags @relation(fields: [tagID], references: [id])
+}
+
+model projects {
+  id              String @id
+  name            String?
+  pageContent     String?
+  startDate       DateTime?
+  endDate         DateTime?
+  employerID      String
+  createdAt       DateTime
+  updatedAt       DateTime
+  isPersonal      Boolean?
+  markdownContent String?
+	Employer employers @relation(fields: [employerID], references: [id])
+	Images images[]
+	Tags project_tags[]
+}
+
+model references {
+  id        String @id
+  name      String?
+  url       String?
+  createdAt DateTime
+  updatedAt DateTime
+	Employers employer_references[]
+}
+
+model tags {
+  id        String @id
+  name      String?
+  createdAt DateTime
+  updatedAt DateTime
+  layer     String?
+  category  String?
+	Projects project_tags[]
+}
