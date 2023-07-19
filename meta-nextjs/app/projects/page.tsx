@@ -1,23 +1,25 @@
 import Link from 'next/link';
 
+import { PrismaClient } from '@prisma/client';
+
 import YearRange from '@/components/YearRange';
-
-import { Projects } from '@/types';
-
-async function getProjects(): Promise<Projects> {
-	const response = await fetch('http://localhost:3001/api/rest/v1/projects')
- 
-  if (!response.ok) {
-    throw new Error('Failed to fetch data')
-  }
- 
-	const data = await response.json();	
-  return data;
-}
 
 export default async function Projects() {
 
-	const projects = await getProjects();
+	const prisma = new PrismaClient()
+	const projects = await prisma.projects.findMany({
+		select: {
+			id: true,
+			name: true,
+			startDate: true,
+			endDate: true,
+			employerID: true,
+			Employer: true,
+		},
+		orderBy: {
+			startDate: 'desc',
+		}
+	});
 
   return (
 		<>		

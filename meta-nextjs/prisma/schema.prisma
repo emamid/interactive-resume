@@ -11,8 +11,6 @@ model employer_references {
   id          String @id
   referenceID String
   employerID  String
-  createdAt   DateTime
-  updatedAt   DateTime
 	Employer employers @relation(fields: [employerID], references: [id])
 	Reference references @relation(fields: [referenceID], references: [id])
 }
@@ -25,8 +23,6 @@ model employers {
   url             String?
   startDate       DateTime?
   endDate         DateTime?
-  createdAt       DateTime
-  updatedAt       DateTime
   latitude        Decimal?
   longitude       Decimal?
   markdownContent String?
@@ -39,8 +35,6 @@ model images {
   caption     String?
   description String?
   projectID   String
-  createdAt   DateTime
-  updatedAt   DateTime
   sortOrder   Int?
 	Project projects @relation(fields: [projectID], references: [id])
 }
@@ -49,8 +43,6 @@ model myself {
   id                 String @id
   name               String?
   pageContent        String?
-  createdAt          DateTime
-  updatedAt          DateTime
   personalEmployerID String
   markdownContent    String?
 }
@@ -59,8 +51,6 @@ model project_tags {
   id        String @id
   projectID String
   tagID     String
-  createdAt DateTime?
-  updatedAt DateTime?
 	Project projects @relation(fields: [projectID], references: [id])
 	Tag tags @relation(fields: [tagID], references: [id])
 }
@@ -72,8 +62,6 @@ model projects {
   startDate       DateTime?
   endDate         DateTime?
   employerID      String
-  createdAt       DateTime
-  updatedAt       DateTime
   isPersonal      Boolean?
   markdownContent String?
 	Employer employers @relation(fields: [employerID], references: [id])
@@ -85,16 +73,12 @@ model references {
   id        String @id
   name      String?
   url       String?
-  createdAt DateTime
-  updatedAt DateTime
 	Employers employer_references[]
 }
 
 model tags {
   id        String @id
   name      String?
-  createdAt DateTime
-  updatedAt DateTime
   layer     String?
   category  String?
 	Projects project_tags[]

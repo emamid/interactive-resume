@@ -2,7 +2,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
 interface MDContentProps {
-	markdown?: string;
+	markdown?: string | null;
 }
 
 const MDContent: React.FC<MDContentProps> = ({ markdown }: MDContentProps) => {

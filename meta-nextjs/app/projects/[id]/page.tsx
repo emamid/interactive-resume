@@ -1,23 +1,26 @@
+import { PrismaClient } from '@prisma/client';
+
 import MDContent from '@/components/MDContent';
 import YearRange from '@/components/YearRange';
 
-import { Project } from '@/types';
-
-async function getProject(id: string): Promise<Project> {
-	const response = await fetch(
-		`http://localhost:3001/api/rest/v1/projects/${id}`
-	);
-
-	if (!response.ok) {
-		throw new Error('Failed to fetch data');
-	}
-
-	const data = await response.json();
-	return data;
-}
-
 export default async function Project({ params }: { params: { id: string } }) {
-	const project = await getProject(params.id);
+
+	const prisma = new PrismaClient()
+	const project = await prisma.projects.findUnique({
+		select: {
+			id: true,
+			name: true,
+			markdownContent: true,
+			startDate: true,
+			endDate: true,
+			Employer: true,
+			employerID: true,
+			isPersonal: true,
+		},
+		where: {
+			id: params.id,
+		}
+	});
 
 	const employerText = project?.isPersonal ? (
 		''

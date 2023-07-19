@@ -1,12 +1,12 @@
 interface YearRangeProps {
-	startDate?: string;
-	endDate?: string;
+	startDate?: Date | null;
+	endDate?: Date | null;
 	withParens?: boolean;
 }
 
 const YearRange = ({ startDate, endDate, withParens }: YearRangeProps) => {
-	const startYear = startDate ? new Date(startDate).getFullYear() : null;
-	const endYear = endDate ? new Date(endDate).getFullYear() : null;
+	const startYear = startDate?.getFullYear();
+	const endYear = endDate?.getFullYear();
 	if (startYear || endYear) {
 		const yearsStr = (startYear === endYear) ? startYear : (endYear ? `${startYear} - ${endYear}` : `${startYear} -`);
 		if (withParens) {

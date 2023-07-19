@@ -1,37 +1,32 @@
-import Link from 'next/link';
+import { PrismaClient } from '@prisma/client';
 
-import { Myself } from '@/types';
+import Link from 'next/link';
 
 import YearRange from '@/components/YearRange';
 import MDContent from '@/components/MDContent';
 
-import { Employers } from '@/types';
-
-async function getEmployers(): Promise<Employers> {
-	const response = await fetch('http://localhost:3001/api/rest/v1/employers');
-
-	if (!response.ok) {
-		throw new Error('Failed to fetch data');
-	}
-
-	const data = await response.json();
-	return data;
-}
-
-async function getMyself(): Promise<Myself> {
-	const response = await fetch('http://localhost:3001/api/rest/v1/myself');
-
-	if (!response.ok) {
-		throw new Error('Failed to fetch data');
-	}
-
-	const data = await response.json();
-	return data;
-}
-
 export default async function Home() {
-	const myself = await getMyself();
-	const employers = await getEmployers();
+
+	const prisma = new PrismaClient()
+	const myself = await prisma.myself.findFirst();
+	const employers = await prisma.employers.findMany({
+		select: {
+			id: true,
+			name: true,
+			position: true,
+			startDate: true,
+			endDate: true,
+		},
+		orderBy: {
+			startDate: 'desc',
+		},
+		where: {
+			id: {
+				not: myself?.personalEmployerID,
+			}
+		}
+	});
+
 	return (
 		<>
 			<MDContent markdown={myself?.markdownContent} />
