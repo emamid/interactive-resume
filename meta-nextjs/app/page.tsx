@@ -1,14 +1,13 @@
-import { PrismaClient } from '@prisma/client';
-
 import Link from 'next/link';
 
 import YearRange from '@/components/YearRange';
 import MDContent from '@/components/MDContent';
 
+import prismaClient from '@/utils/prismaClient';
+
 export default async function Home() {
-	const prisma = new PrismaClient();
-	const myself = await prisma.myself.findFirst();
-	const employers = await prisma.employers.findMany({
+	const myself = await prismaClient.myself.findFirst();
+	const employers = await prismaClient.employers.findMany({
 		select: {
 			id: true,
 			name: true,
@@ -25,7 +24,7 @@ export default async function Home() {
 			}
 		}
 	});
-	const personalProjects = await prisma.projects.findMany({
+	const personalProjects = await prismaClient.projects.findMany({
 		select: {
 			id: true,
 			name: true,

@@ -1,12 +1,11 @@
-import { PrismaClient } from '@prisma/client';
-
 import MDContent from '@/components/MDContent';
 import YearRange from '@/components/YearRange';
 
+import prismaClient from '@/utils/prismaClient';
+
 export default async function Project({ params }: { params: { id: string } }) {
 
-	const prisma = new PrismaClient()
-	const project = await prisma.projects.findUnique({
+	const project = await prismaClient.projects.findUnique({
 		select: {
 			id: true,
 			name: true,

@@ -1,13 +1,12 @@
 import Link from 'next/link';
 
-import { PrismaClient } from '@prisma/client';
-
 import YearRange from '@/components/YearRange';
+
+import prismaClient from '@/utils/prismaClient';
 
 export default async function Projects() {
 
-	const prisma = new PrismaClient()
-	const projects = await prisma.projects.findMany({
+	const projects = await prismaClient.projects.findMany({
 		select: {
 			id: true,
 			name: true,
