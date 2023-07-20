@@ -109,7 +109,7 @@ export default async function Home() {
 									/>
 								</th>
 								<td className="px-6 py-4">
-									<Link href={`/project/${project?.id}`}>
+									<Link href={`/projects/${project?.id}`}>
 										{project.name}
 									</Link>
 								</td>
