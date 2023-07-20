@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import MDContent from '@/components/MDContent';
 import YearRange from '@/components/YearRange';
 
@@ -15,6 +17,21 @@ export default async function Project({ params }: { params: { id: string } }) {
 			Employer: true,
 			employerID: true,
 			isPersonal: true,
+			Tags: {
+				select: {
+					Tag: {						
+						select: {
+							id: true,
+							name: true,
+						}
+					},
+				},
+				orderBy: {
+					Tag: {
+						name: 'asc',
+					},
+				},		
+			}
 		},
 		where: {
 			id: params.id,
@@ -44,6 +61,7 @@ export default async function Project({ params }: { params: { id: string } }) {
 			{project?.name}
 				{employerText}
 			</h5>
+			{project?.Tags.map(tag => (<Link className="bg-gray-100 text-gray-800 text-sm font-medium px-3 py-1 rounded-full dark:bg-gray-700 dark:text-gray-300 border border-gray-500" href={`/tags/${tag.Tag.id}`}>{tag.Tag.name}</Link>))}
 			<MDContent markdown={project?.markdownContent} />
 		</>
 	);
