@@ -4,8 +4,9 @@ import MDContent from '@/components/MDContent';
 import YearRange from '@/components/YearRange';
 
 import prismaClient from '@/utils/prismaClient';
+import type { IDPageParams } from '@/types';
 
-export default async function Project({ params }: { params: { id: string } }) {
+export default async function Project({ params: { id } }: IDPageParams) {
 
 	const project = await prismaClient.projects.findUnique({
 		select: {
@@ -34,7 +35,7 @@ export default async function Project({ params }: { params: { id: string } }) {
 			}
 		},
 		where: {
-			id: params.id,
+			id,
 		}
 	});
 

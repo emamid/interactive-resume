@@ -4,8 +4,9 @@ import MDContent from '@/components/MDContent';
 import YearRange from '@/components/YearRange';
 
 import prismaClient from '@/utils/prismaClient';
+import type { IDPageParams } from '@/types';
 
-export default async function Employer({ params }: { params: { id: string } }) {
+export default async function Employer({ params: { id } }: IDPageParams) {
 	const employer = await prismaClient.employers.findUnique({
 		select: {
 			id: true,
@@ -18,6 +19,7 @@ export default async function Employer({ params }: { params: { id: string } }) {
 				select: {
 					Reference: {
 						select: {
+							id: true,
 							name: true,
 							url: true
 						}
@@ -26,7 +28,7 @@ export default async function Employer({ params }: { params: { id: string } }) {
 			}
 		},
 		where: {
-			id: params.id
+			id,
 		}
 	});
 
@@ -43,9 +45,16 @@ export default async function Employer({ params }: { params: { id: string } }) {
 
 			<MDContent markdown={employer?.markdownContent} />
 			<h5>References</h5>
-			<ul>
+			<ul className="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
 				{employer?.References.map((reference) => (
-					<li><Link href={`${reference.Reference.url}`} target='_blank'>{reference.Reference.name}</Link></li>
+					<li key={reference.Reference.id}>
+						<Link
+							href={`${reference.Reference.url}`}
+							target="_blank"
+						>
+							{reference.Reference.name}
+						</Link>
+					</li>
 				))}
 			</ul>
 		</>
