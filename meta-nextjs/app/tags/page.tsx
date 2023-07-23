@@ -1,24 +1,35 @@
-import { Tags } from '@/types';
+import Link from 'next/link';
 
-async function getTags(): Promise<Tags> {
-	const response = await fetch('http://localhost:3001/api/rest/v1/tags')
- 
-  if (!response.ok) {
-    throw new Error('Failed to fetch data')
-  }
- 
-	const data = await response.json();	
-  return data;
-}
+import prismaClient from '@/utils/prismaClient';
 
 export default async function Tags() {
+	const tags = await prismaClient.tags.findMany({
+		select: {
+			id: true,
+			name: true
+		},
+		orderBy: {
+			name: 'asc'
+		}
+	});
 
-	const tags = await getTags();
-
-  return (
+	return (
 		<>
-	    <div>List of tags</div>
-			<div>{JSON.stringify(tags)}</div>
+			<div className="flex flex-wrap">
+				{tags.map((tag) => (
+					<Link
+						className="p-1"
+						href={`/tags/${tag.id}`}
+					>
+						<button
+							type="button"
+							className="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+						>
+							{tag.name}
+						</button>
+					</Link>
+				))}
+			</div>
 		</>
-  )
+	);
 }
