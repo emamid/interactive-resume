@@ -1,0 +1,54 @@
+<div class="visualize">
+  <ion-row class="control-section">
+    <ion-col size="12" sizeMd="2">
+      <ion-select
+        label="Color By"
+        labelPlacement="stacked"
+        fill="outline"
+        interface="popover"
+        [value]="colorBy()"
+        (ionChange)="setColorBy($event.detail.value)"
+      >
+        @for (item of colorByItems; track item.value) {
+          <ion-select-option [value]="item.value">{{ item.text }}</ion-select-option>
+        }
+      </ion-select>
+    </ion-col>
+    <ion-col size="12" sizeMd="2">
+      <ion-select
+        label="Group By"
+        labelPlacement="stacked"
+        fill="outline"
+        interface="popover"
+        [value]="groupBy()"
+        (ionChange)="setGroupBy($event.detail.value)"
+      >
+        @for (item of groupByItems; track item.value) {
+          <ion-select-option [value]="item.value">{{ item.text }}</ion-select-option>
+        }
+      </ion-select>
+    </ion-col>
+    <ion-col size="12" sizeMd="2">
+      <ion-range
+        class="value-range"
+        label="Value"
+        labelPlacement="stacked"
+        color="primary"
+        [dualKnobs]="true"
+        [min]="rangeMin"
+        [max]="valueMax()"
+        [step]="1"
+        [pin]="true"
+        [value]="valueRange()"
+        (ionInput)="setValueRange($event.detail.value)"
+      />
+    </ion-col>
+  </ion-row>
+  <app-bubble-chart
+    class="chart-container"
+    [chartConfig]="chartConfig()"
+    [data]="bubbles()"
+    (bubbleClicked)="bubbleClicked($event)"
+  />
+  <app-color-legend [colorMap]="colorMap()" />
+</div>

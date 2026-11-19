@@ -21,11 +21,26 @@
 					v-model="groupBy"
 				/>
 			</v-col>
+			<v-col cols="2">
+				<div class="value-range-control">
+					<label class="value-range-label">Value</label>
+					<v-range-slider
+						class="value-range"
+						color="primary"
+						:min="rangeMin"
+						:max="valueMax"
+						:step="1"
+						thumb-label
+						hide-details
+						v-model="valueRange"
+					/>
+				</div>
+			</v-col>
 		</v-row>
 		<BubbleChart
 			class="chart-container"
 			:chartConfig="{	colorByProp: colorBy,	colorMap, groupByProp: groupBy }"
-			:data="mappedTags"
+			:data="visibleTags"
 			@bubbleClicked="data => router.push(`/tags/${data.id}`)"
 		/>
 		<ColorLegend :colorMap="colorMap" />
@@ -43,6 +58,7 @@ import getProjectTags from '@/api/axios/getProjectTags';
 import ColorLegend from '@/components/ColorLegend.vue';
 import type { BubbleData } from '@/components/BubbleChart/types';
 import BubbleChart from '@/components/BubbleChart/index.vue';
+import { filterByValue, maxValue, valueRangeMin } from './value-range';
 
 interface TagBubbleData extends BubbleData {
 	value: number,
@@ -92,7 +108,14 @@ const mappedTags: TagBubbleData[] = projectTags.value?.map((tag) => ({
 	x: 0,
 	y: 0,
 })) || [];
-const colorValues = computed(() => uniq(mappedTags.map((tag: any) => tag[colorBy.value])).sort());
+const rangeMin = valueRangeMin;
+const valueMax = maxValue(mappedTags);
+const valueRange = ref<[number, number]>([rangeMin, valueMax]);
+const visibleTags = computed(() => filterByValue(mappedTags, {
+	lower: valueRange.value[0],
+	upper: valueRange.value[1],
+}));
+const colorValues = computed(() => uniq(visibleTags.value.map((tag: any) => tag[colorBy.value])).sort());
 const colorMap = computed(() => colorValues.value.reduce(
 	(currentMap, value) => ({
 		...currentMap,
@@ -119,6 +142,29 @@ const colorMap = computed(() => colorValues.value.reduce(
 .control-section {
 	flex-grow: 0;
 	margin-bottom: 1em;
+}
+
+.value-range-control {
+	position: relative;
+	height: 70px;
+}
+
+.value-range-label {
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 12px;
+	line-height: 18px;
+	letter-spacing: 0.009375em;
+	opacity: 0.6;
+}
+
+.value-range.v-slider.v-input--horizontal {
+	position: absolute;
+	top: 32px;
+	left: 0;
+	right: 0;
+	margin: 0;
 }
 
 </style>

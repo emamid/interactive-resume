@@ -1,0 +1,37 @@
+:host {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.data {
+  overflow: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  border: 1px solid #151417;
+  padding: 5px;
+}
+
+pre.bracket {
+  margin: 0;
+}
+
+button.item {
+  display: block;
+  width: 100%;
+  margin: 0 0 0 2em;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  white-space: pre;
+  cursor: pointer;
+}
+
+button.item:hover {
+  background-color: lightgrey;
+}

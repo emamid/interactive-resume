@@ -1,0 +1,4 @@
+<ion-card button="true" (click)="clicked.emit(image())">
+  <img [src]="'/thumbnails/' + image().filename" [alt]="image().caption" />
+  <ion-card-content>{{ image().caption }}</ion-card-content>
+</ion-card>

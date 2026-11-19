@@ -1,0 +1,20 @@
+<div class="project">
+  @if (project.hasValue()) {
+    @let current = project.value();
+    <h2>
+      {{ current.name }}
+      @if (!current.isPersonal) {
+        {{ ' at ' }}
+        <a [routerLink]="['/employers', current.employerID]">{{ current.Employer.name }}</a>
+        {{ ' ' }}
+        <app-year-range [startDate]="current.startDate" [endDate]="current.endDate" [withParens]="true" />
+      }
+    </h2>
+    <br />
+    <app-tag-list [tags]="sortedTags()" [chips]="true" />
+    <div [innerHTML]="current.pageContent"></div>
+    <br />
+    <app-image-dialog [image]="dialogImage()" [(open)]="imageDialogOpen" />
+    <app-image-gallery [images]="current.Images || []" (clicked)="imageClicked($event)" />
+  }
+</div>

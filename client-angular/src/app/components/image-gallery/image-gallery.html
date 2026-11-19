@@ -1,0 +1,14 @@
+@if (images().length) {
+  <div>
+    <h3>Gallery</h3>
+    <ion-grid>
+      <ion-row>
+        @for (image of images(); track image.filename) {
+          <ion-col size="12" sizeMd="3">
+            <app-image-card [image]="image" (clicked)="clicked.emit(image)" />
+          </ion-col>
+        }
+      </ion-row>
+    </ion-grid>
+  </div>
+}

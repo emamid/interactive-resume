@@ -5,6 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Slider from '@mui/material/Slider';
 
 import useGetProjectTags from '@/api/hooks/useGetProjectTags';
 
@@ -12,6 +13,7 @@ import * as d3 from 'd3';
 import { map, uniq } from 'lodash';
 
 import BubbleChart from '@/components/BubbleChart';
+import { filterByValue, maxValue, valueRangeMin } from './value-range';
 
 import './Visualize.css';
 
@@ -39,10 +41,21 @@ const Visualize = ({ history }: VisualizeProps) => {
 			value: tag.projectCount,
 			r: 4 + tag.projectCount * 11
 		})) || [];
+	const valueMax = maxValue(mappedTags);
+	const [valueRange, setValueRange] = useState<[number, number]>([valueRangeMin, valueMax]);
+	const [trackedMax, setTrackedMax] = useState(valueMax);
+	if (trackedMax !== valueMax) {
+		setTrackedMax(valueMax);
+		setValueRange([valueRangeMin, valueMax]);
+	}
+	const visibleTags = filterByValue(mappedTags, {
+		lower: valueRange[0],
+		upper: valueRange[1]
+	});
 
 	const colors = d3.scaleOrdinal(d3.schemeSet3);
 
-	const colorValues = uniq(mappedTags.map((tag: any) => tag[colorBy])).sort();
+	const colorValues = uniq(visibleTags.map((tag: any) => tag[colorBy])).sort();
 
 	const colorMap = colorValues.reduce(
 		(currentMap, value) => ({
@@ -88,10 +101,26 @@ const Visualize = ({ history }: VisualizeProps) => {
 						<MenuItem value={'layer'}>Layer</MenuItem>
 					</Select>
 				</FormControl>
+				<FormControl variant="standard" className="visualize-value-range">
+					<InputLabel shrink>Value</InputLabel>
+					<Slider
+						value={valueRange}
+						min={valueRangeMin}
+						max={valueMax}
+						step={1}
+						valueLabelDisplay="auto"
+						getAriaLabel={(index) => (index === 0 ? 'Minimum value' : 'Maximum value')}
+						onChange={(_event, value) => {
+							if (Array.isArray(value)) {
+								setValueRange([value[0], value[1]]);
+							}
+						}}
+					/>
+				</FormControl>
 			</div>
 			<div ref={chartDiv} className="visualize-chart">
 				<BubbleChart
-					data={mappedTags}
+					data={visibleTags}
 					colorByProp={colorBy}
 					groupByProp={groupBy ? (groupBy as string) : undefined}
 					svgWidth={svgWidth}

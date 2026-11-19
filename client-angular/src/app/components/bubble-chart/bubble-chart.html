@@ -1,0 +1,39 @@
+<div #container class="chart">
+  <svg>
+    @for (group of layout().groups; track group.title) {
+      <g
+        appBubbleGroup
+        [attr.transform]="
+          'translate(' + group.column * layout().tileWidth + ',' + group.row * layout().tileHeight + ')'
+        "
+        [data]="group"
+        [chartConfig]="chartConfig()"
+        [maxValue]="maxValue()"
+        [tileWidth]="layout().tileWidth"
+        [tileHeight]="layout().tileHeight"
+        [tileScale]="layout().tileScale"
+        (bubbleClicked)="bubbleClicked.emit($event)"
+      />
+    }
+    @for (column of columnLines(); track column) {
+      <line
+        [attr.x1]="column * layout().tileWidth"
+        y1="0"
+        [attr.x2]="column * layout().tileWidth"
+        [attr.y2]="layout().tileRows * layout().tileHeight"
+        stroke="black"
+        stroke-dasharray="2, 2"
+      />
+    }
+    @for (row of rowLines(); track row) {
+      <line
+        x1="0"
+        [attr.y1]="row * layout().tileHeight"
+        [attr.x2]="layout().tileColumns * layout().tileWidth"
+        [attr.y2]="row * layout().tileHeight"
+        stroke="black"
+        stroke-dasharray="2, 2"
+      />
+    }
+  </svg>
+</div>

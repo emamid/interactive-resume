@@ -1,0 +1,75 @@
+<ion-app>
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-content>
+      <ion-list>
+        <ion-item button routerLink="/" (click)="closeMenu()">
+          <ion-icon name="home-outline" slot="start" aria-hidden="true" />
+          <ion-label>Home</ion-label>
+        </ion-item>
+        <ion-item button routerLink="/projects" (click)="closeMenu()">
+          <ion-icon name="build-outline" slot="start" aria-hidden="true" />
+          <ion-label>Projects</ion-label>
+        </ion-item>
+        <ion-item button routerLink="/tags" (click)="closeMenu()">
+          <ion-icon name="pricetag-outline" slot="start" aria-hidden="true" />
+          <ion-label>Tags</ion-label>
+        </ion-item>
+        <ion-item button routerLink="/visualize" (click)="closeMenu()">
+          <ion-icon name="pie-chart-outline" slot="start" aria-hidden="true" />
+          <ion-label>Visualize</ion-label>
+        </ion-item>
+        <ion-item button routerLink="/api/rest" (click)="closeMenu()">
+          <ion-icon name="code-slash-outline" slot="start" aria-hidden="true" />
+          <ion-label>REST API</ion-label>
+        </ion-item>
+        <ion-item-divider />
+        <ion-item button href="/react_client" detail="false">
+          <img src="/icons/react_logo.svg" alt="" width="24" height="24" slot="start" />
+          <ion-label>React</ion-label>
+        </ion-item>
+        <ion-item button href="/svelte_client" detail="false">
+          <img src="/icons/svelte_logo.svg" alt="" width="24" height="24" slot="start" />
+          <ion-label>Svelte</ion-label>
+        </ion-item>
+        <ion-item button href="/vue3_client" detail="false">
+          <img src="/icons/vue_logo.svg" alt="" width="24" height="24" slot="start" />
+          <ion-label>Vue 3</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-menu-button />
+        </ion-buttons>
+        <ion-title>Interactive Resume</ion-title>
+        <ion-buttons slot="end">
+          <ion-button id="framework-trigger" fill="clear" class="framework-button">
+            <img [src]="currentFramework.imageSrc" alt="" width="24" height="24" />
+            {{ currentFramework.text }}
+          </ion-button>
+          <ion-popover trigger="framework-trigger" triggerAction="click" [dismissOnSelect]="true">
+            <ng-template>
+              <ion-list>
+                @for (item of frameworkItems; track item.value) {
+                  <ion-item [href]="item.url + routeUrl()" button detail="false">
+                    <img [src]="item.imageSrc" [alt]="item.text" width="24" height="24" slot="start" />
+                    <ion-label>{{ item.text }}</ion-label>
+                  </ion-item>
+                }
+              </ion-list>
+            </ng-template>
+          </ion-popover>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content [scrollY]="allowOverflow()" class="shell-content">
+      <div class="outlet" [class.allow-overflow]="allowOverflow()" [class.prevent-overflow]="!allowOverflow()">
+        <router-outlet />
+      </div>
+    </ion-content>
+  </div>
+</ion-app>

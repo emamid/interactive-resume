@@ -1,0 +1,20 @@
+<div class="projects">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Dates</th>
+        <th>Position</th>
+        <th>Company</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (project of projects.hasValue() ? projects.value() : []; track project.id) {
+        <tr>
+          <td><app-year-range [startDate]="project.startDate" [endDate]="project.endDate" /></td>
+          <td appLinkCell [path]="'/projects/' + project.id" [text]="project.name"></td>
+          <td appLinkCell [path]="'/employers/' + project.employerID" [text]="project.Employer.name"></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

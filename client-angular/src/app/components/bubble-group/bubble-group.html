@@ -1,0 +1,20 @@
+<svg:g
+  class="bubble-group-inner"
+  [attr.transform]="
+    'translate(' + data().centerX + ',' + data().centerY + ') scale(' + tileScale() + ')'
+  "
+>
+  @for (bubble of data().data; track bubble.id) {
+    <svg:g
+      appBubble
+      [attr.transform]="'translate(' + bubble.x + ',' + bubble.y + ')'"
+      [data]="bubble"
+      [chartConfig]="chartConfig()"
+      [maxValue]="maxValue()"
+      (bubbleClicked)="bubbleClicked.emit($event)"
+    />
+  }
+</svg:g>
+@if (data().title !== 'All') {
+  <svg:text x="16" y="24" class="bubble-group-caption">{{ data().title || 'Other' }}</svg:text>
+}

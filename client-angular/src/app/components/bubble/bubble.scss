@@ -1,0 +1,16 @@
+:host {
+  cursor: pointer;
+}
+
+body.bubble {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  background: transparent;
+}
+
+p.bubble {
+  margin: 0;
+  text-align: center;
+}

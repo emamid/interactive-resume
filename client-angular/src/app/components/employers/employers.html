@@ -1,0 +1,18 @@
+<table class="data-table">
+  <thead>
+    <tr>
+      <th>Dates</th>
+      <th>Company</th>
+      <th>Position</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (employer of employers.hasValue() ? employers.value() : []; track employer.id) {
+      <tr>
+        <td><app-year-range [startDate]="employer.startDate" [endDate]="employer.endDate" /></td>
+        <td appLinkCell [path]="'/employers/' + employer.id" [text]="employer.name"></td>
+        <td appLinkCell [path]="'/employers/' + employer.id" [text]="employer.position"></td>
+      </tr>
+    }
+  </tbody>
+</table>

@@ -1,0 +1,12 @@
+<div class="employer">
+  @if (employer.hasValue()) {
+    @let current = employer.value();
+    <h2>
+      {{ current.position }} at {{ current.name }}
+      <app-year-range [startDate]="current.startDate" [endDate]="current.endDate" [withParens]="true" />
+    </h2>
+    <div [innerHTML]="current.pageContent"></div>
+    <br />
+    <app-reference-list [references]="current.References" />
+  }
+</div>

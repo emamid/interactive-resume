@@ -1,0 +1,11 @@
+<div class="home">
+  @if (myself.hasValue()) {
+    <div [innerHTML]="myself.value().pageContent"></div>
+  }
+  <br />
+  <h4>Employment History</h4>
+  <app-employers />
+  <br />
+  <h4>Personal Projects</h4>
+  <app-personal-projects [projects]="myself.hasValue() ? myself.value().Projects : undefined" />
+</div>

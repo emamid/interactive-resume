@@ -1,0 +1,11 @@
+@if (clickable()) {
+  <div class="data">
+    <pre class="bracket">[</pre>
+    @for (line of lines(); track $index) {
+      <button type="button" class="item" (click)="itemClicked.emit(line.id)">{{ line.text }}</button>
+    }
+    <pre class="bracket">]</pre>
+  </div>
+} @else {
+  <pre class="data">{{ formatted() }}</pre>
+}

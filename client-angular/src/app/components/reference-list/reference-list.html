@@ -1,0 +1,12 @@
+@if (references()?.length) {
+  <div>
+    <h4>References</h4>
+    <ul>
+      @for (reference of references(); track reference.id) {
+        <li>
+          <a [href]="reference.url" target="_blank" rel="noopener noreferrer">{{ reference.name }}</a>
+        </li>
+      }
+    </ul>
+  </div>
+}

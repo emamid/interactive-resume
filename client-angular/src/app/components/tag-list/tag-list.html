@@ -1,0 +1,7 @@
+@for (tag of tags(); track tag.id) {
+  @if (chips()) {
+    <ion-chip outline="true" (click)="goToTag(tag.id)">{{ tag.name }}</ion-chip>
+  } @else {
+    <ion-button class="tag-button" fill="outline" (click)="goToTag(tag.id)">{{ tag.name }}</ion-button>
+  }
+}

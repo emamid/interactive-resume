@@ -8,6 +8,7 @@
 				<menu-item to="/visualize" icon="mdi-chart-bubble" title="Visualize"/>
 				<menu-item to="/api/rest" icon="mdi-api" title="REST API"/>
 				<v-divider />
+				<menu-item imageSrc="/icons/angular_logo.svg" href="/angular_client" title="Angular"/>
 				<menu-item imageSrc="/icons/react_logo.svg" href="/react_client" title="React"/>
 				<menu-item imageSrc="/icons/svelte_logo.svg" href="/svelte_client" title="Svelte"/>
 			</v-list>
@@ -55,6 +56,11 @@ axios.defaults.withCredentials = true;
 const drawerOpen = ref(false);
 
 const frameworkItems = [{
+	imageSrc: '/icons/angular_logo.svg',
+	url: '/angular_client/#',
+	value: 'angular',
+	text: 'Angular'
+}, {
 	imageSrc: '/icons/react_logo.svg',
 	url: '/react_client/#',
 	value: 'react',
