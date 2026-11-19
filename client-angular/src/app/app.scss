@@ -1,0 +1,39 @@
+.framework-button {
+  --color: #ffffff;
+  min-width: 144px;
+  text-transform: none;
+  font-size: 1rem;
+}
+
+.framework-button img {
+  margin-right: 8px;
+}
+
+ion-menu img {
+  margin-right: 16px;
+}
+
+.shell-content {
+  --background: #ffffff;
+}
+
+.outlet {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 16px;
+}
+
+.allow-overflow {
+  overflow: auto;
+}
+
+.prevent-overflow {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.prevent-overflow > :not(router-outlet) {
+  flex: 1;
+  min-height: 0;
+}

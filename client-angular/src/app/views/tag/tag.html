@@ -1,0 +1,20 @@
+<div class="tag">
+  @if (tag.hasValue()) {
+    @let current = tag.value();
+    <h2>{{ current.name }}</h2>
+    <ion-grid>
+      <ion-row>
+        @for (project of current.Projects; track project.id) {
+          <ion-col size="12" sizeSm="6" sizeMd="3">
+            <ion-card button="true" (click)="goToProject(project.id)">
+              <ion-card-header>
+                <ion-card-title>{{ project.name }}</ion-card-title>
+                <ion-card-subtitle>{{ project.Employer.name }}</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        }
+      </ion-row>
+    </ion-grid>
+  }
+</div>

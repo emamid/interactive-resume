@@ -1,0 +1,10 @@
+<ion-modal [isOpen]="open()" (didDismiss)="open.set(false)">
+  <ng-template>
+    <div class="dialog-sheet">
+      <h3>{{ image()?.caption }}</h3>
+      @if (image(); as current) {
+        <img class="dialog-image" [src]="'/images/' + current.filename" [alt]="current.caption" />
+      }
+    </div>
+  </ng-template>
+</ion-modal>

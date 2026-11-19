@@ -144,6 +144,15 @@ const App = () => {
 				<ListItem
 					button
 					onClick={() => {
+						window.location.href = '/angular_client'
+					}}
+						>
+					<img className="client-logo" alt="logo" src="/icons/angular_logo.svg" height="24px" width="24px" />
+					<ListItemText primary="Angular" />
+				</ListItem>
+				<ListItem
+					button
+					onClick={() => {
 						window.location.href = '/svelte_client'
 					}}
 						>
@@ -186,6 +195,7 @@ const App = () => {
 								onChange={event => window.location.pathname = `/${event.target.value}_client/`}
 								className="framework-select"
 							>
+								<MenuItem value={'angular'} className="framework-select-item"><img alt="Angular" src="/icons/angular_logo.svg" className="framework-logo" />Angular</MenuItem>
 								<MenuItem value={'react'} className="framework-select-item"><img alt="React" src="/icons/react_logo.svg" className="framework-logo" />React</MenuItem>
 								<MenuItem value={'svelte'} className="framework-select-item"><img alt="Svelte" src="/icons/svelte_logo.svg" className="framework-logo" />Svelte</MenuItem>
 								<MenuItem value={'vue3'} className="framework-select-item"><img alt="Vue 3" src="/icons/vue_logo.svg" className="framework-logo" />Vue 3</MenuItem>

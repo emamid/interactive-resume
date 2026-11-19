@@ -19,6 +19,7 @@ app.use('/thumbnails', express.static(`${dataDir}/thumbnails`));
 app.use('/react_client', express.static(process.env.REACT_CLIENT_DIR));
 app.use('/svelte_client', express.static(process.env.SVELTE_CLIENT_DIR));
 app.use('/vue3_client', express.static(process.env.VUE3_CLIENT_DIR));
+app.use('/angular_client', express.static(process.env.ANGULAR_CLIENT_DIR));
 app.use('/api/rest', rest);
 app.use('/', express.static(`${dataDir}/redirect`));
 

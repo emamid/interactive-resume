@@ -1,0 +1,21 @@
+<svg:circle [attr.r]="data().r * 0.95" [attr.fill]="color()" (click)="click()">
+  <svg:title>{{ data().name }}</svg:title>
+</svg:circle>
+<svg:foreignObject
+  [attr.width]="data().r * 1.6"
+  [attr.height]="data().r * 1.6"
+  [attr.x]="data().r * -0.8"
+  [attr.y]="data().r * -0.8"
+>
+  <xhtml:body
+    class="bubble"
+    [attr.title]="data().name"
+    [style.height.px]="data().r * 1.6"
+    [style.width.px]="data().r * 1.6"
+    (click)="click()"
+  >
+    <xhtml:p class="bubble" [style.font-size]="fontSize()" [attr.title]="data().name" (click)="click()">
+      {{ data().name }}
+    </xhtml:p>
+  </xhtml:body>
+</svg:foreignObject>

@@ -1,0 +1,7 @@
+<div class="legend-container">
+  @for (entry of entries(); track entry[0]) {
+    <span class="legend-item" [style.background-color]="entry[1]">
+      {{ entry[0] === 'null' ? 'Other' : entry[0] }}
+    </span>
+  }
+</div>
