@@ -10,7 +10,7 @@ import getProjectTags from '@/api/axios/getProjectTags';
 import ColorLegend from '@/components/ColorLegend.svelte';
 import type { BubbleData } from '@/components/BubbleChart/types';
 import BubbleChart from '@/components/BubbleChart/index.svelte';
-import { filterByValue, maxValue, VALUE_RANGE_MIN } from './value-range';
+import { filterByValue, maxValue, valueRangeMin } from './value-range';
 
 interface TagBubbleData extends BubbleData {
 	value: number,
@@ -26,10 +26,10 @@ let mappedTags: TagBubbleData[] = [];
 let visibleTags: TagBubbleData[] = [];
 let colorValues: string[] = [];
 let colorMap: Record<string, string> = {};
-let valueMax = VALUE_RANGE_MIN;
-let trackedMax = VALUE_RANGE_MIN;
-let valueStart = VALUE_RANGE_MIN;
-let valueEnd = VALUE_RANGE_MIN;
+let valueMax = valueRangeMin;
+let trackedMax = valueRangeMin;
+let valueStart = valueRangeMin;
+let valueEnd = valueRangeMin;
 
 $: {
 	localStorage.setItem('visualize-colorBy', colorBy);
@@ -46,7 +46,7 @@ $: mappedTags = projectTags?.map((tag) => ({
 $: valueMax = maxValue(mappedTags);
 $: if (trackedMax !== valueMax) {
 	trackedMax = valueMax;
-	valueStart = VALUE_RANGE_MIN;
+	valueStart = valueRangeMin;
 	valueEnd = valueMax;
 }
 $: visibleTags = filterByValue(mappedTags, {
@@ -82,11 +82,11 @@ $: colorMap = colorValues.reduce(
     </Select>
 		<div class="value-range">
 			<span class="value-range-label">Value</span>
-			{#if valueMax > VALUE_RANGE_MIN}
+			{#if valueMax > valueRangeMin}
 				<Slider
 					range
 					discrete
-					min={VALUE_RANGE_MIN}
+					min={valueRangeMin}
 					max={valueMax}
 					step={1}
 					bind:start={valueStart}

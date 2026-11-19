@@ -58,7 +58,7 @@ import getProjectTags from '@/api/axios/getProjectTags';
 import ColorLegend from '@/components/ColorLegend.vue';
 import type { BubbleData } from '@/components/BubbleChart/types';
 import BubbleChart from '@/components/BubbleChart/index.vue';
-import { filterByValue, maxValue, VALUE_RANGE_MIN } from './value-range';
+import { filterByValue, maxValue, valueRangeMin } from './value-range';
 
 interface TagBubbleData extends BubbleData {
 	value: number,
@@ -108,7 +108,7 @@ const mappedTags: TagBubbleData[] = projectTags.value?.map((tag) => ({
 	x: 0,
 	y: 0,
 })) || [];
-const rangeMin = VALUE_RANGE_MIN;
+const rangeMin = valueRangeMin;
 const valueMax = maxValue(mappedTags);
 const valueRange = ref<[number, number]>([rangeMin, valueMax]);
 const visibleTags = computed(() => filterByValue(mappedTags, {

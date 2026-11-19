@@ -13,7 +13,7 @@ import * as d3 from 'd3';
 import { map, uniq } from 'lodash';
 
 import BubbleChart from '@/components/BubbleChart';
-import { filterByValue, maxValue, VALUE_RANGE_MIN } from './value-range';
+import { filterByValue, maxValue, valueRangeMin } from './value-range';
 
 import './Visualize.css';
 
@@ -42,11 +42,11 @@ const Visualize = ({ history }: VisualizeProps) => {
 			r: 4 + tag.projectCount * 11
 		})) || [];
 	const valueMax = maxValue(mappedTags);
-	const [valueRange, setValueRange] = useState<[number, number]>([VALUE_RANGE_MIN, valueMax]);
+	const [valueRange, setValueRange] = useState<[number, number]>([valueRangeMin, valueMax]);
 	const [trackedMax, setTrackedMax] = useState(valueMax);
 	if (trackedMax !== valueMax) {
 		setTrackedMax(valueMax);
-		setValueRange([VALUE_RANGE_MIN, valueMax]);
+		setValueRange([valueRangeMin, valueMax]);
 	}
 	const visibleTags = filterByValue(mappedTags, {
 		lower: valueRange[0],
@@ -105,7 +105,7 @@ const Visualize = ({ history }: VisualizeProps) => {
 					<InputLabel shrink>Value</InputLabel>
 					<Slider
 						value={valueRange}
-						min={VALUE_RANGE_MIN}
+						min={valueRangeMin}
 						max={valueMax}
 						step={1}
 						valueLabelDisplay="auto"

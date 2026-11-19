@@ -9,7 +9,7 @@ import { apiURL, readStorage, writeStorage } from '../../api/utils';
 import { BubbleChart } from '../../components/bubble-chart/bubble-chart';
 import { BubbleData } from '../../components/bubble-chart/types';
 import { ColorLegend } from '../../components/color-legend/color-legend';
-import { filterByValue, maxValue, VALUE_RANGE_MIN, ValueRange } from './value-range';
+import { filterByValue, maxValue, valueRangeMin, ValueRange } from './value-range';
 
 @Component({
   selector: 'app-visualize',
@@ -33,7 +33,7 @@ export class Visualize {
   ];
   protected readonly colorBy = signal(readStorage('visualize-colorBy', 'category'));
   protected readonly groupBy = signal(readStorage('visualize-groupBy', ''));
-  protected readonly rangeMin = VALUE_RANGE_MIN;
+  protected readonly rangeMin = valueRangeMin;
   private readonly projectTags = httpResource<ProjectTags>(() => apiURL('project-tags'));
 
   private readonly allBubbles = computed<BubbleData[]>(() => {
