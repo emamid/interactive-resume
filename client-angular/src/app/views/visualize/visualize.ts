@@ -1,7 +1,7 @@
 import { httpResource } from '@angular/common/http';
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, linkedSignal, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonCol, IonRow, IonSelect, IonSelectOption } from '@ionic/angular';
+import { IonCol, IonRange, IonRow, IonSelect, IonSelectOption } from '@ionic/angular';
 import { scaleOrdinal, schemeSet3 } from 'd3';
 
 import { ProjectTags } from '../../api/types';
@@ -9,10 +9,11 @@ import { apiURL, readStorage, writeStorage } from '../../api/utils';
 import { BubbleChart } from '../../components/bubble-chart/bubble-chart';
 import { BubbleData } from '../../components/bubble-chart/types';
 import { ColorLegend } from '../../components/color-legend/color-legend';
+import { filterByValue, maxValue, VALUE_RANGE_MIN, ValueRange } from './value-range';
 
 @Component({
   selector: 'app-visualize',
-  imports: [BubbleChart, ColorLegend, IonCol, IonRow, IonSelect, IonSelectOption],
+  imports: [BubbleChart, ColorLegend, IonCol, IonRange, IonRow, IonSelect, IonSelectOption],
   templateUrl: './visualize.html',
   styleUrl: './visualize.scss',
 })
@@ -32,9 +33,10 @@ export class Visualize {
   ];
   protected readonly colorBy = signal(readStorage('visualize-colorBy', 'category'));
   protected readonly groupBy = signal(readStorage('visualize-groupBy', ''));
+  protected readonly rangeMin = VALUE_RANGE_MIN;
   private readonly projectTags = httpResource<ProjectTags>(() => apiURL('project-tags'));
 
-  protected readonly bubbles = computed<BubbleData[]>(() => {
+  private readonly allBubbles = computed<BubbleData[]>(() => {
     const tags = this.projectTags.hasValue() ? this.projectTags.value() : [];
     return tags.map((tag) => ({
       id: tag.tagID,
@@ -47,6 +49,12 @@ export class Visualize {
       y: 0,
     }));
   });
+  protected readonly valueMax = computed(() => maxValue(this.allBubbles()));
+  protected readonly valueRange = linkedSignal(() => ({
+    lower: this.rangeMin,
+    upper: this.valueMax(),
+  }));
+  protected readonly bubbles = computed(() => filterByValue(this.allBubbles(), this.valueRange()));
   protected readonly colorMap = computed(() => {
     const colorBy = this.colorBy();
     const values = [...new Set(this.bubbles().map((tag) => String(tag[colorBy] ?? 'null')))].sort();
@@ -78,7 +86,26 @@ export class Visualize {
     }
   }
 
+  protected setValueRange(value: unknown) {
+    if (!isValueRange(value)) {
+      return;
+    }
+    const current = this.valueRange();
+    if (current.lower === value.lower && current.upper === value.upper) {
+      return;
+    }
+    this.valueRange.set({ lower: value.lower, upper: value.upper });
+  }
+
   protected bubbleClicked(data: BubbleData) {
     void this.router.navigate(['/tags', data.id]);
   }
 }
+
+const isValueRange = (value: unknown): value is ValueRange =>
+  !!value &&
+  typeof value === 'object' &&
+  'lower' in value &&
+  'upper' in value &&
+  typeof value.lower === 'number' &&
+  typeof value.upper === 'number';

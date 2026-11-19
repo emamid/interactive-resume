@@ -23,3 +23,17 @@
   flex-grow: 0;
   margin-bottom: 1em;
 }
+
+.value-range {
+  width: 100%;
+  padding-top: 0;
+  --height: 40px;
+}
+
+.value-range::part(label) {
+  margin-bottom: 2px;
+  max-width: 100%;
+  transform: none;
+  font-size: 12px;
+  line-height: 14px;
+}

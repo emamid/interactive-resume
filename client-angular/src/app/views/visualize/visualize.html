@@ -28,6 +28,21 @@
         }
       </ion-select>
     </ion-col>
+    <ion-col size="12" sizeMd="2">
+      <ion-range
+        class="value-range"
+        label="Value"
+        labelPlacement="stacked"
+        color="primary"
+        [dualKnobs]="true"
+        [min]="rangeMin"
+        [max]="valueMax()"
+        [step]="1"
+        [pin]="true"
+        [value]="valueRange()"
+        (ionInput)="setValueRange($event.detail.value)"
+      />
+    </ion-col>
   </ion-row>
   <app-bubble-chart
     class="chart-container"

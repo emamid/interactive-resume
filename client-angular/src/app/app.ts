@@ -94,7 +94,7 @@ export class App {
     },
   ];
 
-  protected readonly currentFramework = this.frameworkItems[3];
+  protected readonly currentFramework = this.frameworkItems.find((item) => item.value === 'angular')!;
   protected readonly allowOverflow = computed(() => !this.routeUrl().startsWith('/api/rest'));
 
   protected closeMenu() {
