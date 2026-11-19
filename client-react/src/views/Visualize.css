@@ -22,6 +22,18 @@
 	width: 20em;
 }
 
+.visualize-value-range {
+	width: 20em;
+	height: 48px;
+	margin-left: 1em;
+	justify-content: flex-end;
+}
+
+.visualize-value-range .MuiSlider-root {
+	padding: 0;
+	margin: 0;
+}
+
 .visualize-legend {
 	margin-top: 1em;
 }
