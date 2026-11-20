@@ -1,4 +1,5 @@
 import { getSequelize } from '..';
+import { renderPageContent } from '../renderPageContent';
 
 export const getAll = async() => {
 
@@ -49,5 +50,6 @@ export const getByID = async(id: string) => {
 		raw: false
 	});
 
-	return project?.toJSON();
+	const json = project?.toJSON();
+	return json && renderPageContent(json);
 }

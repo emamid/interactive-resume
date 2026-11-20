@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 
 import { getSequelize } from '..';
+import { renderPageContent } from '../renderPageContent';
 
 export const getAll = async() => {
 
@@ -54,5 +55,6 @@ export const getByID = async(id: string) => {
 		raw: false
 	});
 
-	return employer?.toJSON();
+	const json = employer?.toJSON();
+	return json && renderPageContent(json);
 }
