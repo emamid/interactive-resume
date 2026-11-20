@@ -8,7 +8,7 @@ export const getAll = async() => {
 
 	const projects = await Project.findAll({
 		attributes: {
-			exclude: ['createdAt', 'pageContent', 'updatedAt']
+			exclude: ['createdAt', 'pageContent', 'markdownContent', 'updatedAt']
 		},
 		include: [{
 			association: 'Employer',

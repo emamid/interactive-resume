@@ -16,6 +16,9 @@ export const defineModel = (sequelize: Sequelize) => {
 			pageContent: {
 				type: DataTypes.TEXT
 			},
+			markdownContent: {
+				type: DataTypes.TEXT
+			},
 			startDate: {
 				type: DataTypes.DATE
 			},
