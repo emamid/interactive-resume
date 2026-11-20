@@ -4,7 +4,7 @@
     <h2>{{ current.name }}</h2>
     <ion-grid>
       <ion-row>
-        @for (project of current.Projects; track project.id) {
+        @for (project of sortedProjects(); track project.id) {
           <ion-col size="12" sizeSm="6" sizeMd="3">
             <ion-card button="true" (click)="goToProject(project.id)">
               <ion-card-header>

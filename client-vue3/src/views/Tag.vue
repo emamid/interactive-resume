@@ -6,7 +6,7 @@
 		<v-container>
 			<v-row>
 				<v-col
-					v-for="project in tag?.Projects"
+					v-for="project in tag?.Projects?.sort((project1, project2) => project1.name.localeCompare(project2.name))"
 					:key="project.id"
 					md="3"
 					sm="6"

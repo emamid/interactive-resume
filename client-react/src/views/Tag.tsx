@@ -22,7 +22,7 @@ const Tag = ({ match }: TagProps) => {
 				{tag?.name}
 			</Typography>
 			<Grid container spacing={3}>
-				{tag?.Projects.map((project: any) => (
+				{tag?.Projects.sort((project1, project2) => project1.name.localeCompare(project2.name)).map((project: any) => (
 					<RoutableGridCard
 						key={project.id}
 						to={`/projects/${project.id}`}

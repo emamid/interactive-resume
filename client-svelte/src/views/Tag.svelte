@@ -21,7 +21,7 @@
 <div class="tag">
 	<div class="mdc-typography--headline5">{tag?.name}</div>
 	<LayoutGrid>
-		{#each (tag?.Projects || []) as project}
+		{#each (tag?.Projects || []).sort((project1, project2) => project1.name.localeCompare(project2.name)) as project}
 			<Cell span={3}>
 				<Card>
 					<PrimaryAction on:click={() => push(`/projects/${project.id}`)} padded>
