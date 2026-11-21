@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   --mdc-theme-primary: #ff3e00;
 }
@@ -93,6 +95,8 @@ main {
 }
 
 .framework-select {
+	/* Tailwind preflight uses border-box, which folds this padding into the 112px width. */
+	box-sizing: content-box;
 	padding-right: 2em; 
 	max-width: 11em; 
 	height: 48px; 

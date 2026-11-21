@@ -25,6 +25,8 @@
 			<MenuDrawerItem href="/angular_client" imageSrc="/icons/angular_logo.svg" text="Angular" />
 			<MenuDrawerItem href="/react_client" imageSrc="/icons/react_logo.svg" text="React" />
 			<MenuDrawerItem href="/vue3_client" imageSrc="/icons/vue_logo.svg" text="Vue 3" />
+			<Separator />
+			<MenuDrawerItem href="./#/data-table" text="Svelte Data Table" />
 		</List>
 	</Content>
 </Drawer>

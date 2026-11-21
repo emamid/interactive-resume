@@ -8,6 +8,7 @@
 	
 	import MenuDrawer from '@/components/MenuDrawer.svelte'
 	
+	import DataTable from './views/DataTable.svelte';
 	import Employer from '@/views/Employer.svelte';
 	import Home from '@/views/Home.svelte';
 	import Project from '@/views/Project.svelte';
@@ -23,6 +24,7 @@
 	const routes = {
 		'/': Home,
 		'/api/rest': RESTAPI,
+		'/data-table': DataTable,
 		'/employers/:id': Employer,
 		'/projects': Projects,
 		'/projects/:id': Project,
@@ -66,6 +68,8 @@
 		}
 
 		img.framework-logo {
+			/* Tailwind preflight uses border-box, which folds this padding into the 24px width. */
+			box-sizing: content-box;
 			height: 24px;
 			width: 24px;
 			padding-right: 32px;
