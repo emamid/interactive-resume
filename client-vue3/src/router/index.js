@@ -7,6 +7,7 @@ import Project from '@/views/Project.vue';
 import Projects from '@/views/Projects.vue';
 import Tag from '@/views/Tag.vue';
 import Tags from '@/views/Tags.vue';
+import DataTable from '@/views/DataTable.vue';
 import Visualize from '@/views/Visualize.vue';
 
 const routes = [
@@ -49,6 +50,11 @@ const routes = [
 		path: '/visualize',
 		name: 'Visualize',
 		component: Visualize,
+	},
+	{
+		path: '/data-table',
+		name: 'DataTable',
+		component: DataTable,
 	},
 ];
 

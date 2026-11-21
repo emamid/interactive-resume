@@ -39,6 +39,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import RoutableListItem from '@/components/RoutableListItem';
 
+import DataTable from '@/views/DataTable';
 import Home from '@/views/Home';
 import Employer from '@/views/Employer';
 // import Map from './views/Map';
@@ -219,6 +220,7 @@ const App = () => {
 						<Route exact path="/api/rest" component={RESTAPI} />
 						<Route path="/tags/:tagID" component={Tag} />
 						<Route path="/visualize" component={Visualize} />
+						<Route path="/data-table" component={DataTable} />
 						{/* <Route path="/map" component={Map} /> */}
 						<Redirect to="/" />
 					</Switch>

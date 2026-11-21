@@ -33,5 +33,9 @@ export const routes: Routes = [
     path: 'visualize',
     loadComponent: () => import('./views/visualize/visualize').then((m) => m.Visualize),
   },
+  {
+    path: 'data-table',
+    loadComponent: () => import('./views/data-table/data-table').then((m) => m.DataTable),
+  },
   { path: '**', redirectTo: '' },
 ];
