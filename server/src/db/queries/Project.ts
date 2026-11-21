@@ -51,5 +51,14 @@ export const getByID = async(id: string) => {
 	});
 
 	const json = project?.toJSON();
+	const tags = (json as {
+		Tags?: {
+			superseded?: boolean | null;
+			ProjectTag?: { superseded?: boolean | null };
+		}[];
+	} | undefined)?.Tags;
+	tags?.forEach((tag) => {
+		tag.superseded = !!tag.ProjectTag?.superseded;
+	});
 	return json && renderPageContent(json);
 }

@@ -17,11 +17,17 @@
 {#each tags as tag (tag.id)}
   {#if chips}
 	<Chip chip={tag.id} onclick={() => push(`/tags/${tag.id}`)}>
-		<Text>{tag.name}</Text>
+		<Text><span class={{ 'tag-superseded': tag.superseded }}>{tag.name}</span></Text>
 	</Chip>
 	{:else}
 	<Button color="primary" onclick={() => push(`/tags/${tag.id}`)} variant="outlined">
-		<Label>{tag.name}</Label>
+		<Label><span class={{ 'tag-superseded': tag.superseded }}>{tag.name}</span></Label>
 	</Button>	
 	{/if}
 {/each}
+
+<style>
+	.tag-superseded {
+		text-decoration: line-through;
+	}
+</style>

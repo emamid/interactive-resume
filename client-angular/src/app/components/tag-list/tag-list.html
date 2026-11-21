@@ -1,7 +1,7 @@
 @for (tag of tags(); track tag.id) {
   @if (chips()) {
-    <ion-chip outline="true" (click)="goToTag(tag.id)">{{ tag.name }}</ion-chip>
+    <ion-chip outline="true" (click)="goToTag(tag.id)"><span [class.tag-superseded]="tag.superseded">{{ tag.name }}</span></ion-chip>
   } @else {
-    <ion-button class="tag-button" fill="outline" (click)="goToTag(tag.id)">{{ tag.name }}</ion-button>
+    <ion-button class="tag-button" fill="outline" (click)="goToTag(tag.id)"><span [class.tag-superseded]="tag.superseded">{{ tag.name }}</span></ion-button>
   }
 }
