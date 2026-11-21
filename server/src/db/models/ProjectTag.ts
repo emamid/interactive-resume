@@ -13,6 +13,9 @@ export const defineModel = (sequelize: Sequelize) => {
 			projectID: {
 				type: DataTypes.UUIDV4
 			},
+			superseded: {
+				type: DataTypes.BOOLEAN,
+			},
 			tagID: {
 				type: DataTypes.UUIDV4
 			}
