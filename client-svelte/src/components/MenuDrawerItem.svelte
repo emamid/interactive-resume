@@ -1,18 +1,24 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
 	import { Item, Text, Graphic } from '@smui/list';
 
-	export let href = '';
-	export let imageSrc = '';
-	export let icon = '';
-	export let text = '';
-
-	const dispatch = createEventDispatcher();
+	let {
+		href = '',
+		imageSrc = '',
+		icon = '',
+		text = '',
+		onnavigated,
+	}: {
+		href?: string;
+		imageSrc?: string;
+		icon?: string;
+		text?: string;
+		onnavigated?: () => void;
+	} = $props();
 </script>
 
 <Item
   {href}
-	on:click={() => dispatch('navigated')}
+	onclick={() => onnavigated?.()}
 >
 	<Graphic class="material-icons">
 		{#if imageSrc}

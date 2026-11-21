@@ -1,24 +1,36 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-
 	import type { BubbleChartConfig, BubbleData } from './types';
 
-	export let data: BubbleData;
-	export let chartConfig: BubbleChartConfig;
-	export let maxValue = 1;
-	
-	const dispatch = createEventDispatcher();
+	let {
+		data,
+		chartConfig,
+		maxValue = 1,
+		onbubbleClicked,
+	}: {
+		data: BubbleData;
+		chartConfig: BubbleChartConfig;
+		maxValue?: number;
+		onbubbleClicked?: (bubble: BubbleData) => void;
+	} = $props();
 
-	const bubbleClicked = () => dispatch('bubbleClicked', data);
+	const bubbleClicked = () => onbubbleClicked?.(data);
 </script>
 
 <g
 	transform={`translate(${data.x},${data.y})`}
+	role="button"
+	tabindex="0"
+	onclick={bubbleClicked}
+	onkeydown={(event) => {
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault();
+			bubbleClicked();
+		}
+	}}
 >
 	<circle
 		r={data.r * 0.95}
-		style={`fill: ${chartConfig.colorMap[data[chartConfig.colorByProp]]}`}
-		on:click={bubbleClicked}
+		style={`fill: ${chartConfig.colorMap[String((data as BubbleData & Record<string, string | number>)[chartConfig.colorByProp])]}`}
 	>
 		<title>{data.name}</title>
 	</circle>
@@ -28,26 +40,24 @@
 		x={data.r * -0.8}
 		y={data.r * -0.8}
 	>
-		<body
+		<div
 		  style={`height: ${data.r * 1.6}px; width: ${data.r * 1.6}px`}
 			class="bubble"
 			title={data.name}
-			on:click={bubbleClicked}
 		>
 			<p
 			  style={`font-size: ${100 - Math.pow(maxValue - data.value, 1.8)}%`}
 				class="bubble"
 				title={data.name}
-				on:click={bubbleClicked}
 			>
 				{data.name}
 			</p>
-		</body>
+		</div>
 	</foreignObject>
 </g>
 
 <style>
-	body.bubble {
+	div.bubble {
 		display: flex;
 		justify-content: center;
 		align-items: center;

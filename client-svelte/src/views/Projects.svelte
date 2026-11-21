@@ -6,11 +6,17 @@
 	import LinkCell from '@/components/LinkCell.svelte';
 	import YearRange from '@/components/YearRange.svelte';
 	
-	let projects: Project[] = [];
-	
-	(async function() {
-		projects = await getProjects();
-	}());
+	let projects = $state<Project[]>([]);
+
+	$effect(() => {
+		let active = true;
+		getProjects().then((result) => {
+			if (active) projects = result;
+		});
+		return () => {
+			active = false;
+		};
+	});
 </script>
 
 <div class="projects">
@@ -23,7 +29,7 @@
 			</Row>
 		</Head>
 		<Body>
-		{#each projects as project}
+		{#each projects as project (project.id)}
 			<Row>
 				<Cell><YearRange startDate={project.startDate} endDate={project.endDate} /></Cell>
 				<LinkCell path={`./#/projects/${project.id}`} text={project.name} />

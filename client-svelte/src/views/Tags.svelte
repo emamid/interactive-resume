@@ -4,11 +4,17 @@
 
 	import TagList from '@/components/TagList.svelte';
 	
-	let tags: Tag[] = [];
+	let tags = $state<Tag[]>([]);
 
-	(async function() {
-		tags = await getTags();
-	}());
+	$effect(() => {
+		let active = true;
+		getTags().then((result) => {
+			if (active) tags = result;
+		});
+		return () => {
+			active = false;
+		};
+	});
 </script>
 	
 <div class="tags">

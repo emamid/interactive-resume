@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
   import Drawer, {
     Content,
   } from '@smui/drawer';
@@ -7,22 +6,21 @@
 	
 	import MenuDrawerItem from './MenuDrawerItem.svelte';
 
-	export let open = false;
+	let { open = $bindable(false) }: { open?: boolean } = $props();
 
-	const dispatch = createEventDispatcher();
 	const navigated = () => {
-		dispatch('closed');
+		open = false;
 	}
 </script>
 
-<Drawer variant="modal" bind:open on:SMUIDrawer:closed={() => dispatch('closed')}>
+<Drawer variant="modal" bind:open>
 	<Content>
 		<List>
-			<MenuDrawerItem href="./#/" icon="home" text="Home" on:navigated={navigated} />
-			<MenuDrawerItem href="./#/projects" icon="build" text="Projects" on:navigated={navigated} />
-			<MenuDrawerItem href="./#/tags" icon="sell" text="Tags" on:navigated={navigated} />
-			<MenuDrawerItem href="./#/visualize" icon="bubble_chart" text="Visualize" on:navigated={navigated} />
-			<MenuDrawerItem href="./#/api/rest" icon="api" text="REST API" on:navigated={navigated} />
+			<MenuDrawerItem href="./#/" icon="home" text="Home" onnavigated={navigated} />
+			<MenuDrawerItem href="./#/projects" icon="build" text="Projects" onnavigated={navigated} />
+			<MenuDrawerItem href="./#/tags" icon="sell" text="Tags" onnavigated={navigated} />
+			<MenuDrawerItem href="./#/visualize" icon="bubble_chart" text="Visualize" onnavigated={navigated} />
+			<MenuDrawerItem href="./#/api/rest" icon="api" text="REST API" onnavigated={navigated} />
 			<Separator />
 			<MenuDrawerItem href="/angular_client" imageSrc="/icons/angular_logo.svg" text="Angular" />
 			<MenuDrawerItem href="/react_client" imageSrc="/icons/react_logo.svg" text="React" />

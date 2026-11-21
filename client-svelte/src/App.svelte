@@ -18,7 +18,7 @@
 	import Visualize from '@/views/Visualize.svelte';
 	
 	axios.defaults.withCredentials = true;
-	let menuDrawerOpen = false;
+	let menuDrawerOpen = $state(false);
 	
 	const routes = {
 		'/': Home,
@@ -35,20 +35,20 @@
 	const toggleMenuDrawer = () => menuDrawerOpen = !menuDrawerOpen;
 	</script>
 	
-	<MenuDrawer open={menuDrawerOpen} on:closed={() => menuDrawerOpen = false}/>
+	<MenuDrawer bind:open={menuDrawerOpen} />
 	<Scrim />
 	<TopAppBar variant="static" color="primary">
 		<Row>
 			<Section>
-				<IconButton class="material-icons" on:click={toggleMenuDrawer}>menu</IconButton>
+				<IconButton class="material-icons" onclick={toggleMenuDrawer}>menu</IconButton>
 				<Title>Interactive Resume</Title>
 			</Section>
 			<Section align="end">
-				<Select class="framework-select" value={'svelte'} on:SMUISelect:change={event => window.location.pathname = `/${event.detail.value}_client/`}>
-					<Option value={'angular'}><img alt="Angular" src="/icons/angular_logo.svg" class="framework-logo" href="/angular_client/#"/>Angular</Option>
-					<Option value={'react'}><img alt="React" src="/icons/react_logo.svg" class="framework-logo" href="/react_client/#"/>React</Option>
-					<Option value={'svelte'}><img alt="Svelte" src="/icons/svelte_logo.svg" class="framework-logo" href="/svelte_client/#"/>Svelte</Option>
-					<Option value={'vue3'}><img alt="Vue" src="/icons/vue_logo.svg" class="framework-logo" href="/vue3_client/#"/>Vue 3</Option>
+				<Select class="framework-select" value={'svelte'} onSMUISelectChange={(event: CustomEvent<{ value: string }>) => window.location.pathname = `/${event.detail.value}_client/`}>
+					<Option value={'angular'}><img alt="Angular" src="/icons/angular_logo.svg" class="framework-logo" />Angular</Option>
+					<Option value={'react'}><img alt="React" src="/icons/react_logo.svg" class="framework-logo" />React</Option>
+					<Option value={'svelte'}><img alt="Svelte" src="/icons/svelte_logo.svg" class="framework-logo" />Svelte</Option>
+					<Option value={'vue3'}><img alt="Vue" src="/icons/vue_logo.svg" class="framework-logo" />Vue 3</Option>
 				</Select>	
 			</Section>
 		</Row>

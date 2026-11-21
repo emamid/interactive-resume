@@ -6,11 +6,17 @@ import HTMLContent from '@/components/HTMLContent.svelte';
 import Employers from '@/components/Employers.svelte';
 import PersonalProjects from '@/components/PersonalProjects.svelte';
 
-let myself: Myself = null;
+let myself = $state<Myself | null>(null);
 
-(async function() {
-	myself = await getMyself();
-}());
+$effect(() => {
+	let active = true;
+	getMyself().then((result) => {
+		if (active) myself = result;
+	});
+	return () => {
+		active = false;
+	};
+});
 </script>
 
 <div class="home">

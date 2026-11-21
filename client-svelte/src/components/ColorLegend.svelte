@@ -1,9 +1,9 @@
 <script lang="ts">
-	export let colorMap: Record<string, string> = {};
+	let { colorMap = {} }: { colorMap?: Record<string, string> } = $props();
 </script>
 
 <div class="legend-container">
-	{#each Object.entries(colorMap) as [text, color]}
+	{#each Object.entries(colorMap) as [text, color] (text)}
 	<span
 	  class="legend-item"
 		style={`background-color: ${color}`}
