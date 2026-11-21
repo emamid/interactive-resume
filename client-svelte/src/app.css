@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin "daisyui";
+@source "../node_modules/@emamid/svelte-data-table";
 
 :root {
   --mdc-theme-primary: #ff3e00;
@@ -110,4 +112,8 @@ main {
 
 .framework-select .mdc-select__selected-text-container .mdc-select__selected-text {
 	color: white;
+}
+
+aside.mdc-drawer {
+	z-index: 20;
 }
