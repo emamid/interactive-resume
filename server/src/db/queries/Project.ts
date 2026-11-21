@@ -1,4 +1,5 @@
 import { getSequelize } from '..';
+import { renderPageContent } from '../renderPageContent';
 
 export const getAll = async() => {
 
@@ -8,7 +9,7 @@ export const getAll = async() => {
 
 	const projects = await Project.findAll({
 		attributes: {
-			exclude: ['createdAt', 'pageContent', 'updatedAt']
+			exclude: ['createdAt', 'pageContent', 'markdownContent', 'updatedAt']
 		},
 		include: [{
 			association: 'Employer',
@@ -49,5 +50,15 @@ export const getByID = async(id: string) => {
 		raw: false
 	});
 
-	return project?.toJSON();
+	const json = project?.toJSON();
+	const tags = (json as {
+		Tags?: {
+			superseded?: boolean | null;
+			ProjectTag?: { superseded?: boolean | null };
+		}[];
+	} | undefined)?.Tags;
+	tags?.forEach((tag) => {
+		tag.superseded = !!tag.ProjectTag?.superseded;
+	});
+	return json && renderPageContent(json);
 }

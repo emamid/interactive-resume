@@ -5,7 +5,7 @@
 			variant="outlined"
 			@click="goToTag(tag.id)"
 		>
-			{{tag.name}}
+			<span :class="{ 'tag-superseded': tag.superseded }">{{ tag.name }}</span>
 		</v-chip>
 		<v-btn
 			class="style-button"
@@ -14,7 +14,7 @@
 			color="primary"
 			@click="goToTag(tag.id)"
 		>
-			{{tag.name}}
+			<span :class="{ 'tag-superseded': tag.superseded }">{{ tag.name }}</span>
 		</v-btn>
 	</template>
 </template>
@@ -36,5 +36,9 @@
 		margin-right: 8px;
 		margin-bottom: 16px;
 		padding: 0 15px;
+	}
+
+	.tag-superseded {
+		text-decoration: line-through;
 	}
 </style>

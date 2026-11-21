@@ -1,0 +1,42 @@
+diff --git a/node_modules/@smui/list/dist/Item.svelte b/node_modules/@smui/list/dist/Item.svelte
+--- a/node_modules/@smui/list/dist/Item.svelte
++++ b/node_modules/@smui/list/dist/Item.svelte
+@@ -439,6 +439,9 @@
+ 
+   export function getPrimaryText() {
+     const element = getElement();
++    if (!element) {
++      return '';
++    }
+ 
+     const primaryText = element.querySelector(
+       '.mdc-deprecated-list-item__primary-text',
+@@ -454,6 +457,6 @@
+   }
+ 
+   export function getElement() {
+-    return element.getElement();
++    return element?.getElement?.() ?? null;
+   }
+ </script>
+diff --git a/node_modules/@smui/list/src/Item.svelte b/node_modules/@smui/list/src/Item.svelte
+--- a/node_modules/@smui/list/src/Item.svelte
++++ b/node_modules/@smui/list/src/Item.svelte
+@@ -439,6 +439,9 @@
+ 
+   export function getPrimaryText() {
+     const element = getElement();
++    if (!element) {
++      return '';
++    }
+ 
+     const primaryText = element.querySelector(
+       '.mdc-deprecated-list-item__primary-text',
+@@ -454,6 +457,6 @@
+   }
+ 
+   export function getElement() {
+-    return element.getElement();
++    return element?.getElement?.() ?? null;
+   }
+ </script>

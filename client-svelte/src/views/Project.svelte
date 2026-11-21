@@ -8,15 +8,24 @@
 	import YearRange from '@/components/YearRange.svelte';
 	import type { IDParams } from '@/types';
 	
-	export let params: IDParams;
+	let { params }: { params?: IDParams } = $props();
 
-	let dialogImage: Image;
-	let imageDialogOpen = false;
-	let project: Project;
-	
-	(async function() {
-		project = await getProject(params?.id);
-	}());
+	let dialogImage = $state<Image | undefined>();
+	let imageDialogOpen = $state(false);
+	let project = $state<Project | undefined>();
+	let sortedTags = $derived(project?.Tags ? [...project.Tags].sort((tag1, tag2) => tag1.name.localeCompare(tag2.name)) : undefined);
+
+	$effect(() => {
+		const id = params?.id;
+		if (!id) return;
+		let active = true;
+		getProject(id).then((result) => {
+			if (active) project = result;
+		});
+		return () => {
+			active = false;
+		};
+	});
 </script>
 	
 <div class="project">
@@ -29,15 +38,15 @@
 		{/if}
 	</div>
 	<br />
-	<TagList tags={project?.Tags.sort((tag1, tag2) => tag1.name.localeCompare(tag2.name))} chips />
+	<TagList tags={sortedTags} chips />
 	<br />
 	<HTMLContent html={project?.pageContent} />
 	<br />
-	<ImageGallery images={project?.Images} on:clicked={event => {
-		dialogImage = event.detail;
+	<ImageGallery images={project?.Images} onclicked={(image) => {
+		dialogImage = image;
 		imageDialogOpen = true;
 	}}/>
-	<ImageDialog image={dialogImage} open={imageDialogOpen} on:closed={() => imageDialogOpen = false} />
+	<ImageDialog image={dialogImage} bind:open={imageDialogOpen} onclosed={() => imageDialogOpen = false} />
 </div>
 
 <style>

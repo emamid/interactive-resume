@@ -6,13 +6,21 @@
 	import YearRange from '@/components/YearRange.svelte';
 	import type { IDParams } from '@/types';
 	
-	export let params: IDParams;
+	let { params }: { params?: IDParams } = $props();
 
-	let employer: Employer;
-	
-	(async function() {
-		employer = await getEmployer(params?.id);
-	}());
+	let employer = $state<Employer | undefined>();
+
+	$effect(() => {
+		const id = params?.id;
+		if (!id) return;
+		let active = true;
+		getEmployer(id).then((result) => {
+			if (active) employer = result;
+		});
+		return () => {
+			active = false;
+		};
+	});
 </script>
 	
 <div class="employer">

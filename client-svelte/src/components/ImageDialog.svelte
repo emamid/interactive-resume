@@ -1,19 +1,23 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
 	import Dialog, { Title, Content } from '@smui/dialog';
 
 	import type { Image } from '@/api/types';
 
-	export let image: Image;
-	export let open = false;
-
-	const dispatch = createEventDispatcher();
+	let {
+		image,
+		open = $bindable(false),
+		onclosed,
+	}: {
+		image?: Image;
+		open?: boolean;
+		onclosed?: () => void;
+	} = $props();
 </script>
 
 <Dialog
   bind:open
   aria-labelledby="image-dialog-title"
-	on:SMUIDialog:closed={() => dispatch('closed')}
+	onSMUIDialogClosed={() => onclosed?.()}
 	fullscreen
 >
 	{#if image && open}

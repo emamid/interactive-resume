@@ -17,65 +17,70 @@ interface TagBubbleData extends BubbleData {
 	r: number,
 }
 
-let projectTags: ProjectTags = [];
-let colorBy = localStorage.getItem('visualize-colorBy') || 'category';
-let groupBy: string = localStorage.getItem('visualize-groupBy') || '';
+let projectTags = $state<ProjectTags>([]);
+let colorBy = $state(localStorage.getItem('visualize-colorBy') || 'category');
+let groupBy = $state(localStorage.getItem('visualize-groupBy') || '');
 
 let colors = d3.scaleOrdinal(d3.schemeSet3);
-let mappedTags: TagBubbleData[] = [];
-let visibleTags: TagBubbleData[] = [];
-let colorValues: string[] = [];
-let colorMap: Record<string, string> = {};
-let valueMax = valueRangeMin;
+let valueStart = $state(valueRangeMin);
+let valueEnd = $state(valueRangeMin);
 let trackedMax = valueRangeMin;
-let valueStart = valueRangeMin;
-let valueEnd = valueRangeMin;
 
-$: {
-	localStorage.setItem('visualize-colorBy', colorBy);
-	localStorage.setItem('visualize-groupBy', groupBy);
-}
-$: mappedTags = projectTags?.map((tag) => ({
+let mappedTags = $derived(projectTags?.map((tag) => ({
 	id: tag.tagID,
 	name: tag.Tag.name,
 	category: tag.Tag.category,
 	layer: tag.Tag.layer,
 	value: tag.projectCount,
 	r: 4 + tag.projectCount * 11
-})) || [];
-$: valueMax = maxValue(mappedTags);
-$: if (trackedMax !== valueMax) {
-	trackedMax = valueMax;
-	valueStart = valueRangeMin;
-	valueEnd = valueMax;
-}
-$: visibleTags = filterByValue(mappedTags, {
+})) || []);
+let valueMax = $derived(maxValue(mappedTags));
+let visibleTags = $derived(filterByValue(mappedTags, {
 	lower: valueStart,
 	upper: valueEnd
-});
-$: colorValues = uniq(visibleTags.map((tag: any) => tag[colorBy])).sort();
-$: colorMap = colorValues.reduce(
+}));
+let colorValues = $derived(uniq(visibleTags.map((tag: any) => tag[colorBy])).sort());
+let colorMap = $derived(colorValues.reduce(
 	(currentMap, value) => ({
 		...currentMap,
 		[value]: colors(value)
 	}),
-	{}
-);
+	{} as Record<string, string>
+));
 
-(async function() {
-	projectTags = await getProjectTags();
-}());
+$effect(() => {
+	localStorage.setItem('visualize-colorBy', colorBy);
+	localStorage.setItem('visualize-groupBy', groupBy);
+});
+
+$effect(() => {
+	if (trackedMax !== valueMax) {
+		trackedMax = valueMax;
+		valueStart = valueRangeMin;
+		valueEnd = valueMax;
+	}
+});
+
+$effect(() => {
+	let active = true;
+	getProjectTags().then((result) => {
+		if (active) projectTags = result;
+	});
+	return () => {
+		active = false;
+	};
+});
 
 </script>
 	
 <div class="visualize">
 	<div class="control-section">
-    <Select style="width: 20em" value={colorBy} label="Color By" on:SMUISelect:change={event => colorBy=event.detail.value}>
+    <Select style="width: 20em" value={colorBy} label="Color By" onSMUISelectChange={(event: CustomEvent<{ value: string }>) => colorBy=event.detail.value}>
 			<Option value={'category'}>Category</Option>
 			<Option value={'layer'}>Layer</Option>
 			<Option value={'value'}>Size</Option>
     </Select>	
-    <Select style="width: 20em" value={groupBy} label="Group By" on:SMUISelect:change={event => groupBy=event.detail.value}>
+    <Select style="width: 20em" value={groupBy} label="Group By" onSMUISelectChange={(event: CustomEvent<{ value: string }>) => groupBy=event.detail.value}>
 			<Option value={''}>None</Option>
 			<Option value={'category'}>Category</Option>
 			<Option value={'layer'}>Layer</Option>
@@ -104,7 +109,7 @@ $: colorMap = colorValues.reduce(
 			colorMap,
 		}}		
 		data={visibleTags}
-		on:bubbleClicked={event => push(`/tags/${event.detail.id}`)}
+		onbubbleClicked={(bubble) => push(`/tags/${bubble.id}`)}
 	/>
 	<ColorLegend {colorMap} />
 </div>

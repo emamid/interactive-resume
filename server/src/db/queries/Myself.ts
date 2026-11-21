@@ -1,4 +1,5 @@
 import { getSequelize } from '..';
+import { renderPageContent } from '../renderPageContent';
 
 export const getOnly = async() => {
 
@@ -20,6 +21,7 @@ export const getOnly = async() => {
 		raw: false
 	});
 
-	return myself?.toJSON();
+	const json = myself?.toJSON();
+	return json && renderPageContent(json);
 
 }

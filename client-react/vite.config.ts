@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths';
-import path from 'path';
 import react from '@vitejs/plugin-react';
+import { fileURLToPath } from 'url';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,7 +12,7 @@ export default defineConfig({
 	],
   resolve: {
     alias: {
-			'@/': path.resolve('./src/', import.meta.url),
+			'@/': fileURLToPath(new URL('./src/', import.meta.url)),
     },
   },
 	server: {

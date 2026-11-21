@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 
 import { getSequelize } from '..';
+import { renderPageContent } from '../renderPageContent';
 
 export const getAll = async() => {
 
@@ -12,7 +13,7 @@ export const getAll = async() => {
 
 	const employers = await Employer.findAll({
 		attributes: {
-			exclude: ['createdAt', 'pageContent', 'updatedAt']
+			exclude: ['createdAt', 'pageContent', 'markdownContent', 'updatedAt']
 		},
 		where: {
 			id: {
@@ -54,5 +55,6 @@ export const getByID = async(id: string) => {
 		raw: false
 	});
 
-	return employer?.toJSON();
+	const json = employer?.toJSON();
+	return json && renderPageContent(json);
 }

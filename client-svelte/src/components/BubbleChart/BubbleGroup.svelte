@@ -1,20 +1,31 @@
 <script lang="ts">
-	import type { BubbleChartConfig, BubbleGroupData } from './types';
+	import type { BubbleChartConfig, BubbleData, BubbleGroupData } from './types';
 	import Bubble from './Bubble.svelte';
 
-	export let data: BubbleGroupData = {
-		data: [],
-		column: 0,
-		row: 0,
-		centerX: 0,
-		centerY: 0,
-		title: '',
-	};
-	export let maxValue;
-	export let chartConfig: BubbleChartConfig;
-	export let tileWidth;
-	export let tileHeight;
-	export let tileScale;
+	let {
+		data = {
+			data: [],
+			column: 0,
+			row: 0,
+			centerX: 0,
+			centerY: 0,
+			title: '',
+		},
+		maxValue = 1,
+		chartConfig,
+		tileWidth,
+		tileHeight,
+		tileScale,
+		onbubbleClicked,
+	}: {
+		data?: BubbleGroupData;
+		maxValue?: number;
+		chartConfig: BubbleChartConfig;
+		tileWidth: number;
+		tileHeight: number;
+		tileScale: number;
+		onbubbleClicked?: (bubble: BubbleData) => void;
+	} = $props();
 
 </script>
 
@@ -27,8 +38,8 @@
 		transform={`translate(${data.centerX},${data.centerY}) scale(${tileScale})`}
 	>
 	{#if data.data}
-		{#each data.data as bubbleData}
-			<Bubble data={bubbleData} {chartConfig} {maxValue} on:bubbleClicked />
+		{#each data.data as bubbleData (bubbleData.id)}
+			<Bubble data={bubbleData} {chartConfig} {maxValue} {onbubbleClicked} />
 		{/each}
 	{/if}
 	</g>

@@ -53,7 +53,11 @@ const Project = ({ match }: ProjectProps) => {
 			<div>
 				{project?.Tags.sort((tag1, tag2) => tag1.name.localeCompare(tag2.name)).map(tag => (
 					<Chip
-						label={tag.name}
+						label={
+							<span style={{ textDecoration: tag.superseded ? 'line-through' : undefined }}>
+								{tag.name}
+							</span>
+						}
 						component="a"
 						href={`./#/tags/${tag.id}`}
 						clickable

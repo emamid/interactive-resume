@@ -1,3 +1,19 @@
+@import "tailwindcss";
+@plugin "daisyui";
+@source "../node_modules/@emamid/svelte-data-table";
+
+/* Preflight clears anchor color and underline. Stay in @layer base so Material styles still win. */
+@layer base {
+	a:any-link {
+		color: LinkText;
+		text-decoration: underline;
+	}
+
+	a:visited {
+		color: VisitedText;
+	}
+}
+
 :root {
   --mdc-theme-primary: #ff3e00;
 }
@@ -93,6 +109,8 @@ main {
 }
 
 .framework-select {
+	/* Tailwind preflight uses border-box, which folds this padding into the 112px width. */
+	box-sizing: content-box;
 	padding-right: 2em; 
 	max-width: 11em; 
 	height: 48px; 
@@ -106,4 +124,21 @@ main {
 
 .framework-select .mdc-select__selected-text-container .mdc-select__selected-text {
 	color: white;
+}
+
+aside.mdc-drawer {
+	z-index: 20;
+}
+
+p {
+	margin-block-start: 16px;
+	margin-block-end: 16px;
+}
+
+/* Preflight removes markers and the ul indent. Stay in @layer base so Material lists still win. */
+@layer base {
+	ul {
+		list-style-type: disc;
+		padding-inline-start: 40px;
+	}
 }

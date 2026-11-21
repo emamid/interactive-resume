@@ -26,6 +26,7 @@ export interface BaseTag {
 	name: string;
 	category: string;
 	layer: string;
+	superseded?: boolean;
 }
 
 // Directly-exported interfaces

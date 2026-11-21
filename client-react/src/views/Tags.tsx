@@ -16,7 +16,9 @@ const Tags = () => {
 							color="primary"
 							href={`./#/tags/${tag.id}`}
 						>
-							{tag.name}
+							<span style={{ textDecoration: tag.superseded ? 'line-through' : undefined }}>
+								{tag.name}
+							</span>
 						</Button>
 					</Grid>
 				))}

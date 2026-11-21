@@ -1,5 +1,5 @@
 import { httpResource } from '@angular/common/http';
-import { Component, inject, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonRow } from '@ionic/angular';
 
@@ -20,6 +20,10 @@ export class Tag {
   protected readonly tag = httpResource<TagRecord>(() => {
     const id = this.id();
     return id ? apiURL(`tags/${id}`) : undefined;
+  });
+  protected readonly sortedProjects = computed(() => {
+    const projects = this.tag.hasValue() ? this.tag.value().Projects : [];
+    return [...(projects ?? [])].sort((project1, project2) => project1.name.localeCompare(project2.name));
   });
 
   protected goToProject(id: string) {

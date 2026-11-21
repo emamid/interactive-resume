@@ -1,7 +1,4 @@
-import sveltePreprocess from 'svelte-preprocess'
-
 export default {
-  // Consult https://github.com/sveltejs/svelte-preprocess
-  // for more information about preprocessors
-  preprocess: sveltePreprocess()
+  // The Svelte 5 compiler typechecks script lang="ts" itself.
+  // svelte-preprocess rewrites `$props()` before that and breaks `$bindable()`.
 }

@@ -5,65 +5,56 @@
 	import BubbleGroup from './BubbleGroup.svelte';
 	import type { BubbleData, BubbleGroupData, BubbleChartConfig, Extents } from './types';
 
-	export let chartConfig: BubbleChartConfig = {
-		colorByProp: '',
-		groupByProp: '',
-		colorMap: {},
-	}
-	export let data: BubbleData[] = [];
-	
-	let svgWidth = 1;
-	let svgHeight = 1;
-	let maxValue: number;
-	let groupValues: string[];
-	let groupedData: Record<string, BubbleData[]>;
-	let groups: Record<string, BubbleGroupData>;
-	let tileCount = 0;
-	let tileColumns = 1;
-	let tileRows = 1;
-	let tileWidth = 128;
-	let tileHeight = 128;
-	let tileCenterX = 64;
-	let tileCenterY = 64;
-	let maxExtents: Extents = {
-		minX: 0,
-		minY: 0,
-		maxX: 1,
-		maxY: 1,
-	}
-	let maxGroupWidth = 1;
-	let maxGroupHeight = 1;
-	let tileScale = 1;
-	let containerDiv;
+	let {
+		class: className = '',
+		chartConfig = {
+			colorByProp: '',
+			groupByProp: '',
+			colorMap: {},
+		},
+		data = [],
+		onbubbleClicked,
+	}: {
+		class?: string;
+		chartConfig?: BubbleChartConfig;
+		data?: BubbleData[];
+		onbubbleClicked?: (bubble: BubbleData) => void;
+	} = $props();
 
-	$: {
-		svgWidth = (containerDiv && containerDiv.clientWidth) || 128;
-		svgHeight =	(containerDiv && containerDiv.clientHeight) || 128;		
-		maxValue = max(data.map(tag => tag.value));
-		groupValues = chartConfig.groupByProp
-			? uniq(data.map((item) => item[chartConfig.groupByProp])).sort()
+	let containerDiv = $state<HTMLDivElement | undefined>();
+
+	let layout = $derived.by(() => {
+		const svgWidth = (containerDiv && containerDiv.clientWidth) || 128;
+		const svgHeight = (containerDiv && containerDiv.clientHeight) || 128;
+		const maxValue = max(data.map(tag => tag.value));
+		const groupKey = (item: BubbleData) =>
+			String((item as BubbleData & Record<string, string | number | undefined>)[chartConfig.groupByProp] ?? '');
+		const groupValues: string[] = chartConfig.groupByProp
+			? uniq(data.map(groupKey)).sort()
 			: ['All'];
-		groupedData = chartConfig.groupByProp
-			? groupBy(data, chartConfig.groupByProp)
+		const groupedData: Record<string, BubbleData[]> = chartConfig.groupByProp
+			? groupBy(data, groupKey)
 			: { All: data };
-		tileCount = groupValues.length;
-		tileColumns = Math.max(Math.ceil(Math.sqrt(tileCount)), 1);
-		tileRows = Math.max(Math.floor(Math.sqrt(tileCount)), 1);
-		tileWidth = svgWidth / tileColumns;
-		tileHeight = svgHeight / tileRows;
-		tileCenterX = tileWidth / 2;
-		tileCenterY = tileHeight / 2;
-		groups = groupValues.reduce(
+		const tileCount = groupValues.length;
+		const tileColumns = Math.max(Math.ceil(Math.sqrt(tileCount)), 1);
+		const tileRows = Math.max(Math.floor(Math.sqrt(tileCount)), 1);
+		const tileWidth = svgWidth / tileColumns;
+		const tileHeight = svgHeight / tileRows;
+		const tileCenterX = tileWidth / 2;
+		const tileCenterY = tileHeight / 2;
+		const groups = groupValues.reduce<Record<string, BubbleGroupData>>(
 			(currentGroups, groupValue, groupIndex) => {
-				const group = groupedData[groupValue];
+				const group = groupedData[groupValue] ?? [];
 				packSiblings(group);
 				const extents = group.reduce(
 					(currentExtents, item) => {
+						const x = item.x ?? 0;
+						const y = item.y ?? 0;
 						return {
-							minX: Math.min(currentExtents.minX, item.x - item.r),
-							minY: Math.min(currentExtents.minY, item.y - item.r),
-							maxX: Math.max(currentExtents.maxX, item.x + item.r),
-							maxY: Math.max(currentExtents.maxY, item.y + item.r)
+							minX: Math.min(currentExtents.minX, x - item.r),
+							minY: Math.min(currentExtents.minY, y - item.r),
+							maxX: Math.max(currentExtents.maxX, x + item.r),
+							maxY: Math.max(currentExtents.maxY, y + item.r)
 						};
 					},
 					{ minX: 0, minY: 0, maxX: 0, maxY: 0 }
@@ -82,15 +73,15 @@
 					}
 				};
 			},
-			{}
+			{} as Record<string, BubbleGroupData>
 		);
-		maxExtents = reduce(
+		const maxExtents: Extents = reduce(
 			groups,
 			(currentExtents, group) => ({
-				minX: Math.min(currentExtents.minX, group.minX),
-				minY: Math.min(currentExtents.minY, group.minY),
-				maxX: Math.max(currentExtents.maxX, group.maxX),
-				maxY: Math.max(currentExtents.maxY, group.maxY)
+				minX: Math.min(currentExtents.minX ?? 0, group.minX ?? 0),
+				minY: Math.min(currentExtents.minY ?? 0, group.minY ?? 0),
+				maxX: Math.max(currentExtents.maxX ?? 0, group.maxX ?? 0),
+				maxY: Math.max(currentExtents.maxY ?? 0, group.maxY ?? 0)
 			}),
 			{
 				minX: 0,
@@ -99,38 +90,39 @@
 				maxY: 0
 			}
 		);
-		maxGroupWidth = maxExtents.maxX - maxExtents.minX;
-		maxGroupHeight = maxExtents.maxY - maxExtents.minY;
-		tileScale =
+		const maxGroupWidth = (maxExtents.maxX ?? 0) - (maxExtents.minX ?? 0);
+		const maxGroupHeight = (maxExtents.maxY ?? 0) - (maxExtents.minY ?? 0);
+		const tileScale =
 			maxGroupWidth && maxGroupHeight
 				? Math.min(tileWidth / maxGroupWidth, tileHeight / maxGroupHeight)
 				: 1;
-	}
+		return { svgWidth, svgHeight, maxValue, groups, tileColumns, tileRows, tileWidth, tileHeight, tileScale };
+	});
 </script>
 
-<div class={$$props.class} bind:this={containerDiv}>
+<div class={className} bind:this={containerDiv}>
 	<svg>
 		<g class="bubbles-area">
-			{#each map(groups) as data}
-				<BubbleGroup {data} {chartConfig} {maxValue} {tileScale} {tileWidth} {tileHeight} on:bubbleClicked />
+			{#each map(layout.groups) as data (data.title)}
+				<BubbleGroup {data} {chartConfig} maxValue={layout.maxValue} tileScale={layout.tileScale} tileWidth={layout.tileWidth} tileHeight={layout.tileHeight} {onbubbleClicked} />
 			{/each}
 		</g>
-		{#each {length: tileColumns - 1} as _, columnNum}
+		{#each {length: layout.tileColumns - 1} as _, columnNum (columnNum)}
 			<line
-				x1={(columnNum + 1) * tileWidth}
+				x1={(columnNum + 1) * layout.tileWidth}
 				y1={0}
-				x2={(columnNum + 1) * tileWidth}
-				y2={svgHeight}
+				x2={(columnNum + 1) * layout.tileWidth}
+				y2={layout.svgHeight}
 				stroke="black"
 				stroke-dasharray="2, 2"
 			/>
 		{/each}
-		{#each {length: tileRows - 1} as _, rowNum}
+		{#each {length: layout.tileRows - 1} as _, rowNum (rowNum)}
 			<line
 					x1={0}
-					y1={(rowNum + 1) * tileHeight}
-					x2={svgWidth}
-					y2={(rowNum + 1) * tileHeight}
+					y1={(rowNum + 1) * layout.tileHeight}
+					x2={layout.svgWidth}
+					y2={(rowNum + 1) * layout.tileHeight}
 					stroke="black"
 				stroke-dasharray="2, 2"
 			/>

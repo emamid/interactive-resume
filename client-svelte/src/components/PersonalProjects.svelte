@@ -5,7 +5,7 @@ import type { BaseProject } from '@/api/types';
 import LinkCell from './LinkCell.svelte';
 import YearRange from './YearRange.svelte';
 
-export let projects: BaseProject[] = [];
+let { projects = [] }: { projects?: BaseProject[] } = $props();
 </script>
 
 <DataTable table$aria-label="Personal projects">
@@ -16,7 +16,7 @@ export let projects: BaseProject[] = [];
     </Row>
   </Head>
 	<Body>
-	{#each projects as project}
+	{#each projects as project (project.id)}
 		<Row>
 			<Cell><YearRange startDate={project.startDate} endDate={project.endDate} /></Cell>
 			<LinkCell path={`./#/projects/${project.id}`} text={project.name} />

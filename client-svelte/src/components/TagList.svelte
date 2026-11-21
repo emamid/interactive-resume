@@ -5,18 +5,29 @@
 
 	import type { BaseTag } from '@/api/types';
 
-	export let tags: BaseTag[] = [];
-	export let chips = false;
+	let {
+		tags = [],
+		chips = false,
+	}: {
+		tags?: BaseTag[];
+		chips?: boolean;
+	} = $props();
 </script>
 
-{#each tags as tag}
+{#each tags as tag (tag.id)}
   {#if chips}
-	<Chip chip={tag.id} on:click={() => push(`/tags/${tag.id}`)}>
-		<Text>{tag.name}</Text>
+	<Chip chip={tag.id} onclick={() => push(`/tags/${tag.id}`)}>
+		<Text><span class={{ 'tag-superseded': tag.superseded }}>{tag.name}</span></Text>
 	</Chip>
 	{:else}
-	<Button color="primary" on:click={() => push(`/tags/${tag.id}`)} variant="outlined">
-		<Label>{tag.name}</Label>
+	<Button color="primary" onclick={() => push(`/tags/${tag.id}`)} variant="outlined">
+		<Label><span class={{ 'tag-superseded': tag.superseded }}>{tag.name}</span></Label>
 	</Button>	
 	{/if}
 {/each}
+
+<style>
+	.tag-superseded {
+		text-decoration: line-through;
+	}
+</style>

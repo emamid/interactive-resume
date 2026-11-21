@@ -1,5 +1,5 @@
 <script lang="ts">
-export let html: string = '';
+	let { html = '' }: { html?: string | null } = $props();
 </script>
 
 <div class="mdc-typography--body1">

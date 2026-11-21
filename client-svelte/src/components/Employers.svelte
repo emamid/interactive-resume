@@ -6,11 +6,17 @@ import getEmployers from '@/api/axios/getEmployers';
 import LinkCell from './LinkCell.svelte';
 import YearRange from './YearRange.svelte';
 
-let employers: Employer[] = [];
+let employers = $state<Employer[]>([]);
 
-(async function() {
-	employers = await getEmployers();
-}());
+$effect(() => {
+	let active = true;
+	getEmployers().then((result) => {
+		if (active) employers = result;
+	});
+	return () => {
+		active = false;
+	};
+});
 </script>
 	
 <DataTable table$aria-label="Personal projects">
@@ -22,7 +28,7 @@ let employers: Employer[] = [];
 		</Row>
 	</Head>
 	<Body>
-	{#each employers as employer}
+	{#each employers as employer (employer.id)}
 		<Row>
 			<Cell><YearRange startDate={employer.startDate} endDate={employer.endDate} /></Cell>
 			<LinkCell path={`./#/employers/${employer.id}`} text={employer.name} />
